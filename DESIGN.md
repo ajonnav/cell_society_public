@@ -36,3 +36,4 @@ Our overview begins with a basic layout of how the program will be separated:
 
 By discretely laying out the various parts of the data in separate classes, I believe that our design will have the ability to adjust dynamically to different automatons.  We have isolated the principles of automata and separated them.  From basic development, we can add features with ease off of the foundational framework.    
 	
+
