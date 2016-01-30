@@ -58,3 +58,32 @@ Our overview begins with a basic layout of how the program will be separated:
 By discretely laying out the various parts of the data in separate classes, I believe that our design will have the ability to adjust dynamically to different automatons.  We have isolated the principles of automata and separated them.  From basic development, we can add features with ease off of the foundational framework.    
 	
 
+
+
+
+## Design Considerations
+
+At this stage of the project, we are making decisions that should allow for flexibility down the road for additional features as well as changes in requirements.   For example, our decision to use a graph structure instead of a grid should allow us to develop more more complex simulations in the future.  We are still deciding on which specific data structure we are going to use for our adjacency composition.  Another issue we are considering is how we will create an organized and consistent way of creating rules for how the cells interact with each other.  An independent object will take the results of the XML parsing and format the data so that the CA class can gather the necessary information for the simulation.  
+
+
+In our consideration of animating the simulation, we have decided to use the AnimationTimer() javaFX class to step through each part of the simulation.  This should give us more control over the workings of the game in comparison to Timeline. Another design consideration is our use of Canvas to draw our objects.  Instead of creating several nodes into our scene, each simulation is going to be drawn on a canvas object.  We are still debating about what we are going to do when we switch between simulations.  As of now, each CA will have its own canvas, and as the CA's are created and used, their respective canvases will be brought to the front.  In other words, we are not deleting any CA objects, we are simply pausing and/or reseting their simulations and bringing it to front.
+
+Having the CA object handle the rule checking was different from our original intention which was to have the cells check each other.  We realized it would have been redundant for each cell to have its own copy of the rules and have to check and apply with their neighbors.  Having the simulation manage state changes will prevent redundancy as well as contradictions that may arise as the result of each cell individually changing and checking its state.  
+
+
+## Team Responsibilities
+
+For the first round of this project, we have decided to break up the work in the following way:
+
+1. Ani will be responsible for creating the XMLParsing and results classes.
+
+2. Christine will create the Main class and the basic UI.
+
+3. Colin will develop the Cell class.
+
+Our goal is to have these pieces built by the end of the day Tuesday, so that we may all begin to work on the creation of the CA class.  This will take up the rest of the week as we work towards getting the program up and running.   
+
+We will all work in our respective branches and plan to commit once a major component of each class is completed, and at the end of each working session.  We will also try to pull back in to the master branch at the end of each day.  
+
+We plan to convene to plan how we are going to implement CA sometime on either Tuesday or Wednesday once we have the separate components completed.  
+
