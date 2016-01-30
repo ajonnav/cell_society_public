@@ -13,7 +13,7 @@ The goal of this program is to animate 2-D cellular automata (CA) simulations. T
 
 In this program, there are a couple major components that will be necessary to create in order for the design to be dynamic and flexible for any CA scenario. As such, the goal for our developing is to craft classes that capture the fundamental principles of Cellular Automata.  
 
-Our overview begins with a basic layout of how the program will be separated [class diagram] (https://github.com/duke-compsci308-spring2016/cellsociety_team19/blob/master/resources/ClassDiagram.pdf):
+Our overview begins with a basic layout of how the program will be separated [class diagram]  (https://github.com/duke-compsci308-spring2016/cellsociety_team19/blob/master/resources/ClassDiagram.pdf):
 
 **Main Class**:
 
@@ -75,8 +75,37 @@ When a user enters erroneous information, a dialog will pop up telling the user 
 
 __Use Cases__
 
+
+*Apply the rules to the middle cell*: The CA in the step method will go through the list of cells to update all of the cells's next state. In update state, the CA will look at the current state of the cell and check through the graph the current states of all of its neighbors. Then after all the next states for the cells have been updated there the cells will be looped through again to change current state to what next state is. Then, the CA based on the Game of Life rules will set the next state of the middle cell to "dead". Then the drawCells method will loop through all the cells and draw the new cell based on its next state and the animation continues.
+
 *Apply the rules to the middle cell*: The CA in the step method will go through the list of cells to update all of the cells's next state. In updateCells, the CA will look at the current state of the cell and check through the graph the current states of all of its neighbors. Then using the rules for the game, the next state of that cell will be determined and updated. 
 
 *Apply the rules to an edge cell*: Applying the rules to the edge cell will be the same as applying to rules to a middle cell because the CA class contains the Graph with a 2D array of all its neighbors and goes through the array to check each cells neighbors each update.
 
-*Move to the next generation*: The updatingCells will update each cell's next state based on its neighbor's current state. After all the next states for the cells have been updated, the list with the cells will be looped through again to change current state to what next state is. Then the drawCells method will loop through all the cells and draw the new cell based on its next state and the animation continues. 
+*Move to the next generation*: The updatingCells will update each cell's next state based on its neighbor's current state. After all the next states for the cells have been updated, the list with the cells will be looped through again to change current state to what next state is. Then the drawCells method will loop through all the cells and draw the new cell based on its next state and the animation continues.
+
+## Design Considerations
+
+At this stage of the project, we are making decisions that should allow for flexibility down the road for additional features as well as changes in requirements.   For example, our decision to use a graph structure instead of a grid should allow us to develop more more complex simulations in the future.  We are still deciding on which specific data structure we are going to use for our adjacency composition.  Another issue we are considering is how we will create an organized and consistent way of creating rules for how the cells interact with each other.  An independent object will take the results of the XML parsing and format the data so that the CA class can gather the necessary information for the simulation.  
+
+
+In our consideration of animating the simulation, we have decided to use the AnimationTimer() javaFX class to step through each part of the simulation.  This should give us more control over the workings of the game in comparison to Timeline. Another design consideration is our use of Canvas to draw our objects.  Instead of creating several nodes into our scene, each simulation is going to be drawn on a canvas object.  We are still debating about what we are going to do when we switch between simulations.  As of now, each CA will have its own canvas, and as the CA's are created and used, their respective canvases will be brought to the front.  In other words, we are not deleting any CA objects, we are simply pausing and/or reseting their simulations and bringing it to front.
+
+Having the CA object handle the rule checking was different from our original intention which was to have the cells check each other.  We realized it would have been redundant for each cell to have its own copy of the rules and have to check and apply with their neighbors.  Having the simulation manage state changes will prevent redundancy as well as contradictions that may arise as the result of each cell individually changing and checking its state.  
+
+
+## Team Responsibilities
+
+For the first round of this project, we have decided to break up the work in the following way:
+
+1. Ani will be responsible for creating the XMLParsing and results classes.
+2. Christine will create the Main class and the basic UI.
+3. Colin will develop the Cell class.
+
+Our goal is to have these pieces built by the end of the day Tuesday, so that we may all begin to work on the creation of the CA class.  This will take up the rest of the week as we work towards getting the program up and running.   
+
+We will all work in our respective branches and plan to commit once a major component of each class is completed, and at the end of each working session.  We will also try to pull back in to the master branch at the end of each day.  
+
+We plan to convene to plan how we are going to implement CA sometime on either Tuesday or Wednesday once we have the separate components completed.  
+
+ 
