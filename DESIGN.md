@@ -13,7 +13,7 @@ The goal of this program is to animate 2-D cellular automata (CA) simulations. T
 
 In this program, there are a couple major components that will be necessary to create in order for the design to be dynamic and flexible for any CA scenario. As such, the goal for our developing is to craft classes that capture the fundamental principles of Cellular Automata.  
 
-Our overview begins with a basic layout of how the program will be separated [class diagram] (https://github.com/duke-compsci308-spring2016/cellsociety_team19/blob/master/resources/ClassDiagram.pdf):
+Our overview begins with a basic layout of how the program will be separated [class diagram]  (https://github.com/duke-compsci308-spring2016/cellsociety_team19/blob/master/resources/ClassDiagram.pdf):
 
 **Main Class**:
 
@@ -71,13 +71,18 @@ When a user enters erroneous information, a dialog will pop up telling the user 
 ## Design Details
 **Cell** abstract class will hold the private int variables for the current state, next state, and a double array of size two that holds location as x and y coordinates. The different sub-classes of cell for example would be *squareCell* or *triangleCell* or whatever type of cell shape we might want to have. The cell sub-classes will also have different public drawing methods to draw the cell shape, color, etc. Other methods that will be included are getter and setter methods for the current state and next state of the cell.
 
-**CA** class will be a superclass that will have different subclasses for each simulation. Game of life, law of segregation, fire, and other simulations will each have a subclass of CA. The CA will store in private variables the number of cells and height and width. Each different subclass for CA for each different game will also have its own private static final int for the different states for the different games (i.e. private static final int FIRE = #).  In the constructor of the CA, the CA will take an parameter that is an object created by xmlArgs that hold the information for those private variables. CA's 2D array holds a 0 or 1 that states whether a cell is a neighbor with another cell and a list that contains all the cells.  Methods for stepping through the animation, updating the cells, drawing all the cells, and initializing the animation screen will be included CA class. The method for initializing is public and will be called from the main class. This will create a new timeline, set the 2D array and list, and use the object passed from the parseXML class to set the variables for cell numbers, height, width, etc. The step method for CA class will call updateCells to update the next state of the cell based on the rules and then call drawCells to loop through all the different cells and draw the cell based on its next state. 
+**CA** class will be a superclass that will have different subclasses for each simulation. Game of life, law of segregation, fire, and other simulations will each have a subclass of CA. The CA will store in private variables the number of cells and height and width. Each different subclass for CA for each different game will also have its own private static final int for the different states for the different games (i.e. private static final int FIRE = #).  In the constructor of the CA, the CA will take an parameter that is an object created by parseXML that hold the information for those private variables. CA's 2D array holds a 0 or 1 that states whether a cell is a neighbor with another cell and a list that contains all the cells. We are also considering perhaps using a Hashmap to store the cell as a key and a list of neighbors as the value. Methods for stepping through the animation, updating the cells, drawing all the cells, and initializing the animation screen will be included CA class. The method for initializing is public and will be called from the main class. This will create a new timeline, set the 2D array and list, and use the object passed from the parseXML class to set the variables for cell numbers, height, width, etc. The step method for CA class will call updateCells to update the next state of the cell based on the rules and then call drawCells to loop through all the different cells and draw the cell based on its next state. 
 
 __Use Cases__
 
+
 *Apply the rules to the middle cell*: The CA in the step method will go through the list of cells to update all of the cells's next state. In update state, the CA will look at the current state of the cell and check through the graph the current states of all of its neighbors. Then after all the next states for the cells have been updated there the cells will be looped through again to change current state to what next state is. Then, the CA based on the Game of Life rules will set the next state of the middle cell to "dead". Then the drawCells method will loop through all the cells and draw the new cell based on its next state and the animation continues.
 
+*Apply the rules to the middle cell*: The CA in the step method will go through the list of cells to update all of the cells's next state. In updateCells, the CA will look at the current state of the cell and check through the graph the current states of all of its neighbors. Then using the rules for the game, the next state of that cell will be determined and updated. 
 
+*Apply the rules to an edge cell*: Applying the rules to the edge cell will be the same as applying to rules to a middle cell because the CA class contains the Graph with a 2D array of all its neighbors and goes through the array to check each cells neighbors each update.
+
+*Move to the next generation*: The updatingCells will update each cell's next state based on its neighbor's current state. After all the next states for the cells have been updated, the list with the cells will be looped through again to change current state to what next state is. Then the drawCells method will loop through all the cells and draw the new cell based on its next state and the animation continues.
 
 ## Design Considerations
 
@@ -94,9 +99,7 @@ Having the CA object handle the rule checking was different from our original in
 For the first round of this project, we have decided to break up the work in the following way:
 
 1. Ani will be responsible for creating the XMLParsing and results classes.
-
 2. Christine will create the Main class and the basic UI.
-
 3. Colin will develop the Cell class.
 
 Our goal is to have these pieces built by the end of the day Tuesday, so that we may all begin to work on the creation of the CA class.  This will take up the rest of the week as we work towards getting the program up and running.   
@@ -105,4 +108,4 @@ We will all work in our respective branches and plan to commit once a major comp
 
 We plan to convene to plan how we are going to implement CA sometime on either Tuesday or Wednesday once we have the separate components completed.  
 
-
+ 
