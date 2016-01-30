@@ -44,8 +44,8 @@ By discretely laying out the various parts of the data in separate classes, I be
 ##User Interface
 
 The user interface to start with will have buttons that will allow the user to naviagate between screens. The first screen after the program is started will be the splash screen that says "Cell Society". On this screen, there will be buttons for each of the different cell animations under this. Above the button there will be text that says the name of the animation. 
-![alt text](CellSociety.jpg "A mockup of splash screen")
+![alt text](https://github.com/duke-compsci308-spring2016/cellsociety_team19/blob/master/resources/CellSociety.jpg "A mockup of splash screen")
  In the first week with the basic design, to adjust factors such as the size of the animation or things such as color to color percentage in the model of segregation, the user will change the xml file to change the different factors related to the game. Later, text boxes will be used for user input to adjust the different factors for each animation. The program will also have default settings if the user does not choose to input settings.There will be buttons on the screen for the user to choose to reset, start, and stop the animation as well. 
-![alt text](AutomatonDisplay.jpg "A mockup of the display")
+![alt text](https://github.com/duke-compsci308-spring2016/cellsociety_team19/blob/master/resources/AutomatonDisplay.jpg "A mockup of the display")
 When a user enters erroneous information, a dialog will pop up telling the user that there has been an error and what kind of error was generated. 
 
