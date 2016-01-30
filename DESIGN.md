@@ -29,11 +29,9 @@ Our overview begins with a basic layout of how the program will be separated:
 * The CA can be paused and switched to different simulations from the Main Class.
 	
 
-**ParseXML**
+**XMLAargs**
 
 * Parses information from XML file about specific automaton.
-* Parameters: CA Name, Collection of Rules and cell states.
-* Rules will be constructed in a format understood by CA class
 	
 **CA**
 
@@ -41,7 +39,6 @@ Our overview begins with a basic layout of how the program will be separated:
 * parameters include: number of cells, shape of cells, rules, cell states
 * our cell objects will be stored in a Graph data structure stored as a 2D array for its neighbors.
 * States will be stored in a collection with index numbers
-* Rules will be stored in a similar data structure.
 * Global list of cells will be used to for simulation steps 
 * The Simulation loop will carry out the following tasks:
 	
