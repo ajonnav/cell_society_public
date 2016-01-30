@@ -84,6 +84,10 @@ __Use Cases__
 
 *Move to the next generation*: The updatingCells will update each cell's next state based on its neighbor's current state. After all the next states for the cells have been updated, the list with the cells will be looped through again to change current state to what next state is. Then the drawCells method will loop through all the cells and draw the new cell based on its next state and the animation continues.
 
+*Set simulation parameter*: The class XMLArgs has a method called readXML that reads in an XML file and creates a Map with the XML tags as the keys and the XML values as the corresponding values. This is then passed in to the constructor of the CA and the parameters are set. To change probCatch, you would change the value of probCatch in the fire XML.
+
+*Switch simulations:* To switch simulations, we will have a "Load New XML" button. This button will be mapped to loadNewSimulation() which will enable the user to load a new XML file, clear the previous simulation and initialize the new simulation. To load in Wator, you would need to click onthe button and load int he Wator XML file.
+
 ## Design Considerations
 
 At this stage of the project, we are making decisions that should allow for flexibility down the road for additional features as well as changes in requirements.   For example, our decision to use a graph structure instead of a grid should allow us to develop more more complex simulations in the future.  We are still deciding on which specific data structure we are going to use for our adjacency composition.  Another issue we are considering is how we will create an organized and consistent way of creating rules for how the cells interact with each other.  An independent object will take the results of the XML parsing and format the data so that the CA class can gather the necessary information for the simulation.  
