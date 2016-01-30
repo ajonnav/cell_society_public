@@ -11,17 +11,15 @@ The goal of this program is to animate 2-D cellular automata (CA) simulations. T
 
 ##Overview
 
-In this program, there are a couple major components that will be necessary to create in order for the design to be dynamic and flexible for any CA scenario.  As such, the goal for our developing is to craft classes that capture the fundamental principles of Cellular Automata.  
+In this program, there are a couple major components that will be necessary to create in order for the design to be dynamic and flexible for any CA scenario. As such, the goal for our developing is to craft classes that capture the fundamental principles of Cellular Automata.  
 
-Our overview begins with a basic layout of how the program will be separated:
-
-
+Our overview begins with a basic layout of how the program will be separated [class diagram] (https://github.com/duke-compsci308-spring2016/cellsociety_team19/blob/master/resources/ClassDiagram.pdf):
 
 **Main Class**:
 
 * This class is responsible for initializing/changing CA's.
 * Extends Application and therefore will have override the start method.
-* Within this, there will be a call to the ParseXML class.  This information will be used to create a new Instance of the CA class.
+* Within this, there will be a call to the XMLArgs class.  This information will be used to create a new Instance of the CA class.
 * The stage will be set such that the button bar at the bottom will remain throughout the program
 * The window above the stage will be updated in Animation as the simulation goes on.
 * Once the grid is initialized, CA will call its run method to being the simulation.
@@ -45,9 +43,6 @@ Our overview begins with a basic layout of how the program will be separated:
 1. Update cells using the rules and neighbors in order to determine the state
 2. Render the cells for the current step of the simulation
 3. Determine if the simulation is over
-
-	
-	
 
 **Cell**
 
