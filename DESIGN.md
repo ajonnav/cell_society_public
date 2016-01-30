@@ -47,9 +47,11 @@ The user interface to start with will have buttons that will allow the user to n
 
 ![alt text](https://github.com/duke-compsci308-spring2016/cellsociety_team19/blob/master/resources/CellSociety.jpg "A mockup of splash screen")
 
- In the first week with the basic design, to adjust factors such as the size of the animation or things such as color to color percentage in the model of segregation, the user will change the XML file to change the different factors related to the game. There will be a button to upload a new XML file on the splash screen for the beginning. Later, the splash screen will give options to change the animation and there will be a back button to change back to the splash screen and run another animation. Text boxes or sliders will be used for user input to adjust the different factors for each animation. The program will also have default settings if the user does not choose to input settings.There will be other buttons on the screen for the user to choose to reset, start, pause, and step through the animation as well. 
+ In the first week with the basic design, to adjust factors such as the size of the animation or things such as color to color percentage in the model of segregation, the user will change the XML file to change the different factors related to the game. There will be a button to upload a new XML file on the splash screen for the beginning. Later, the splash screen will give options to change the animation. There will be a splash screen and another window, the "display screen" that has the animation and the buttons related to the animation. On the display screen, text boxes or sliders will eventually be used for user input to adjust the different factors for each animation. The program will also have default settings if the user does not choose to input settings.There will also be other buttons on the screen for the user to choose to reset, start, pause, and step through the animation as well. 
  
 ![alt text](https://github.com/duke-compsci308-spring2016/cellsociety_team19/blob/master/resources/AutomatonDisplay.jpg "A mockup of the display")
+
+To switch between screens, the user would close the display window and select another animation or upload an XML from the splash screen that remains open.
 
 When a user enters erroneous information, a dialog will pop up telling the user that there has been an error and what kind of error was generated.
 
