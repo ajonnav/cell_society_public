@@ -41,4 +41,11 @@ Our overview begins with a basic layout of how the program will be separated:
 
 By discretely laying out the various parts of the data in separate classes, I believe that our design will have the ability to adjust dynamically to different automatons.  We have isolated the principles of automata and separated them.  From basic development, we can add features with ease off of the foundational framework.    
 	
+##User Interface
+
+The user interface to start with will have buttons that will allow the user to naviagate between screens. The first screen after the program is started will be the splash screen that says "Cell Society". On this screen, there will be buttons for each of the different cell animations under this. Above the button there will be text that says the name of the animation. 
+
+ In the first week with the basic design, to adjust factors such as the size of the animation or things such as color to color percentage in the model of segregation, the user will change the xml file to change the different factors related to the game. Later, text boxes will be used for user input to adjust the different factors for each animation. The program will also have default settings if the user does not choose to input settings.There will be buttons on the screen for the user to choose to reset, start, and stop the animation as well. 
+
+When a user enters erroneous information, a dialog will pop up telling the user that there has been an error and what kind of error was generated. 
 
