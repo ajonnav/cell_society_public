@@ -1,11 +1,14 @@
+import javafx.scene.image.Image;
+import javafx.scene.canvas.GraphicsContext;
 public abstract class Cell {
 	private int state;
 	private double xCoord, yCoord;
-
-	public Cell(int currentState, double x, double y) {
+	protected Image img;
+	public Cell(int currentState, double x, double y, Image i) {
 		state = currentState;
 		xCoord = x;
 		yCoord = y;
+		img = i;
 	}
 	
 	/**
@@ -35,6 +38,8 @@ public abstract class Cell {
 	public double getY(){
 		return yCoord;
 	}
-
-	public abstract void draw();
+	public void setImage(Image newImage){
+		img = newImage;
+	}
+	public abstract void draw(GraphicsContext gc);
 }
