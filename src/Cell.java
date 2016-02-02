@@ -36,13 +36,24 @@ public abstract class Cell {
 	public double getY(){
 		return yCoord;
 	}
-	
+	/**
+	 * Sets X coordinate
+	 * @param newXcoord
+	 */
 	public void setX(double newXcoord){
 		xCoord = newXcoord;
 	}
-	
+	/**
+	 * Set Y coordinate
+	 * @param newYcoord
+	 */
 	public void setY(double newYcoord){
 		xCoord = newYcoord;
 	}
+	/**
+	 * This Class will vary from extension to extension of the Cell class.
+	 * Every inherited class will require GraphicsContext to draw.
+	 * @param gc
+	 */
 	public abstract void draw(GraphicsContext gc);
 }

@@ -5,18 +5,24 @@ public class SquareCell extends Cell {
 	private int width, height;
 	private Color cellColor;
 	/**
-	 * Constructor for SquareCell without Image
+	 * Constructor for SquareCell that will create a square cell of a certain color
 	 */
 	public SquareCell(int currentState, double x, double y, Color c, int w, int h){
 		super(currentState, x, y);
 		cellColor = c;
 		
 	}
-	
+	/**
+	 * Returns the Cell's color.   
+	 * @return
+	 */
 	public Color getColor(){
 		return cellColor;
 	}
-	
+	/**
+	 * Update Color for given state
+	 * @param newColor
+	 */
 	public void setColor(Color newColor){
 		cellColor = newColor;
 	}
