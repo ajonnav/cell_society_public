@@ -17,6 +17,9 @@ public class SplashScreen {
 	private static Group root;
 	private static String chosenFile;
 	
+	/**
+	 * Initializes the display of the splash screen
+	 */
 	public Scene initScreen() {
 		root = new Group();
 		Scene s = new Scene(root, WIDTH, HEIGHT);
@@ -27,12 +30,18 @@ public class SplashScreen {
 		return s;
 	}
 	
+	/**
+	 * Sets up a file chooser 
+	 */
 	public void setupFileChoose() {
 		FileChooser f = new FileChooser();
 		f.setTitle("Open XML file");
 		setUploadButton(f);
 	}
 	
+	/**
+	 * Creates a button to allow upload of a file
+	 */
 	private void setUploadButton(FileChooser f) {
 		Button b = new Button("Open XML");
 		b.setLayoutX(WIDTH/2.25);
@@ -41,6 +50,9 @@ public class SplashScreen {
 		b.setOnAction(e -> selectFiletoParse(f));
 	}
 	
+	/**
+	 * Gets the name of the chosen file and passes it to xmlArgs; then calls for an automation window to be opened
+	 */
 	private void selectFiletoParse(FileChooser f) {
 		File file = f.showOpenDialog(root.getScene().getWindow());
 		if (file != null) {
@@ -50,11 +62,17 @@ public class SplashScreen {
 		}
 	}
 	
+	/**
+	 * Creates an instance of Automaton display and opens a window for the automaton display
+	 */
 	private void openAutomationWindow() {
 		AutomatonDisplay myAutomation = new AutomatonDisplay();
 		myAutomation.loadAutomaton(myAutomation);
 	}
 	
+	/**
+	 * returns the name of the chosen file
+	 */
 	public String getChosenFile() {
 		return chosenFile;
 	}
