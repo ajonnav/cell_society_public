@@ -9,6 +9,9 @@ public class Main extends Application{
 	
 	private static final String TITLE = "Cell Society";
 	
+	/**
+	 * Creates a new instance of the splash screen, sets the title of the window and displays the splash screen
+	 */
 	public void start (Stage s) {
 		SplashScreen n = new SplashScreen();
 		s.setTitle(TITLE);
@@ -17,6 +20,9 @@ public class Main extends Application{
         s.show();
 	}
 	
+	/**
+	 * Launches the animation
+	 */
 	public static void main (String[] args) {
         launch(args);
     } 
