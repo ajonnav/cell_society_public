@@ -1,7 +1,6 @@
 package simulations;
-
+import automaton.AutomatonDisplay;
 import java.util.*;
-import cellsociety_team19.*;
 import cells.*;
 import javafx.animation.Animation;
 import javafx.animation.Timeline;
