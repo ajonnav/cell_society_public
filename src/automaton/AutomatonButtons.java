@@ -15,10 +15,16 @@ public class AutomatonButtons {
 	private Button reset;
 	private Group root;
 	
+	/**
+	 * Constructor takes Group of Automaton window as a parameter 
+	 */
 	public AutomatonButtons(Group root) {
 		this.root = root;
 	}
 	
+	/**
+	 * Creates a button with a certain layout and text
+	 */
 	private Button createButton(String text, double x, double y) {
 		Button b = new Button(text);
 		b.setLayoutX(x);
@@ -27,6 +33,9 @@ public class AutomatonButtons {
 		return b;
 	}
 	
+	/**
+	 * Sets the buttons for the automaton display
+	 */
 	public void setAutomatonButtons(AutomatonDisplay a) {
 		reset = createButton("Reset", CANVAS_X + 25, CANVAS_Y + CANVAS_SIZE + 10);
 		start = createButton("Start", CANVAS_X + 50 + 25, CANVAS_Y + CANVAS_SIZE + 10);
@@ -34,10 +43,9 @@ public class AutomatonButtons {
 		step = createButton("Step", CANVAS_X + 150 + 25, CANVAS_Y + CANVAS_SIZE + 10);
 	}
 	
-	public void setCAtimeline() {
-		
-	}
-	
+	/**
+	 * Sets the actions of the buttons
+	 */
 	private void setButtonActions() {
 		
 	}

@@ -1,9 +1,12 @@
 package simulations;
 import automaton.AutomatonDisplay;
+
 import java.util.*;
+
 import cells.*;
 import javafx.animation.Animation;
 import javafx.animation.Timeline;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.util.Duration;
 import javafx.animation.KeyFrame;
@@ -16,9 +19,9 @@ public abstract class CA {
 	protected int[][] neighbors;
 	protected final int[] stateCodes;;
 	protected boolean simOver;
-	protected Collection<Cell> allCells;
+	protected ArrayList<Cell> allCells;
 	protected Timeline t;
-	protected GraphicsContext gc;
+	protected Canvas canvas;
 
 	/**
 	 * Default Constructor that I am going to use until we figure out XML file
@@ -34,7 +37,7 @@ public abstract class CA {
 		stateCodes = states;
 		allCells = new ArrayList<Cell>();
 		t = new Timeline();
-		gc = a.getCanvas().getGraphicsContext2D();
+		canvas = a.getCanvas();
 		simOver = false;
 	}
 	/**
@@ -65,7 +68,7 @@ public abstract class CA {
 
 	protected void drawCells() {
 		for (Cell c : allCells) {
-			c.draw(gc);
+			c.draw(canvas.getGraphicsContext2D());
 		}
 	}
 
