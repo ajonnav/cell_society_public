@@ -1,4 +1,4 @@
-package cellsociety_team19;
+
 
 import javafx.scene.Group;
 import javafx.scene.control.Button;
@@ -31,5 +31,13 @@ public class AutomatonButtons {
 		start = createButton("Start", CANVAS_X + 50 + 25, CANVAS_Y + CANVAS_SIZE + 10);
 		pause = createButton("Pause", CANVAS_X + 100 + 25, CANVAS_Y + CANVAS_SIZE + 10);
 		step = createButton("Step", CANVAS_X + 150 + 25, CANVAS_Y + CANVAS_SIZE + 10);
+	}
+	
+	public void setCAtimeline() {
+		
+	}
+	
+	private void setButtonActions() {
+		
 	}
 }
