@@ -1,3 +1,4 @@
+package automaton;
 
 
 import java.io.File;

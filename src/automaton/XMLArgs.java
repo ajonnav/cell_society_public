@@ -1,3 +1,4 @@
+package automaton;
 import java.io.File;
 import java.util.HashMap;
 import javax.xml.parsers.DocumentBuilder;

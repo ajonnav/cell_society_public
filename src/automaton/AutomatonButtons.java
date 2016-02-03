@@ -1,3 +1,4 @@
+package automaton;
 
 
 import javafx.scene.Group;
