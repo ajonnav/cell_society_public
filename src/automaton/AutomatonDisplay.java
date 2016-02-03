@@ -31,11 +31,18 @@ public class AutomatonDisplay {
 		return window;
 	}
 	
+	/**
+	 * Loads the automaton
+	 * eventually will have a param for the object from XMLargs
+	 */
 	public void loadAutomaton(AutomatonDisplay a) {
 		openDisplay(a);
 		//make new CA and do stuff
 	}
 	
+	/**
+	 * Creates new window and a group for the window, also adds the buttons for the window
+	 */
 	private void openDisplay(AutomatonDisplay a) {
 		window = new Stage();
 		root = new Group();
@@ -46,6 +53,9 @@ public class AutomatonDisplay {
 		window.show();
 	}
 	
+	/**
+	 * Sets scene and background for the window
+	 */
 	private Scene setDisplayScene() {
 		myDisplay = new Scene(root, WIDTH, HEIGHT);
 		Image background = new Image(getClass().getClassLoader().getResourceAsStream("DisplayCA.jpg"));
@@ -55,20 +65,29 @@ public class AutomatonDisplay {
 		return myDisplay;
 	}
 	
+	/**
+	 * Creates a canvas for the window
+	 */
 	private void setCanvas() {
 		canvas = new Canvas(CANVAS_SIZE, CANVAS_SIZE);
 		canvas.setLayoutX(CANVAS_X);
 		canvas.setLayoutY(CANVAS_Y);
-		GraphicsContext gc = canvas.getGraphicsContext2D();
-		gc.setFill(Color.BLUE);
-		gc.fillRect(17.5,10,350,350);
-		root.getChildren().add(canvas);
+//		GraphicsContext gc = canvas.getGraphicsContext2D();
+//		gc.setFill(Color.BLUE);
+//		gc.fillRect(0,0,400,400);
+//		root.getChildren().add(canvas);
 	}
 	
+	/**
+	 * Returns the canvas of the window
+	 */
 	public Canvas getCanvas() {
 		return canvas;
 	}
 	
+	/**
+	 * Returns the group associated with the window
+	 */
 	public Group getRoot() {
 		return root;
 	}
