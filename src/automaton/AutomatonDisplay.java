@@ -37,6 +37,7 @@ public class AutomatonDisplay {
 	 */
 	public void loadAutomaton(AutomatonDisplay a) {
 		openDisplay(a);
+
 		//make new CA and do stuff
 	}
 	
@@ -44,6 +45,7 @@ public class AutomatonDisplay {
 	 * Creates new window and a group for the window, also adds the buttons for the window
 	 */
 	private void openDisplay(AutomatonDisplay a) {
+
 		window = new Stage();
 		root = new Group();
 		setDisplayScene();
