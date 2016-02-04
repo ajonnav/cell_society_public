@@ -35,15 +35,15 @@ public class AutomatonDisplay {
 	 * Loads the automaton
 	 * eventually will have a param for the object from XMLargs
 	 */
-	public void loadAutomaton(AutomatonDisplay a) {
-		openDisplay(a);
+	public void loadAutomaton() {
+		openDisplay();
 		//make new CA and do stuff
 	}
 	
 	/**
 	 * Creates new window and a group for the window, also adds the buttons for the window
 	 */
-	private void openDisplay(AutomatonDisplay a) {
+	private void openDisplay() {
 		window = new Stage();
 		root = new Group();
 		setDisplayScene();
