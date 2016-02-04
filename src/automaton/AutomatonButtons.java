@@ -1,13 +1,14 @@
 package automaton;
 
 
+import simulations.CA;
+import javafx.animation.Animation;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 
 public class AutomatonButtons {
-	private static final int CANVAS_Y = 10;
-	private static final double CANVAS_X = 17.5;
-	private static final int CANVAS_SIZE = 350;
 	
 	private Button step;
 	private Button pause;
@@ -36,17 +37,31 @@ public class AutomatonButtons {
 	/**
 	 * Sets the buttons for the automaton display
 	 */
-	public void setAutomatonButtons(AutomatonDisplay a) {
-		reset = createButton("Reset", CANVAS_X + 25, CANVAS_Y + CANVAS_SIZE + 10);
-		start = createButton("Start", CANVAS_X + 50 + 25, CANVAS_Y + CANVAS_SIZE + 10);
-		pause = createButton("Pause", CANVAS_X + 100 + 25, CANVAS_Y + CANVAS_SIZE + 10);
-		step = createButton("Step", CANVAS_X + 150 + 25, CANVAS_Y + CANVAS_SIZE + 10);
+	public void setAutomatonButtons(AutomatonDisplay a, CA ca) {
+		reset = createButton("Reset", a.getCanvasX() + 25, a.getCanvasY() + a.getCanvasHeight() + 10);
+		start = createButton("Start", a.getCanvasX() + 50 + 25, a.getCanvasY() + a.getCanvasHeight() + 10);
+		pause = createButton("Pause", a.getCanvasX() + 100 + 25, a.getCanvasY() + a.getCanvasHeight() + 10);
+		step = createButton("Step", a.getCanvasX() + 150 + 25, a.getCanvasY() + a.getCanvasHeight() + 10);
+		setButtonActions(ca);
 	}
 	
 	/**
 	 * Sets the actions of the buttons
 	 */
-	private void setButtonActions() {
-		
+	private void setButtonActions(CA ca) {
+		start.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		    	if(ca.getTimeline().getStatus() == Animation.Status.PAUSED) {
+		    		ca.getTimeline().play();
+		    	}
+		    }
+		});
+		pause.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		    	if(ca.getTimeline().getStatus() == Animation.Status.RUNNING) {
+		    		ca.getTimeline().pause();
+		    	}
+		    }
+		});
 	}
 }

@@ -1,6 +1,8 @@
 package automaton;
 
 
+import java.util.HashMap;
+
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.application.Application;

@@ -1,28 +1,16 @@
 package cells;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 public abstract class Cell {
-	private int state;
+	private Color cellColor;
 	private double xCoord, yCoord;
-	public Cell(int currentState, double x, double y) {
-		state = currentState;
+	public Cell(double x, double y, Color color) {
+		setCellColor(color);
 		xCoord = x;
 		yCoord = y;
 	}
-	
-	/**
-	 * @return state of cell
-	 */
-	public int getState(){
-		return state;
-	}
-	/**
-	 * Updates cell state
-	 * @param newState
-	 */
-	public void setState(int newState){
-		state = newState;
-	}
+
 	/**
 	 * returns x pixel coordinate of cell
 	 * @return xCoord
@@ -51,6 +39,14 @@ public abstract class Cell {
 	public void setY(double newYcoord){
 		xCoord = newYcoord;
 	}
+	public Color getCellColor() {
+		return cellColor;
+	}
+
+	public void setCellColor(Color cellColor) {
+		this.cellColor = cellColor;
+	}
+
 	/**
 	 * This Class will vary from extension to extension of the Cell class.
 	 * Every inherited class will require GraphicsContext to draw.
