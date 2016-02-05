@@ -1,16 +1,18 @@
 package simulations;
 
+import java.util.Map;
+
 import automaton.AutomatonDisplay;
 
 public class Fire extends CA {
 	private double probCatch;
-	private;
+	private double allCells;
 	
-	public Fire(int width, int height, int[] states, AutomatonDisplay a) {
-		super(width, height, states, a); //super(mapArgs, a);
+	public Fire (Map<String, String> mapArgs, AutomatonDisplay a) {
+		super(mapArgs, a);
 		// TODO Auto-generated constructor stub
 		probCatch = Double.parseDouble(mapArgs.get("probCatch"));
-		allCells;
+//		allCells;
 	}
 
 	@Override
@@ -20,9 +22,21 @@ public class Fire extends CA {
 	}
 
 	@Override
-	protected void updateCells() {
+	public void updateCells() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	protected void calculateAdjacencyMatrixAndSetNeighbor() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void drawCells() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

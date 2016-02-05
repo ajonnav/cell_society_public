@@ -53,38 +53,22 @@ public class AutomatonButtons {
 	 * Sets the actions of the buttons
 	 */
 	private void setButtonActions(CA ca) {
-		start.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent e) {
-		    	ca.getTimeline().play();
-		    }
-		});
-		pause.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent ee) {
-		    	ca.getTimeline().pause();
-		    }
-		});
-		step.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent eee) {
+		start.setOnAction(e -> ca.getTimeline().play());
+		pause.setOnAction(e -> ca.getTimeline().pause());
+		step.setOnAction(e -> {
 		    	ca.updateCells();
 		    	ca.drawCells();
-		    }
-		});
-		reset.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent eee) {
+		    });
+		reset.setOnAction(e -> {
 		    	ca.getTimeline().stop();
 		    	ca.initializeScreen();
-		    }
-		});
-		speedUp.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent eee) {
+		    });
+		speedUp.setOnAction(e -> {
 		    	if(ca.getTimeline().getRate()<=8)
 		    		ca.getTimeline().setRate(ca.getTimeline().getRate()*2);
-		    }
-		});
-		slowDown.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent eee) {
+		    });
+		slowDown.setOnAction(e -> {
 		    	ca.getTimeline().setRate(ca.getTimeline().getRate()/2);
-		    }
-		});
+		    });
 	}
 }
