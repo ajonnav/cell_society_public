@@ -2,6 +2,8 @@ package automaton;
 
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -57,17 +59,26 @@ public class SplashScreen {
 		File file = f.showOpenDialog(root.getScene().getWindow());
 		if (file != null) {
 			chosenFile = file.getName();
+			XMLArgs xmlargs = new XMLArgs();
+			HashMap<String, String> argsMap = xmlargs.readXML(file.getAbsolutePath());
 			//return object from parsed
-			openAutomationWindow();
+			openAutomationWindow(argsMap);
 		}
 	}
 	
 	/**
 	 * Creates an instance of Automaton display and opens a window for the automaton display
 	 */
+<<<<<<< HEAD
 	private void openAutomationWindow() {
 		AutomatonDisplay myAutomation = new AutomatonDisplay();
 		myAutomation.loadAutomaton(myAutomation);
+=======
+
+	private void openAutomationWindow(Map<String, String> argsMap) {
+		AutomatonDisplay myAutomation = new AutomatonDisplay(argsMap);
+		myAutomation.loadAutomaton();
+>>>>>>> master
 	}
 	
 	/**

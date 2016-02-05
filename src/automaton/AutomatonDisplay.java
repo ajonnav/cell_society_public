@@ -1,6 +1,9 @@
 package automaton;
 
 
+import java.util.Map;
+
+import simulations.*;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -12,11 +15,14 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class AutomatonDisplay {
-	private static final int CANVAS_Y = 0;//10;
-	private static final double CANVAS_X = 0;//17.5;
-	private static final int CANVAS_SIZE = 400; //350;
-	private static final int WIDTH = 400;
-	private static final int HEIGHT = 500;
+	private double canvasY = 0;//10;
+	private double canvasX = 0;//17.5;
+	private double canvasHeight; //350;
+	private double canvasWidth;
+	private int windowWidth;
+	private int windowHeight;
+	
+	private final int BUTTON_PANE_HEIGHT = 100;
 	
 	private Stage window;
 	private Scene myDisplay;
@@ -26,6 +32,22 @@ public class AutomatonDisplay {
 	private Button pause;
 	private Button start;
 	private Button reset;
+	private CA ca;
+	
+	public AutomatonDisplay(Map<String, String> map) {
+		root = new Group();
+		window = new Stage();
+		canvasHeight = Integer.parseInt(map.get("simHeight"));
+		canvasWidth = Integer.parseInt(map.get("simWidth"));
+		windowWidth = Integer.parseInt(map.get("simWidth"));
+		windowHeight = Integer.parseInt(map.get("simHeight"))+BUTTON_PANE_HEIGHT;
+		myDisplay = new Scene(root, windowWidth, windowHeight);
+		String simName = map.get("name");
+		canvas = new Canvas(canvasWidth, canvasHeight);
+		if(simName.equals("GOL")) {
+			ca = new GameOfLife(map, this);
+		}
+	}
 	
 	public Stage getwindow() {
 		return window;
@@ -35,23 +57,23 @@ public class AutomatonDisplay {
 	 * Loads the automaton
 	 * eventually will have a param for the object from XMLargs
 	 */
-	public void loadAutomaton(AutomatonDisplay a) {
-		openDisplay(a);
 
+	public void loadAutomaton() {
+		openDisplay();
 		//make new CA and do stuff
+		ca.initializeScreen();
 	}
 	
 	/**
 	 * Creates new window and a group for the window, also adds the buttons for the window
 	 */
-	private void openDisplay(AutomatonDisplay a) {
-
-		window = new Stage();
-		root = new Group();
+	private void openDisplay() {
+		window.setWidth(windowWidth);
+		window.setHeight(windowHeight);
 		setDisplayScene();
 		setCanvas();
 		AutomatonButtons controls = new AutomatonButtons(root);
-		controls.setAutomatonButtons(this);
+		controls.setAutomatonButtons(this, ca);
 		window.show();
 	}
 	
@@ -59,7 +81,7 @@ public class AutomatonDisplay {
 	 * Sets scene and background for the window
 	 */
 	private Scene setDisplayScene() {
-		myDisplay = new Scene(root, WIDTH, HEIGHT);
+		
 		Image background = new Image(getClass().getClassLoader().getResourceAsStream("DisplayCA.jpg"));
 		ImageView display = new ImageView(background);
 		root.getChildren().add(display);
@@ -71,13 +93,12 @@ public class AutomatonDisplay {
 	 * Creates a canvas for the window
 	 */
 	private void setCanvas() {
-		canvas = new Canvas(CANVAS_SIZE, CANVAS_SIZE);
-		canvas.setLayoutX(CANVAS_X);
-		canvas.setLayoutY(CANVAS_Y);
-//		GraphicsContext gc = canvas.getGraphicsContext2D();
-//		gc.setFill(Color.BLUE);
-//		gc.fillRect(0,0,400,400);
-//		root.getChildren().add(canvas);
+		canvas.setLayoutX(canvasX);
+		canvas.setLayoutY(canvasY);
+		//GraphicsContext gc = canvas.getGraphicsContext2D();
+		//gc.setFill(Color.BLUE);
+		//gc.fillRect(0,0,500,500);
+		root.getChildren().add(canvas);
 	}
 	
 	/**
@@ -94,4 +115,16 @@ public class AutomatonDisplay {
 		return root;
 	}
 	
+	public double getCanvasX() {
+		return canvasX;
+	}
+	public double getCanvasY() {
+		return canvasY;
+	}
+	public double getCanvasHeight() {
+		return canvasHeight;
+	}
+	public double getCanvasWidth() {
+		return canvasWidth;
+	}
 }
