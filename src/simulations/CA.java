@@ -59,7 +59,7 @@ public abstract class CA {
 	}
 	/**
 	 * Initializes each cell to its starting state, varies from simulation to simulation
-	 */1
+	 */
 	public abstract void initializeScreen();
 	
 	/**
