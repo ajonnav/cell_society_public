@@ -67,7 +67,7 @@ public class SplashScreen {
 	 */
 	private void openAutomationWindow() {
 		AutomatonDisplay myAutomation = new AutomatonDisplay();
-		myAutomation.loadAutomaton();
+		myAutomation.loadAutomaton(myAutomation);
 	}
 	
 	/**

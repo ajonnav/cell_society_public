@@ -2,6 +2,7 @@ package simulations;
 
 import java.util.ArrayList;
 
+import javafx.scene.paint.Color;
 import cells.Cell;
 import automaton.AutomatonDisplay;
 import grid.SquareGrid;;
@@ -13,6 +14,7 @@ public class SchellingCA extends CA {
 	static final int STATE_ONE = 1;
 	static final int STATE_TWO = 2;
 	static final int [] STATES = {VACANT, STATE_ONE, STATE_TWO};
+	static final Color [] STATE_COLORS = {Color.GRAY, Color.RED, Color.BLUE};
 	private ArrayList<Cell> cellsThisRound;
 	public SchellingCA(int width, int height, int[] states, AutomatonDisplay a, double t, double p, double v){
 		super(width, height, states, a);
@@ -40,6 +42,7 @@ public class SchellingCA extends CA {
 			int type = (int) (cellTypes.length*Math.random());
 			if(cellTypes[type] > 0){
 			allCells.get(i).setState(STATES[type]);
+			//allCells.get(i).setColor(STATE_COLORS[type]));
 			cellTypes[type]--;
 			}
 		}
