@@ -2,11 +2,22 @@ package cells;
 
 import javafx.scene.paint.Color;
 
-public class GOLSquareCell extends SquareCell{
+public abstract class GOLSquareCell extends SquareCell{
 
-	public GOLSquareCell(double x, double y, Color c, int w, int h) {
+	private boolean isAlive;
+	
+	public GOLSquareCell(double x, double y, Color c, double w, double h) {
 		super(x, y, c, w, h);
 		// TODO Auto-generated constructor stub
 	}
 
+	public boolean isAlive() {
+		return isAlive;
+	}
+
+	public void setAlive(boolean isAlive) {
+		this.isAlive = isAlive;
+	}
+	
+	public abstract GOLSquareCell update(GOLSquareCell[] cells);
 }

@@ -5,7 +5,7 @@
 <author>John Horton Conway</author>
 <simWidth>500</simWidth>
 <simHeight>500</simHeight>
-<numRow>100</numRow>
-<numCol>100</numCol>
+<numRow>5</numRow>
+<numCol>5</numCol>
 <perAlive>0.30</perAlive>
 </content>

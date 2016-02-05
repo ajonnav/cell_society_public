@@ -2,15 +2,12 @@ package cells;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-public class SquareCell extends Cell {
-	private int width, height;
+public abstract class SquareCell extends Cell {
 	/**
 	 * Constructor for SquareCell that will create a square cell of a certain color
 	 */
-	public SquareCell(double x, double y, Color c, int w, int h){
-		super(x, y, c);
-		setWidth(w);
-		setHeight(h);
+	public SquareCell(double x, double y, Color c, double w, double h){
+		super(x, y, c, w, h);
 	}
 	@Override
 	public void draw(GraphicsContext gc) {
@@ -18,17 +15,4 @@ public class SquareCell extends Cell {
 		gc.setFill(getCellColor());
 		gc.fillRect(getX(), getY(), getWidth(), getHeight());
 	}
-	private int getWidth() {
-		return width;
-	}
-	private void setWidth(int width) {
-		this.width = width;
-	}
-	private int getHeight() {
-		return height;
-	}
-	private void setHeight(int height) {
-		this.height = height;
-	}
-
 }

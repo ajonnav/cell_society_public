@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 public abstract class CA {
+	private final int DEFAULT_FRAMES_PER_SECOND = 30;
 	private int simWidth;
 	private int simHeight;
 	private int numRow;
@@ -18,10 +19,8 @@ public abstract class CA {
 	private String name;
 	private String title;
 	private String author;
-	private int[][] neighbors;
-	//private final int[] stateCodes;
+	private int[][] adjacency;
 	private boolean simOver;
-	private List<Cell> allCells;
 	private Timeline timeline;
 	private GraphicsContext graphicsContext;
 	private double cellWidth;
@@ -45,14 +44,13 @@ public abstract class CA {
 		setTitle(argsMap.get("title"));
 		setAuthor(argsMap.get("author"));
 		//stateCodes = states;
-		allCells = new ArrayList<Cell>();
 		setTimeline(new Timeline());
 		setGraphicsContext(a.getCanvas().getGraphicsContext2D());
 		simOver = false;
 		setCellWidth(getSimWidth()/getNumCol());
 		setCellHeight(getSimHeight()/getNumRow());
 		setNumCell(getNumCol()*getNumCol());
-		neighbors = new int[getNumCell()][getNumCell()];
+		adjacency = new int[getNumCell()][getNumCell()];
 	}
 	/**
 	 * Initializes each cell to its starting state, varies from simulation to simulation
@@ -64,7 +62,7 @@ public abstract class CA {
 	 */
 	protected void initializeSimulationLoop() {
 		getTimeline().setCycleCount(Animation.INDEFINITE);
-		KeyFrame simulate = new KeyFrame(Duration.INDEFINITE,
+		KeyFrame simulate = new KeyFrame(Duration.millis(1000/getFramesPerSecond()),
 				new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
 						runSimulation();
@@ -79,15 +77,11 @@ public abstract class CA {
 	 * by simulation loop. No need for public visibility
 	 */
 	
-	protected abstract void calculateAdjacencyMatrix();
+	protected abstract void calculateAdjacencyMatrixAndSetNeighbor();
 	
-	protected abstract void updateCells();
+	public abstract void updateCells();
 
-	protected void drawCells() {
-		for (Cell c : allCells) {
-			c.draw(getGraphicsContext());
-		}
-	}
+	public abstract void drawCells();
 
 	protected void runSimulation() {
 		updateCells();
@@ -107,11 +101,11 @@ public abstract class CA {
 	public void setSimHeight(int simHeight) {
 		this.simHeight = simHeight;
 	}
-	public int[][] getNeighbors() {
-		return neighbors;
+	public int[][] getAdjacency() {
+		return adjacency;
 	}
-	public void setNeighbors(int[][] neighbors) {
-		this.neighbors = neighbors;
+	public void setAdjacency(int[][] adjacency) {
+		this.adjacency = adjacency;
 	}
 	//public int[] getStateCodes() {
 	//	return stateCodes;
@@ -122,12 +116,7 @@ public abstract class CA {
 	public void setSimOver(boolean opt) {
 		simOver = opt;
 	}
-	public List<Cell> getAllCells() {
-		return allCells;
-	}
-	public void setAllCells(List<Cell> list) {
-		Collections.copy(list, allCells);
-	}
+	
 	public int getNumRow() {
 		return numRow;
 	}
@@ -187,5 +176,9 @@ public abstract class CA {
 	}
 	public void setNumCell(int numCell) {
 		this.numCell = numCell;
+	}
+	
+	private int getFramesPerSecond() {
+		return DEFAULT_FRAMES_PER_SECOND;
 	}
 }

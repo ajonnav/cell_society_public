@@ -59,6 +59,7 @@ public class AutomatonDisplay {
 	 */
 	public void loadAutomaton() {
 		openDisplay();
+		
 		//make new CA and do stuff
 		ca.initializeScreen();
 	}

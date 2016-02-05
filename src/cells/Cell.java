@@ -1,16 +1,30 @@
 package cells;
 
+import java.util.ArrayList;
+
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 public abstract class Cell {
 	private Color cellColor;
 	private double xCoord, yCoord;
-	public Cell(double x, double y, Color color) {
+	private ArrayList<Integer> neighbor;
+	private double width, height;
+	public Cell(double x, double y, Color color, double w, double h) {
 		setCellColor(color);
 		xCoord = x;
 		yCoord = y;
+		neighbor = new ArrayList<Integer>();
+		setWidth(w);
+		setHeight(h);
 	}
 
+	/**
+	 * This Class will vary from extension to extension of the Cell class.
+	 * Every inherited class will require GraphicsContext to draw.
+	 * @param gc
+	 */
+	public abstract void draw(GraphicsContext gc);
+	
 	/**
 	 * returns x pixel coordinate of cell
 	 * @return xCoord
@@ -39,6 +53,20 @@ public abstract class Cell {
 	public void setY(double newYcoord){
 		xCoord = newYcoord;
 	}
+	
+	public double getWidth() {
+		return width;
+	}
+	private void setWidth(double w) {
+		this.width = w;
+	}
+	public double getHeight() {
+		return height;
+	}
+	private void setHeight(double h) {
+		this.height = h;
+	}
+	
 	public Color getCellColor() {
 		return cellColor;
 	}
@@ -47,10 +75,11 @@ public abstract class Cell {
 		this.cellColor = cellColor;
 	}
 
-	/**
-	 * This Class will vary from extension to extension of the Cell class.
-	 * Every inherited class will require GraphicsContext to draw.
-	 * @param gc
-	 */
-	public abstract void draw(GraphicsContext gc);
+	public ArrayList<Integer> getNeighbor() {
+		return neighbor;
+	}
+
+	public void setNeighbor(ArrayList<Integer> list) {
+		this.neighbor = list;
+	}
 }
