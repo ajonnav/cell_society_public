@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import cells.GOLSquareCell;
 import cells.SharkWatorSquareCell;
 import cells.FishWatorSquareCell;
 import cells.EmptyWatorSquareCell;
@@ -56,14 +55,15 @@ public class Wator extends CA{
 
 	@Override
 	protected void calculateAdjacencyMatrixAndSetNeighbor() {
-		for(int i=0; i<getNumCell(); i++) {
+		for(int i = 0; i < getNumCell(); i++) {
 			WatorSquareCell cell = getAllCells()[i];
 			ArrayList<Integer> list = new ArrayList<Integer>();
-			for(int j=0; j<getNumCell(); j++) {
+			for(int j = 0; j < getNumCell(); j++) {
 				WatorSquareCell temp = getAllCells()[j];
-				if(((Math.abs(cell.getX() - temp.getX())==getCellWidth() && Math.abs(cell.getY()-temp.getY())==0) 
-						|| (Math.abs(cell.getX() - temp.getX())==0 && Math.abs(cell.getY()-temp.getY())==getCellHeight()))
-						&& i!=j) {
+				if(((Math.abs(cell.getX() - temp.getX()) == getCellWidth() && Math.abs(cell.getY() - temp.getY()) == 0) 
+					|| (Math.abs(cell.getX() - temp.getX()) == 0 && Math.abs(cell.getY() - temp.getY()) == getCellHeight())
+					||(Math.abs(cell.getX() - temp.getX()) == getSimWidth() - getCellWidth() && Math.abs(cell.getY() - temp.getY()) == 0))
+						&& i != j) {
 					getAdjacency()[i][j] =1;
 					list.add(j);
 				}
@@ -80,29 +80,42 @@ public class Wator extends CA{
 			list[i] = new EmptyWatorSquareCell(getAllCells()[i].getX(), getAllCells()[i].getY(), getCellWidth(), getCellHeight());
 			list[i].setNeighbor(getAllCells()[i].getNeighbor());
 		}
-		for(int i = 0; i<getNumCell(); i++) {
-			if(getAllCells()[i].isShark()) {
-				list[i] = getAllCells()[i].updateWator(getAllCells(), map, i);
-			}
-		}
-		for(int i = 0; i < getNumCell(); i++) {
-			if(!getAllCells()[i].isShark() && !getAllCells()[i].isEmpty()) {
-				list[i] = getAllCells()[i].updateWator(getAllCells(), map, i);
-			}
-		}
-		
-		for(int i = 0; i < getNumCell(); i++) {
+		updateSharks(list, map);
+		updateFish(list, map);
+		updateEmptyCells(list, map);
+		setAllCells(list);
+	}
+
+	private void updateEmptyCells(WatorSquareCell[] list,
+			HashMap<Integer, Integer> map) {
+		for(int i = 0; i < getNumCell(); i ++) {
 			if(getAllCells()[i].isEmpty()) {
 				list[i] = getAllCells()[i].updateWator(getAllCells(), map, i);
 			}
 		}
-		setAllCells(list);
+	}
+
+	private void updateFish(WatorSquareCell[] list,
+			HashMap<Integer, Integer> map) {
+		for(int i = 0; i < getNumCell(); i ++) {
+			if(!getAllCells()[i].isShark() && !getAllCells()[i].isEmpty()) {
+				list[i] = getAllCells()[i].updateWator(getAllCells(), map, i);
+			}
+		}
+	}
+
+	private void updateSharks(WatorSquareCell[] list,
+			HashMap<Integer, Integer> map) {
+		for(int i = 0; i < getNumCell(); i ++) {
+			if(getAllCells()[i].isShark()) {
+				list[i] = getAllCells()[i].updateWator(getAllCells(), map, i);
+			}
+		}
 	}
 
 	@Override
 	public void drawCells() {
-		getGraphicsContext().clearRect(0,0,getSimWidth(), getSimHeight());
-		WatorSquareCell[] s = getAllCells();
+		getGraphicsContext().clearRect(0, 0, getSimWidth(), getSimHeight());
 		for(WatorSquareCell cell: getAllCells()) {
 			cell.draw(getGraphicsContext());
 		}
