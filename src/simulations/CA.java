@@ -49,13 +49,12 @@ public abstract class CA {
 		setName(argsMap.get("name"));
 		setTitle(argsMap.get("title"));
 		setAuthor(argsMap.get("author"));
-		//stateCodes = states;
 		setTimeline(new Timeline());
 		setGraphicsContext(a.getCanvas().getGraphicsContext2D());
 		simOver = false;
-		setCellWidth(getSimWidth()/getNumCol());
-		setCellHeight(getSimHeight()/getNumRow());
-		setNumCell(getNumCol()*getNumCol());
+		setCellWidth((double)getSimWidth()/getNumCol());
+		setCellHeight((double)getSimHeight()/getNumRow());
+		setNumCell(getNumRow()*getNumCol());
 		adjacency = new int[getNumCell()][getNumCell()];
 	}
 	/**
@@ -117,9 +116,7 @@ public abstract class CA {
 	public void setAdjacency(int[][] adjacency) {
 		this.adjacency = adjacency;
 	}
-	//public int[] getStateCodes() {
-	//	return stateCodes;
-	//}
+	
 	public boolean getSimOver() {
 		return simOver;
 	}
@@ -166,14 +163,14 @@ public abstract class CA {
 	public double getCellWidth() {
 		return cellWidth;
 	}
-	public void setCellWidth(int cellWidth) {
-		this.cellWidth = cellWidth;
+	public void setCellWidth(double d) {
+		this.cellWidth = d;
 	}
 	public double getCellHeight() {
 		return cellHeight;
 	}
-	public void setCellHeight(int cellHeight) {
-		this.cellHeight = cellHeight;
+	public void setCellHeight(double d) {
+		this.cellHeight = d;
 	}
 	public GraphicsContext getGraphicsContext() {
 		return graphicsContext;

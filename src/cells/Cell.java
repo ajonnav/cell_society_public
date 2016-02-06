@@ -51,7 +51,7 @@ public abstract class Cell {
 	 * @param newYcoord
 	 */
 	public void setY(double newYcoord){
-		xCoord = newYcoord;
+		yCoord = newYcoord;
 	}
 	
 	public double getWidth() {

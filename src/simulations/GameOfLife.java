@@ -25,8 +25,8 @@ public class GameOfLife extends CA{
 	@Override
 	public void initializeScreen() {		
 		int numCell = 0;
-		for(int i = 0; i<getNumRow(); i++) {
-			for(int j = 0; j<getNumCol(); j++) {
+		for(int i = 0; i<getNumCol(); i++) {
+			for(int j = 0; j<getNumRow(); j++) {
 				if(Math.random()<perAlive) {
 					getAllCells()[numCell] = new LiveGOLSquareCell(i*getCellWidth(), j*getCellHeight(), getCellWidth(), getCellHeight());
 				}
@@ -76,7 +76,6 @@ public class GameOfLife extends CA{
 
 	@Override
 	public void drawCells() {
-		// TODO Auto-generated method stub
 		getGraphicsContext().clearRect(0,0,getSimWidth(), getSimHeight());
 		for(GOLSquareCell cell: getAllCells()) {
 			cell.draw(getGraphicsContext());
