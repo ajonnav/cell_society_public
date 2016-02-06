@@ -2,7 +2,9 @@ package simulations;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
+
 
 //import javafx.scene.paint.Color;
 import cells.*;
@@ -39,10 +41,9 @@ public class SchellingCA extends CA {
 
 	public void setInitialStates() {
 		int numCell = 0;
-		for (int i = 0; i < getNumRow(); i++) {
-			for (int j = 0; j < getNumCol(); j++) {
+		for (int i = 0; i < getNumCol(); i++) {
+			for (int j = 0; j < getNumRow(); j++) {
 				double typeOne = (1.0 - vacantP) * typeOneP;
-				// double typeTwo = (1.0 - vacantP)*(1 - typeOneP);
 				double rand = Math.random();
 				if (rand < vacantP) {
 					getAllCells()[numCell] = new VacantSegregationSquareCell(i
@@ -62,27 +63,6 @@ public class SchellingCA extends CA {
 		}
 	}
 	
-	public void setInitialStates2() {
-		int numCell = 0;
-		for (int i = 0; i < getNumRow(); i++) {
-			for (int j = 0; j < getNumCol(); j++) {
-				if ((i+j+ 1)%2 == 0) {
-					getAllCells()[numCell] = new VacantSegregationSquareCell(i
-							* getCellWidth(), j * getCellHeight(),
-							getCellWidth(), getCellHeight());
-				} else if ((i+j)%3 == 0) {
-					getAllCells()[numCell] = new TypeOneSegregationSquareCell(i
-							* getCellWidth(), j * getCellHeight(),
-							getCellWidth(), getCellHeight(), tPercentage);
-				} else {
-					getAllCells()[numCell] = new TypeTwoSegregationSquareCell(i
-							* getCellWidth(), j * getCellHeight(),
-							getCellWidth(), getCellHeight(), tPercentage);
-				}
-				numCell++;
-			}
-		}
-	}
 
 	@Override
 	public void updateCells() {
@@ -96,6 +76,8 @@ public class SchellingCA extends CA {
 			if (getAllCells()[i].getState() == 0)
 				vacantList.add(i);
 		}
+		Collections.shuffle(vacantList);
+		Collections.shuffle(unsatisfiedList);
 		SegregationSquareCell[] swappedCells = swapCells(vacantList, unsatisfiedList);
 		
 		//if (gridThisRound == getAllCells())
