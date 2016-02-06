@@ -42,8 +42,6 @@ public class Fire extends CA {
 				numCell++;
 			}
 		}
-		
-		//set empty and set burning
 		initializeSimulationLoop();
 		calculateAdjacencyMatrixAndSetNeighbor();
 		drawCells();
