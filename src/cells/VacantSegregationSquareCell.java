@@ -12,7 +12,7 @@ public class VacantSegregationSquareCell extends SegregationSquareCell {
 	}
 
 	@Override
-	public SegregationSquareCell update(SegregationSquareCell[] cells, SegregationSquareCell [] tempChange) {
+	public SegregationSquareCell update(SegregationSquareCell[] cells, SegregationSquareCell [] tempChange, SegregationSquareCell [] noGo) {
 		// TODO Auto-generated method stub
 		return this;
 	}

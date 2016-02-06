@@ -17,7 +17,7 @@ public abstract class SegregationSquareCell extends SquareCell {
 		state = newState;
 	}
 	
-	public abstract SegregationSquareCell update(SegregationSquareCell [] cells, SegregationSquareCell [] tempChange);
+	public abstract SegregationSquareCell update(SegregationSquareCell[] cells, SegregationSquareCell [] tempChange, SegregationSquareCell [] noGo);
 	
 	
 

@@ -60,7 +60,7 @@ public class SchellingCA extends CA {
 		SegregationSquareCell[] tempList = new SegregationSquareCell[getNumCell()];
 		SegregationSquareCell[] gridThisRound = Arrays.copyOf(getAllCells(), getNumCell());
 		for (int i = 0; i < getNumCell(); i++) {
-			tempList[i] = getAllCells()[i].update(getAllCells(), gridThisRound);
+			tempList[i] = getAllCells()[i].update(getAllCells(), gridThisRound, tempList);
 		}
 		if(gridThisRound == getAllCells()) this.setSimOver(true);
 		setAllCells(tempList);

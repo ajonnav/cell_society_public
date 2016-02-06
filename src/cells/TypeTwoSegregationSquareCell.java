@@ -20,12 +20,11 @@ public class TypeTwoSegregationSquareCell extends SegregationSquareCell {
 	}
 
 	@Override
-	public SegregationSquareCell update(SegregationSquareCell[] cells, SegregationSquareCell [] tempChange) {
-		if (cellUnsatisfied(cells)) {
+	public SegregationSquareCell update(SegregationSquareCell[] cells, SegregationSquareCell [] tempChange, SegregationSquareCell [] noGo) {
+		if (cellUnsatisfied(cells) && moveRandomly(tempChange, noGo)) {
 			VacantSegregationSquareCell returnCell = new VacantSegregationSquareCell(
 					getX(), getY(), getWidth(), getHeight());
 			returnCell.setNeighbor(getNeighbor());
-			moveRandomly(tempChange);
 			return returnCell;
 		}
 		return this;
@@ -48,17 +47,27 @@ public class TypeTwoSegregationSquareCell extends SegregationSquareCell {
 		return count;
 	}
 
-	private void moveRandomly(SegregationSquareCell[] cells) {
+	private boolean moveRandomly(SegregationSquareCell[] cells, SegregationSquareCell[] noGo) {
 		boolean go = true;
+		int count = 1;
 		while (go) {
-			int randCell = (int) (Math.random() * (cells.length - 1));
-			if (cells[randCell].getState() == 0) {
+			int randCell = (int) (Math.random() * (cells.length));
+			if (cells[randCell].getState() == 0 && (noGo[randCell] == null || noGo[randCell].getState() == 0) ) {
 				SegregationSquareCell temp = cells[randCell];
 				cells[randCell] = new TypeTwoSegregationSquareCell(temp,
 						tPercentage);
 				cells[randCell].setNeighbor(temp.getNeighbor());
 				go = false;
+				return true;
+			}
+			//if it goes through full list and fails to find a vacant slot, break
+			count++;
+			if(count == cells.length){
+				go = false;
+				break;
 			}
 		}
+		
+		return false;
 	}
 }

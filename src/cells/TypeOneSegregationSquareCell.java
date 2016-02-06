@@ -23,12 +23,12 @@ public class TypeOneSegregationSquareCell extends SegregationSquareCell {
 	}
 
 	@Override
-	public SegregationSquareCell update(SegregationSquareCell[] cells, SegregationSquareCell [] tempChange) {
-		if (cellUnsatisfied(cells)) {
+	public SegregationSquareCell update(SegregationSquareCell[] cells, SegregationSquareCell [] tempChange, SegregationSquareCell [] noGo) {
+		if (cellUnsatisfied(cells) && moveRandomly(tempChange, noGo)) {
 			VacantSegregationSquareCell returnCell = new VacantSegregationSquareCell(
 					getX(), getY(), getWidth(), getHeight());
 			returnCell.setNeighbor(getNeighbor());
-			moveRandomly(tempChange);
+			moveRandomly(tempChange, noGo);
 			return returnCell;
 		}
 		return this;
@@ -51,18 +51,26 @@ public class TypeOneSegregationSquareCell extends SegregationSquareCell {
 		return count;
 	}
 
-	private void moveRandomly(SegregationSquareCell[] cells) {
+	private boolean moveRandomly(SegregationSquareCell[] cells, SegregationSquareCell[] noGo) {
 		boolean go = true;
+		int count = 1;
 		while (go) {
 			int randCell = (int) (Math.random() * (cells.length));
-			if (cells[randCell].getState() == 0) {
+			if (cells[randCell].getState() == 0 && (noGo[randCell] == null || noGo[randCell].getState() == 0) ) {
 				SegregationSquareCell temp = cells[randCell];
 				cells[randCell] = new TypeOneSegregationSquareCell(temp,
 						tPercentage);
 				cells[randCell].setNeighbor(temp.getNeighbor());
 				go = false;
+				return true;
+			}
+			count++;
+			if(count == cells.length){
+				go = false;
+				break;
 			}
 		}
+		return false;
 	}
 
 }
