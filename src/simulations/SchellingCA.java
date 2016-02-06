@@ -31,14 +31,16 @@ public class SchellingCA extends CA {
 	@Override
 	public void initializeScreen() {
 		// TODO Auto-generated method stub
-
 		setInitialStates();
 		initializeSimulationLoop();
 		calculateAdjacencyMatrixAndSetNeighbor();
 		drawCells();
 
 	}
-
+/**
+ * Random number is used to determine which cell is built where.  If random is less than Vacant percentage, vacant cell built
+ * if random is between vacant probability and typeOne probability, then typeOne is built.  Any number larger creates a typeTwo
+ */
 	public void setInitialStates() {
 		int numCell = 0;
 		for (int i = 0; i < getNumCol(); i++) {
@@ -65,6 +67,10 @@ public class SchellingCA extends CA {
 	
 
 	@Override
+	/**
+	 * Checks satisfaction and/or vacancy of each cell.  If cell is unsatisfied, or vacant, it is added to its respective
+	 * ArrayList for use in moving unsatisfied agents.  The two objects are shuffled to give more realistic movement
+	 */
 	public void updateCells() {
 		ArrayList<Integer> unsatisfiedList = new ArrayList<Integer>();
 		ArrayList<Integer> vacantList = new ArrayList<Integer>();
@@ -79,12 +85,11 @@ public class SchellingCA extends CA {
 		Collections.shuffle(vacantList);
 		Collections.shuffle(unsatisfiedList);
 		SegregationSquareCell[] swappedCells = swapCells(vacantList, unsatisfiedList);
-		
-		//if (gridThisRound == getAllCells())
-			//this.setSimOver(true);
 		setAllCells(mergeList(swappedCells, gridThisRound));
 	}
-
+/**
+ * Determines the neighbors of each Cell.  Adjacency list is also built for future abstractions.
+ */
 	protected void calculateAdjacencyMatrixAndSetNeighbor() {
 		for (int i = 0; i < getNumCell(); i++) {
 			Cell cell = getAllCells()[i];
@@ -101,16 +106,29 @@ public class SchellingCA extends CA {
 			cell.setNeighbor(list);
 		}
 	}
-	
+	/**
+	 * Compares the list of newly moved unsatisfied cells against the master list. Anything on the Swapped list overwrites
+	 * the master list to reflect changes.  
+	 * @param swapped
+	 * @param master
+	 * @return
+	 */
 	private SegregationSquareCell[] mergeList(SegregationSquareCell[] swapped, SegregationSquareCell[] master){
 		for (int i = 0; i < getNumCell(); i++){
 			if(swapped[i] != null){
 				master[i] = swapped[i];
 			}
 		}
+		
 		return master;
 	}
-	
+	/**
+	 * Takes in lists of vacant and unsatisfied cells.  Loops through until all unsatisfied cells are moved.  Once unsatisfied
+	 * cell is moved, its former spot is added to the vacancy list.
+	 * @param vacant
+	 * @param unsatisfied
+	 * @return
+	 */
 	private SegregationSquareCell[] swapCells(ArrayList<Integer> vacant, ArrayList<Integer> unsatisfied){
 		SegregationSquareCell[] ret  = new SegregationSquareCell[getNumCell()];
 		while(unsatisfied.size() > 0 && vacant.size() > 0){
@@ -123,8 +141,6 @@ public class SchellingCA extends CA {
 			double newX = toFill.getX();
 			double newY = toFill.getY();
 			ArrayList<Integer> tempN  = new ArrayList<Integer>(toFill.getNeighbor());
-			double vacateX = toVacate.getX();
-			double vacateY = toVacate.getY();
 			toFill.setX(toVacate.getX());
 			toFill.setY(toVacate.getY());
 			toFill.setNeighbor(toVacate.getNeighbor());
@@ -138,15 +154,24 @@ public class SchellingCA extends CA {
 		}
 		return ret;
 	}
-
+	
+/**
+ * Returns all the Cells in the simulation
+ * @return allCells
+ */
 	public SegregationSquareCell[] getAllCells() {
 		return allCells;
 	}
-
+/**
+ * Sets all the Cells to a new list
+ * @param newList
+ */
 	public void setAllCells(SegregationSquareCell[] newList) {
 		allCells = Arrays.copyOf(newList, newList.length);
 	}
-
+/**
+ * Renders the cells for the next round of the simulation.
+ */
 	public void drawCells() {
 		getGraphicsContext().clearRect(0, 0, getSimWidth(), getSimHeight());
 		for (SquareCell cell : getAllCells()) {
