@@ -4,6 +4,7 @@ package automaton;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -13,19 +14,22 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 
 public class SplashScreen {
+	private static final String DEFAULT_RESOURCE_PACKAGE = "ResourceBundle/";
 	private static final int WIDTH = 800;
 	private static final int HEIGHT = 400;
 	
 	private static Group root;
 	private static String chosenFile;
+	private ResourceBundle myResources;
 	
 	/**
 	 * Initializes the display of the splash screen
 	 */
-	public Scene initScreen() {
+	public Scene initScreen(String language) {
 		root = new Group();
 		Scene s = new Scene(root, WIDTH, HEIGHT);
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream("CellSocietyBackground.jpg"));
+		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
 		ImageView background = new ImageView(image);
 		root.getChildren().add(background);
 		setupFileChoose();
@@ -37,7 +41,7 @@ public class SplashScreen {
 	 */
 	public void setupFileChoose() {
 		FileChooser f = new FileChooser();
-		f.setTitle("Open XML file");
+		f.setTitle(myResources.getString("XMLButton"));
 		setUploadButton(f);
 	}
 	
