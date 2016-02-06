@@ -42,10 +42,13 @@ public class AutomatonDisplay {
 		windowWidth = Integer.parseInt(map.get("simWidth"));
 		windowHeight = Integer.parseInt(map.get("simHeight"))+BUTTON_PANE_HEIGHT;
 		myDisplay = new Scene(root, windowWidth, windowHeight);
-		String simName = map.get("name");
 		canvas = new Canvas(canvasWidth, canvasHeight);
+		String simName = map.get("name");
 		if(simName.equals("GOL")) {
 			ca = new GameOfLife(map, this);
+		}
+		else if(simName.equals("Wator")) {
+			ca = new Wator(map, this);
 		}
 	}
 	
