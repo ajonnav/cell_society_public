@@ -6,7 +6,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Random;
 
-import cells.*;
+import cells.DeadGOLSquareCell;
+import cells.GOLSquareCell;
+import cells.LiveGOLSquareCell;
 import automaton.AutomatonDisplay;
 
 public class GameOfLife extends CA{
@@ -21,17 +23,10 @@ public class GameOfLife extends CA{
 	}
 
 	@Override
-	public void initializeScreen() {
-		// TODO Auto-generated method stub
-		HashSet<Integer> aliveIndexSet = new HashSet<Integer>();
-		Random randomGenerator = new Random();
-		/*while(aliveIndexSet.size()<= perAlive*getNumCell()){
-			aliveIndexSet.add(randomGenerator.nextInt(100));
-	    }*/  
-		
-		int numCell=0;
-		for(int i =0; i<getNumRow(); i++) {
-			for(int j =0; j<getNumCol(); j++) {
+	public void initializeScreen() {		
+		int numCell = 0;
+		for(int i = 0; i<getNumRow(); i++) {
+			for(int j = 0; j<getNumCol(); j++) {
 				if(Math.random()<perAlive) {
 					getAllCells()[numCell] = new LiveGOLSquareCell(i*getCellWidth(), j*getCellHeight(), getCellWidth(), getCellHeight());
 				}
@@ -48,7 +43,6 @@ public class GameOfLife extends CA{
 
 	@Override
 	public void updateCells() {
-		// TODO Auto-generated method stub
 		GOLSquareCell[] list = new GOLSquareCell[getNumCell()];
 		for(int i=0; i<getNumCell(); i++) {
 			list[i] = getAllCells()[i].update(getAllCells());
@@ -59,10 +53,10 @@ public class GameOfLife extends CA{
 	@Override
 	protected void calculateAdjacencyMatrixAndSetNeighbor() {
 		for(int i=0; i<getNumCell(); i++) {
-			Cell cell = getAllCells()[i];
+			GOLSquareCell cell = getAllCells()[i];
 			ArrayList<Integer> list = new ArrayList<Integer>();
 			for(int j=0; j<getNumCell(); j++) {
-				Cell temp = getAllCells()[j];
+				GOLSquareCell temp = getAllCells()[j];
 				if(Math.abs(cell.getX() - temp.getX())<=getCellWidth() && Math.abs(cell.getY()-temp.getY())<=getCellHeight() && i!=j) {
 					getAdjacency()[i][j] =1;
 					list.add(j);
@@ -75,6 +69,7 @@ public class GameOfLife extends CA{
 	public GOLSquareCell[] getAllCells() {
 		return allCells;
 	}
+	
 	public void setAllCells(GOLSquareCell[] list) {
 		allCells = Arrays.copyOf(list, list.length);
 	}
@@ -83,7 +78,7 @@ public class GameOfLife extends CA{
 	public void drawCells() {
 		// TODO Auto-generated method stub
 		getGraphicsContext().clearRect(0,0,getSimWidth(), getSimHeight());
-		for(SquareCell cell: getAllCells()) {
+		for(GOLSquareCell cell: getAllCells()) {
 			cell.draw(getGraphicsContext());
 		}
 	}
