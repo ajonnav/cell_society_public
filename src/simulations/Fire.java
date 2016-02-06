@@ -30,8 +30,8 @@ public class Fire extends CA {
 	public void initializeScreen() {
 		// TODO Auto-generated method stub
 		int numCell = 0;
-		for (int i = 0; i < getNumRow(); i++) {
-			for (int j = 0; j < getNumCol(); j++) {
+		for (int i = 0; i < getNumCol(); i++) {
+			for (int j = 0; j < getNumRow(); j++) {
 				if (burning_x.contains(i) && burning_y.contains(j)) {
 					getAllCells()[numCell] = new FireBURNING(i*getCellWidth(), j*getCellHeight(), getCellWidth(), getCellHeight());
 				} else if (empty_x.contains(i) && empty_y.contains(j)) {

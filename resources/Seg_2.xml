@@ -5,8 +5,8 @@
 <author>Thomas Schelling</author>
 <simWidth>500</simWidth>
 <simHeight>500</simHeight>
-<numRow>3</numRow>
-<numCol>3</numCol>
+<numRow>50</numRow>
+<numCol>50</numCol>
 <tPercentage>0.30</tPercentage>
 <typeOneP>0.40</typeOneP>
 <vacantP>0.20</vacantP>

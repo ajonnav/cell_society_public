@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<content>
+<name>Wator</name>
+<title>Wator</title>
+<author>A.K. Dewdney</author>
+<simWidth>500</simWidth>
+<simHeight>500</simHeight>
+<numRow>100</numRow>
+<numCol>100</numCol>
+<perShark>0</perShark>
+<perFish>0.001</perFish>
+<fishBreed>100000</fishBreed>
+<sharkBreed>20</sharkBreed>
+<sharkStarve>5</sharkStarve>
+</content>

@@ -3,12 +3,11 @@ import automaton.AutomatonDisplay;
 
 import java.util.*;
 
-import cells.*;
 import javafx.animation.Animation;
 import javafx.animation.Timeline;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.animation.KeyFrame;
 import javafx.event.ActionEvent;
@@ -31,6 +30,7 @@ public abstract class CA {
 	private double cellWidth;
 	private double cellHeight;
 	private int numCell;
+	private Stage window;
 
 	/**
 	 * Default Constructor that I am going to use until we figure out XML file
@@ -49,14 +49,14 @@ public abstract class CA {
 		setName(argsMap.get("name"));
 		setTitle(argsMap.get("title"));
 		setAuthor(argsMap.get("author"));
-		//stateCodes = states;
 		setTimeline(new Timeline());
 		setGraphicsContext(a.getCanvas().getGraphicsContext2D());
 		simOver = false;
-		setCellWidth(getSimWidth()/getNumCol());
-		setCellHeight(getSimHeight()/getNumRow());
-		setNumCell(getNumCol()*getNumCol());
+		setCellWidth((double)getSimWidth()/getNumCol());
+		setCellHeight((double)getSimHeight()/getNumRow());
+		setNumCell(getNumRow()*getNumCol());
 		adjacency = new int[getNumCell()][getNumCell()];
+		window = a.getwindow();
 	}
 	/**
 	 * Initializes each cell to its starting state, varies from simulation to simulation
@@ -76,6 +76,7 @@ public abstract class CA {
 				});
 		getTimeline().getKeyFrames().add(simulate);
 		//getTimeline().play();
+		window.setOnCloseRequest(e -> getTimeline().stop());
 	}
 
 	/**
@@ -117,9 +118,7 @@ public abstract class CA {
 	public void setAdjacency(int[][] adjacency) {
 		this.adjacency = adjacency;
 	}
-	//public int[] getStateCodes() {
-	//	return stateCodes;
-	//}
+	
 	public boolean getSimOver() {
 		return simOver;
 	}
@@ -166,14 +165,14 @@ public abstract class CA {
 	public double getCellWidth() {
 		return cellWidth;
 	}
-	public void setCellWidth(int cellWidth) {
-		this.cellWidth = cellWidth;
+	public void setCellWidth(double d) {
+		this.cellWidth = d;
 	}
 	public double getCellHeight() {
 		return cellHeight;
 	}
-	public void setCellHeight(int cellHeight) {
-		this.cellHeight = cellHeight;
+	public void setCellHeight(double d) {
+		this.cellHeight = d;
 	}
 	public GraphicsContext getGraphicsContext() {
 		return graphicsContext;

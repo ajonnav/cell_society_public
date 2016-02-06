@@ -15,9 +15,8 @@ public abstract class SegregationSquareCell extends SquareCell {
 	
 	public void setState(int newState){
 		state = newState;
-	}
-	
-	public abstract SegregationSquareCell update(SegregationSquareCell[] cells, SegregationSquareCell [] tempChange, SegregationSquareCell [] noGo);
+	}	
+	public abstract boolean cellUnsatisfied(SegregationSquareCell [] cells);
 	
 	
 
