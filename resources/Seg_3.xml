@@ -7,7 +7,7 @@
 <simHeight>500</simHeight>
 <numRow>30</numRow>
 <numCol>30</numCol>
-<tPercentage>0.90</tPercentage>
+<tPercentage>0.60</tPercentage>
 <typeOneP>0.50</typeOneP>
-<vacantP>0.10</vacantP>
+<vacantP>0.20</vacantP>
 </content>
