@@ -18,7 +18,7 @@ public class SharkWatorSquareCell extends WatorSquareCell{
 	
 	
 	public SharkWatorSquareCell(double x, double y, double w, double h, int breed, int starve) {
-		super(x, y, Color.RED, w, h);
+		super(x, y, CELL_COLOR, w, h);
 		setEmpty(IS_EMPTY);
 		setShark(IS_SHARK);
 		BREED = breed;

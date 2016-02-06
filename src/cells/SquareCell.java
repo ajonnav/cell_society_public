@@ -16,6 +16,5 @@ public abstract class SquareCell extends Cell {
 		// TODO Auto-generated method stub
 		gc.setFill(getCellColor());
 		gc.fillRect(getX(), getY(), getWidth(), getHeight());
-		//gc.strokeRect(getX(), getY(), getWidth(), getHeight());
 	}
 }

@@ -15,7 +15,7 @@ public class FishWatorSquareCell extends WatorSquareCell{
 	private final boolean IS_SHARK= false;
 	
 	public FishWatorSquareCell(double x, double y, double w, double h, int breedCount) {
-		super(x, y, Color.YELLOW, w, h);
+		super(x, y, CELL_COLOR, w, h);
 		BREED = breedCount;
 		setBreedCount(BREED);
 		setEmpty(IS_EMPTY);
@@ -44,23 +44,18 @@ public class FishWatorSquareCell extends WatorSquareCell{
 			returnCell.setNeighbor(getNeighbor());
 			return returnCell;
 		}
-		
 		decrementBreedCount();
-		
 		ArrayList<Integer> emptyCells = new ArrayList<Integer>();
 		for(int i =0; i<this.getNeighbor().size();i++) {
 			if(cells[this.getNeighbor().get(i)].isEmpty() && !map.containsKey(this.getNeighbor().get(i)))
 				emptyCells.add(this.getNeighbor().get(i));
 		}
-		
 		if(emptyCells.isEmpty()) {
 			return this;
 		}
-		
 		Random rnd = new Random();
 		int newIndex = emptyCells.get(rnd.nextInt(emptyCells.size()));
 		map.put(newIndex, position);
-		
 		if(breedCount<=0) {
 			FishWatorSquareCell returnCell = new FishWatorSquareCell(getX(), getY(), getWidth(), getHeight(), BREED);
 			returnCell.setNeighbor(this.getNeighbor());

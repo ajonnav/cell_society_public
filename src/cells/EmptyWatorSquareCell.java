@@ -11,7 +11,7 @@ public class EmptyWatorSquareCell extends WatorSquareCell{
 	private final boolean IS_SHARK= false;
 	
 	public EmptyWatorSquareCell(double x, double y, double w, double h) {
-		super(x, y, Color.BLUE, w, h);
+		super(x, y, CELL_COLOR, w, h);
 		setEmpty(IS_EMPTY);
 		setShark(IS_SHARK);
 	}
