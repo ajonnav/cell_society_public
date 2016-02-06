@@ -5,8 +5,10 @@ import simulations.CA;
 import javafx.animation.Animation;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
 
 public class AutomatonButtons {
 	
@@ -17,22 +19,27 @@ public class AutomatonButtons {
 	private Button speedUp;
 	private Button slowDown;
 	private Group root;
+	private HBox hbox;
 	
 	/**
 	 * Constructor takes Group of Automaton window as a parameter 
 	 */
 	public AutomatonButtons(Group root) {
 		this.root = root;
+		hbox = new HBox(5);
+		hbox.setAlignment(Pos.BOTTOM_RIGHT);
+		root.getChildren().add(hbox);
+		hbox.setLayoutX(70);
+		hbox.setLayoutY(510);
 	}
 	
 	/**
 	 * Creates a button with a certain layout and text
 	 */
-	private Button createButton(String text, double x, double y) {
+	private Button createButton(String text, String id) {
 		Button b = new Button(text);
-		b.setLayoutX(x);
-		b.setLayoutY(y);
-		root.getChildren().add(b);
+		b.setId(id);
+		hbox.getChildren().add(b);
 		return b;
 	}
 	
@@ -40,12 +47,12 @@ public class AutomatonButtons {
 	 * Sets the buttons for the automaton display
 	 */
 	public void setAutomatonButtons(AutomatonDisplay a, CA ca) {
-		reset = createButton("Reset", a.getCanvasX() + 25, a.getCanvasY() + a.getCanvasHeight() + 10);
-		start = createButton("Start", a.getCanvasX() + 75 + 25, a.getCanvasY() + a.getCanvasHeight() + 10);
-		pause = createButton("Pause", a.getCanvasX() + 125 + 25, a.getCanvasY() + a.getCanvasHeight() + 10);
-		step = createButton("Step", a.getCanvasX() + 175 + 25, a.getCanvasY() + a.getCanvasHeight() + 10);
-		speedUp = createButton("Speed Up", a.getCanvasX() + 225 + 25, a.getCanvasY() + a.getCanvasHeight() + 10);
-		slowDown = createButton("Slow Down", a.getCanvasX() + 300 + 25, a.getCanvasY() + a.getCanvasHeight() + 10);
+		reset = createButton("Reset", "resetButton");
+		start = createButton("Start", "startButton");
+		pause = createButton("Pause", "pauseButton");
+		step = createButton("Step", "stepButton");
+		speedUp = createButton("Speed Up", "speedUpButton");
+		slowDown = createButton("Slow Down", "slowDownButton");
 		setButtonActions(ca);
 	}
 	
