@@ -3,12 +3,11 @@ import automaton.AutomatonDisplay;
 
 import java.util.*;
 
-import cells.*;
 import javafx.animation.Animation;
 import javafx.animation.Timeline;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.animation.KeyFrame;
 import javafx.event.ActionEvent;
@@ -31,6 +30,7 @@ public abstract class CA {
 	private double cellWidth;
 	private double cellHeight;
 	private int numCell;
+	private Stage window;
 
 	/**
 	 * Default Constructor that I am going to use until we figure out XML file
@@ -55,8 +55,9 @@ public abstract class CA {
 		simOver = false;
 		setCellWidth(getSimWidth()/getNumCol());
 		setCellHeight(getSimHeight()/getNumRow());
-		setNumCell(getNumCol()*getNumCol());
+		setNumCell(getNumCol()*getNumRow());
 		adjacency = new int[getNumCell()][getNumCell()];
+		window = a.getwindow();
 	}
 	/**
 	 * Initializes each cell to its starting state, varies from simulation to simulation
@@ -76,6 +77,7 @@ public abstract class CA {
 				});
 		getTimeline().getKeyFrames().add(simulate);
 		//getTimeline().play();
+		window.setOnCloseRequest(e -> getTimeline().stop());
 	}
 
 	/**

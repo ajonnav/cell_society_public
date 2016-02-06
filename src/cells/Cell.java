@@ -51,19 +51,19 @@ public abstract class Cell {
 	 * @param newYcoord
 	 */
 	public void setY(double newYcoord){
-		xCoord = newYcoord;
+		yCoord = newYcoord;
 	}
 	
 	public double getWidth() {
 		return width;
 	}
-	private void setWidth(double w) {
+	protected void setWidth(double w) {
 		this.width = w;
 	}
 	public double getHeight() {
 		return height;
 	}
-	private void setHeight(double h) {
+	protected void setHeight(double h) {
 		this.height = h;
 	}
 	
