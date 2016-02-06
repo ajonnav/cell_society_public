@@ -16,5 +16,9 @@ public class VacantSegregationSquareCell extends SegregationSquareCell {
 		// TODO Auto-generated method stub
 		return this;
 	}
+	
+	public boolean cellUnsatisfied(SegregationSquareCell[] cells){
+		return false;
+	}
 
 }
