@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-
 import cells.SharkWatorSquareCell;
 import cells.FishWatorSquareCell;
 import cells.EmptyWatorSquareCell;
 import cells.WatorSquareCell;
 import automaton.AutomatonDisplay;
+
+/**
+ * This class is the Wator simulation class
+ * @author aj168 - Anirudh Jonnavithula
+ *
+ */
 
 public class Wator extends CA{
 
