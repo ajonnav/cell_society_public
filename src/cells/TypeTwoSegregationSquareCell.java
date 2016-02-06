@@ -14,7 +14,7 @@ public class TypeTwoSegregationSquareCell extends SegregationSquareCell {
 		tPercentage = t;
 	}
 	public TypeTwoSegregationSquareCell(SegregationSquareCell v, double t) {
-		super(v.getX(), v.getY(), Color.BLUE, v.getWidth(), v.getHeight());
+		super(v.getX(), v.getY(), Color.RED, v.getWidth(), v.getHeight());
 		tPercentage = t;
 		state = 2;
 	}

@@ -54,7 +54,7 @@ public class TypeOneSegregationSquareCell extends SegregationSquareCell {
 	private void moveRandomly(SegregationSquareCell[] cells) {
 		boolean go = true;
 		while (go) {
-			int randCell = (int) (Math.random() * (cells.length - 1));
+			int randCell = (int) (Math.random() * (cells.length));
 			if (cells[randCell].getState() == 0) {
 				SegregationSquareCell temp = cells[randCell];
 				cells[randCell] = new TypeOneSegregationSquareCell(temp,
