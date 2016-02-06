@@ -46,6 +46,8 @@ public class AutomatonDisplay {
 		canvas = new Canvas(canvasWidth, canvasHeight);
 		if(simName.equals("GOL")) {
 			ca = new GameOfLife(map, this);
+		} else if(simName.equals("Fire")) {
+			ca = new Fire(map, this);
 		}
 		if(simName.equals("Segregation")) {
 			ca = new SchellingCA(map, this);

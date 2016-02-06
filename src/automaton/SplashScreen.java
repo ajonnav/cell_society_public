@@ -74,6 +74,7 @@ public class SplashScreen {
 	private void openAutomationWindow(Map<String, String> argsMap) {
 		AutomatonDisplay myAutomation = new AutomatonDisplay(argsMap);
 		myAutomation.loadAutomaton();
+
 	}
 	
 	/**
