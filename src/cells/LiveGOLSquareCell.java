@@ -4,10 +4,11 @@ import javafx.scene.paint.Color;
 
 public class LiveGOLSquareCell extends GOLSquareCell{
 
-	public final boolean ALIVE_STATUS = true;
+	private final boolean ALIVE_STATUS = true;
+	private static final Color CELL_COLOR = Color.BLUE;
 	
 	public LiveGOLSquareCell(double x, double y, double w, double h) {
-		super(x, y, Color.BLUE, w, h);
+		super(x, y, CELL_COLOR , w, h);
 		setAlive(ALIVE_STATUS);
 	}
 

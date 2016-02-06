@@ -10,6 +10,7 @@ public abstract class SquareCell extends Cell {
 	public SquareCell(double x, double y, Color c, double w, double h){
 		super(x, y, c, w, h);
 	}
+	
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
