@@ -1,76 +1,34 @@
 package cells;
 
-import java.util.ArrayList;
-
 import javafx.scene.paint.Color;
 
-public class TypeTwoSegregationSquareCell extends SegregationSquareCell {
-	private double tPercentage;
-	public TypeTwoSegregationSquareCell(double x, double y, double w,
-			double h, double t) {
-		super(x, y, Color.RED, w, h);
+public class TypeTwoSegregationSquareCell extends SegregationTypeSquareCell {
+	private static final int STATE = 2;
+	private static final int OTHER_STATE = 1;
+	private static final Color COLOR = Color.RED;
+
+	public TypeTwoSegregationSquareCell(double x, double y, double w, double h,
+			double t) {
+		super(x, y, COLOR, w, h, t);
 		// TODO Auto-generated constructor stub
-		state = 2;
-		tPercentage = t;
+		state = STATE;
 	}
+/**
+ * Take any type of SegregationSquareCell and create a new version of TypeSegregationCell
+ * @param v
+ * @param t
+ */
 	public TypeTwoSegregationSquareCell(SegregationSquareCell v, double t) {
-		super(v.getX(), v.getY(), Color.RED, v.getWidth(), v.getHeight());
-		tPercentage = t;
-		state = 2;
+		super(v.getX(), v.getY(), COLOR, v.getWidth(), v.getHeight(), t);
+		state = STATE;
 	}
-
-	@Override
-	public SegregationSquareCell update(SegregationSquareCell[] cells, SegregationSquareCell [] tempChange, SegregationSquareCell [] noGo) {
-		if (cellUnsatisfied(cells) && moveRandomly(tempChange, noGo)) {
-			VacantSegregationSquareCell returnCell = new VacantSegregationSquareCell(
-					getX(), getY(), getWidth(), getHeight());
-			returnCell.setNeighbor(getNeighbor());
-			return returnCell;
-		}
-		return this;
-	}
-	
-	
-
+/**
+ * Returns true if the number of similar/total neighbors ratio is less than the tPercentage
+ */
 	public boolean cellUnsatisfied(SegregationSquareCell[] cells) {
 		double numSimilar = getNumOfState(getNeighbor(), state, cells);
-		double numNotSimilar = getNumOfState(getNeighbor(), 1, cells);
-		return ((numSimilar / ( numNotSimilar + numSimilar)) < tPercentage);
+		double numNotSimilar = getNumOfState(getNeighbor(), OTHER_STATE, cells);
+		return ((numSimilar / (numNotSimilar + numSimilar)) < tPercentage);
 	}
 
-	private double getNumOfState(ArrayList<Integer> neighbors,
-			int stateToCheck, SegregationSquareCell[] cells) {
-		double count = 0.0;
-		for (int i : neighbors) {
-			if (cells[i].getState() == stateToCheck)
-				count++;
-		}
-
-		return count;
-	}
-
-	private boolean moveRandomly(SegregationSquareCell[] cells, SegregationSquareCell[] noGo) {
-		boolean go = true;
-		int count = 0;
-		while (go) {
-			int randCell = (int) (Math.random() * (cells.length));
-			//if (cells[randCell].getState() == 0 && (noGo[randCell] == null || noGo[randCell].getState() == 0) ) {
-			if(noGo[randCell] == null || noGo[randCell].getState() == 0){ 	
-			SegregationSquareCell temp = cells[randCell];
-				noGo[randCell] = new TypeTwoSegregationSquareCell(temp,
-						tPercentage);
-				noGo[randCell].setNeighbor(temp.getNeighbor());
-				go = false;
-				return true;
-			}
-			//if it goes through full list and fails to find a vacant slot, break
-			count++;
-			if(count == cells.length){
-				go = false;
-				break;
-			}
-		}
-		
-		return false;
-	}
 }
