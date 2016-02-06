@@ -46,6 +46,11 @@ public class AutomatonDisplay {
 		String simName = map.get("name");
 		if(simName.equals("GOL")) {
 			ca = new GameOfLife(map, this);
+		} else if(simName.equals("Fire")) {
+			ca = new Fire(map, this);
+		}
+		if(simName.equals("Segregation")) {
+			ca = new SchellingCA(map, this);
 		}
 		else if(simName.equals("Wator")) {
 			ca = new Wator(map, this);

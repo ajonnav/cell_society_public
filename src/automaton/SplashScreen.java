@@ -70,9 +70,11 @@ public class SplashScreen {
 	 * Creates an instance of Automaton display and opens a window for the automaton display
 	 */
 
+
 	private void openAutomationWindow(Map<String, String> argsMap) {
 		AutomatonDisplay myAutomation = new AutomatonDisplay(argsMap);
 		myAutomation.loadAutomaton();
+
 	}
 	
 	/**
