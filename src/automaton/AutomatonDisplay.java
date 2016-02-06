@@ -8,8 +8,6 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 
@@ -78,7 +76,7 @@ public class AutomatonDisplay {
 		window.setHeight(windowHeight);
 		setDisplayScene();
 		setCanvas();
-		AutomatonButtons controls = new AutomatonButtons(root);
+		AutomatonButtons controls = new AutomatonButtons(root, "English");
 		controls.setAutomatonButtons(this, ca);
 		window.show();
 	}
