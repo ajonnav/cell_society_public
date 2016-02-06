@@ -21,7 +21,7 @@ public class FireTREE extends FireCell {
 		// TODO Auto-generated method stub
 		FireBURNING newFireCell = new FireBURNING(getX(), getY(), getWidth(), getHeight());
 		newFireCell.setNeighbor(getNeighbor());
-		return hasBurningNeighbor(cells) && (probCatch <= Math.random()) 
+		return hasBurningNeighbor(cells) && (probCatch >= Math.random()) 
 				? newFireCell : this;
 	}
 	
