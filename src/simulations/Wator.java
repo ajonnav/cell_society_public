@@ -20,6 +20,11 @@ public class Wator extends CA{
 	private double perShark;
 	private WatorSquareCell[] allCells;
 	
+	/**
+	 * 
+	 * @param argsMap Map that contains parsed values
+	 * @param a	AutomatonDisplay on which simulations are drawn
+	 */
 	public Wator(Map<String, String> argsMap, AutomatonDisplay a) {
 		super(argsMap, a);
 		fishBreed = Integer.parseInt(argsMap.get("fishBreed"));
@@ -30,6 +35,9 @@ public class Wator extends CA{
 		setAllCells(new WatorSquareCell[getNumCell()]);
 	}
 
+	/**
+	 * Initiializes the screen
+	 */
 	@Override
 	public void initializeScreen() {
 		int numCell = 0;
@@ -53,6 +61,9 @@ public class Wator extends CA{
 		drawCells();
 	}
 
+	/**
+	 * Calculates adjacency matrix/ neighbors
+	 */
 	@Override
 	protected void calculateAdjacencyMatrixAndSetNeighbor() {
 		for(int i = 0; i < getNumCell(); i++) {
@@ -72,6 +83,9 @@ public class Wator extends CA{
 		}
 	}
 
+	/**
+	 * Updates the cells
+	 */
 	@Override
 	public void updateCells() {
 		WatorSquareCell[] list = new WatorSquareCell[getNumCell()];
@@ -86,6 +100,11 @@ public class Wator extends CA{
 		setAllCells(list);
 	}
 
+	/**
+	 * Updates Empty Cells
+	 * @param list List of new Cells
+	 * @param map Maps old cell locations to new cell locations
+	 */
 	private void updateEmptyCells(WatorSquareCell[] list,
 			HashMap<Integer, Integer> map) {
 		for(int i = 0; i < getNumCell(); i ++) {
@@ -95,6 +114,11 @@ public class Wator extends CA{
 		}
 	}
 
+	/**
+	 * Updates Fish Cells
+	 * @param list List of new Cells
+	 * @param map Maps old cell locations to new cell locations
+	 */
 	private void updateFish(WatorSquareCell[] list,
 			HashMap<Integer, Integer> map) {
 		for(int i = 0; i < getNumCell(); i ++) {
@@ -104,6 +128,11 @@ public class Wator extends CA{
 		}
 	}
 
+	/**
+	 * Updates Shark Cells
+	 * @param list List of new Cells
+	 * @param map Maps old cell locations to new cell locations
+	 */
 	private void updateSharks(WatorSquareCell[] list,
 			HashMap<Integer, Integer> map) {
 		for(int i = 0; i < getNumCell(); i ++) {
@@ -113,6 +142,9 @@ public class Wator extends CA{
 		}
 	}
 
+	/**
+	 * Draws cells
+	 */
 	@Override
 	public void drawCells() {
 		getGraphicsContext().clearRect(0, 0, getSimWidth(), getSimHeight());
@@ -121,9 +153,18 @@ public class Wator extends CA{
 		}
 	}
 	
+	/**
+	 * Gets all the cells
+	 * @return all the cells
+	 */
 	public WatorSquareCell[] getAllCells() {
 		return allCells;
 	}
+	
+	/**
+	 * Sets all the cells
+	 * @param list The new list of cells
+	 */
 	
 	public void setAllCells(WatorSquareCell[] list) {
 		allCells = Arrays.copyOf(list, list.length);
