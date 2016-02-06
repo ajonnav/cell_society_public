@@ -8,6 +8,8 @@
 <numRow>100</numRow>
 <numCol>100</numCol>
 <probCatch>0.30</probCatch>
-<BurningCells_x>0</BurningCells_x>
-<BurningCells_y>0</BurningCells_y>
+<BurningCells_x>0 150 200 250 1 5 6</BurningCells_x>
+<BurningCells_y>250 1 1 2 5 7 10</BurningCells_y>
+<Empty_x>0</Empty_x>
+<Empty_y>0</Empty_y>
 </content>
