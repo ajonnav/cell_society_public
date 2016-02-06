@@ -2,6 +2,9 @@ package automaton;
 
 
 import simulations.CA;
+
+import java.util.ResourceBundle;
+
 import javafx.animation.Animation;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,6 +15,7 @@ import javafx.scene.layout.HBox;
 
 public class AutomatonButtons {
 	
+	private static final String DEFAULT_RESOURCE_PACKAGE = "ResourceBundle/";
 	private Button step;
 	private Button pause;
 	private Button start;
@@ -20,12 +24,14 @@ public class AutomatonButtons {
 	private Button slowDown;
 	private Group root;
 	private HBox hbox;
+	private ResourceBundle myResources;
 	
 	/**
 	 * Constructor takes Group of Automaton window as a parameter 
 	 */
-	public AutomatonButtons(Group root) {
+	public AutomatonButtons(Group root, String language) {
 		this.root = root;
+		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
 		hbox = new HBox(5);
 		hbox.setAlignment(Pos.BOTTOM_RIGHT);
 		root.getChildren().add(hbox);
@@ -47,12 +53,12 @@ public class AutomatonButtons {
 	 * Sets the buttons for the automaton display
 	 */
 	public void setAutomatonButtons(AutomatonDisplay a, CA ca) {
-		reset = createButton("Reset", "resetButton");
-		start = createButton("Start", "startButton");
-		pause = createButton("Pause", "pauseButton");
-		step = createButton("Step", "stepButton");
-		speedUp = createButton("Speed Up", "speedUpButton");
-		slowDown = createButton("Slow Down", "slowDownButton");
+		reset = createButton(myResources.getString("ResetButton"), "resetButton");
+		start = createButton(myResources.getString("StartButton"), "startButton");
+		pause = createButton(myResources.getString("PauseButton"), "pauseButton");
+		step = createButton(myResources.getString("StepButton"), "stepButton");
+		speedUp = createButton(myResources.getString("SpeedUpButton"), "speedUpButton");
+		slowDown = createButton(myResources.getString("SlowDownButton"), "slowDownButton");
 		setButtonActions(ca);
 	}
 	
