@@ -49,6 +49,9 @@ public class AutomatonDisplay {
 		} else if(simName.equals("Fire")) {
 			ca = new Fire(map, this);
 		}
+		if(simName.equals("Segregation")) {
+			ca = new SchellingCA(map, this);
+		}
 	}
 	
 	public Stage getwindow() {
