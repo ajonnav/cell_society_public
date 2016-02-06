@@ -57,12 +57,15 @@ public abstract class Cell {
 	public double getWidth() {
 		return width;
 	}
+	
 	protected void setWidth(double w) {
 		this.width = w;
 	}
+	
 	public double getHeight() {
 		return height;
 	}
+	
 	protected void setHeight(double h) {
 		this.height = h;
 	}

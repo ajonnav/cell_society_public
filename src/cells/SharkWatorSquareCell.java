@@ -1,6 +1,7 @@
 package cells;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 import javafx.scene.paint.Color;
@@ -32,44 +33,65 @@ public class SharkWatorSquareCell extends WatorSquareCell{
 	}
 
 	@Override
-	public void updateWator(WatorSquareCell[] cells, WatorSquareCell[] list, int position) {
+	public WatorSquareCell updateWator(WatorSquareCell[] cells, HashMap<Integer, Integer> map, int position) {
+		Random rnd = new Random();
 		decrementBreedCount();
 		decrementStarveCount();
 		
 		if(getStarveCount() == 0) {
-			return;
+			EmptyWatorSquareCell returnCell = new EmptyWatorSquareCell(getX(), getY(), getWidth(), getHeight());
+			returnCell.setNeighbor(getNeighbor());
+			return returnCell;
+		}
+		
+		ArrayList<Integer> fishCells = new ArrayList<Integer>();
+		for(int i = 0; i < getNeighbor().size(); i++) {
+			if(!cells[getNeighbor().get(i)].isShark() 
+					&& !cells[getNeighbor().get(i)].isEmpty() 
+					&& !map.containsKey(this.getNeighbor().get(i)))
+				fishCells.add(getNeighbor().get(i));
 		}
 		
 		ArrayList<Integer> emptyCells = new ArrayList<Integer>();
 		for(int i = 0; i < getNeighbor().size(); i++) {
-			if(list[getNeighbor().get(i)].isEmpty() && !cells[getNeighbor().get(i)].isShark())
+			if(cells[getNeighbor().get(i)].isEmpty() && !map.containsKey(this.getNeighbor().get(i)))
 				emptyCells.add(getNeighbor().get(i));
 		}
 		
-		if(emptyCells.isEmpty()) {
-			return;
-		}
-		
-		Random rnd = new Random();
-		int newIndex = emptyCells.get(rnd.nextInt(emptyCells.size()));
-		
-		if(!cells[newIndex].isShark()) {
+		if(!fishCells.isEmpty()) {
+			int nextIndex = fishCells.get(rnd.nextInt(fishCells.size()));
+			map.put(nextIndex, position);
 			resetStarveCount();
+			
+			if(breedCount <= 0) {
+				SharkWatorSquareCell returnCell = new SharkWatorSquareCell(getX(), getY(), getWidth(), getHeight(), BREED, STARVE);
+				returnCell.setNeighbor(getNeighbor());
+				resetBreedCount();
+				return returnCell;
+			}
+			else {
+				EmptyWatorSquareCell returnCell = new EmptyWatorSquareCell(getX(), getY(), getWidth(), getHeight());
+				returnCell.setNeighbor(getNeighbor());
+				return returnCell;
+			}
 		}
 		
-		ArrayList<Integer> tempNeighbor = new ArrayList<Integer>(list[newIndex].getNeighbor());
-		
-		if(breedCount <= 0) {
-			list[position] = new SharkWatorSquareCell(list[newIndex].getX(), list[newIndex].getY(),getWidth(), getHeight(), BREED, STARVE);
-			list[position].setNeighbor(new ArrayList<Integer>(this.getNeighbor()));
-			resetBreedCount();
+		if(!emptyCells.isEmpty()) {
+			int nextIndex = emptyCells.get(rnd.nextInt(emptyCells.size()));
+			map.put(nextIndex,  position);
+			if(breedCount <= 0) {
+				SharkWatorSquareCell returnCell = new SharkWatorSquareCell(getX(), getY(), getWidth(), getHeight(), BREED, STARVE);
+				returnCell.setNeighbor(getNeighbor());
+				resetBreedCount();
+				return returnCell;
+			}
+			else {
+				EmptyWatorSquareCell returnCell = new EmptyWatorSquareCell(getX(), getY(), getWidth(), getHeight());
+				returnCell.setNeighbor(getNeighbor());
+				return returnCell;
+			}
 		}
-		
-		list[newIndex] = new SharkWatorSquareCell(list[newIndex].getX(), list[newIndex].getY(),getWidth(), getHeight(), BREED, STARVE);
-		list[newIndex].setNeighbor(tempNeighbor);
-		((SharkWatorSquareCell)list[newIndex]).setBreedCount(this.getBreedCount());
-		((SharkWatorSquareCell)list[newIndex]).setStarveCount(this.getStarveCount());
-		return;
+		return this;
 	}
 
 	public void decrementBreedCount() {
@@ -101,6 +123,15 @@ public class SharkWatorSquareCell extends WatorSquareCell{
 
 	private void setStarveCount(int starveCount) {
 		this.starveCount = starveCount;
+	}
+
+	@Override
+	public WatorSquareCell copy() {
+		SharkWatorSquareCell returnCell = new SharkWatorSquareCell(getX(), getY(), getWidth(), getHeight(), BREED, STARVE);
+		returnCell.setNeighbor(getNeighbor());
+		returnCell.setBreedCount(getBreedCount());
+		returnCell.setStarveCount(getStarveCount());
+		return returnCell;
 	}
 
 }
