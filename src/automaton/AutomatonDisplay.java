@@ -7,14 +7,13 @@ import simulations.*;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+
 public class AutomatonDisplay {
+	private static final String DEFAULT_RESOURCE_PACKAGE = "uicss/";
+	private static final String STYLESHEET = "default.css";
 	private double canvasY = 0;//10;
 	private double canvasX = 0;//17.5;
 	private double canvasHeight; //350;
@@ -40,16 +39,16 @@ public class AutomatonDisplay {
 		canvasHeight = Integer.parseInt(map.get("simHeight"));
 		canvasWidth = Integer.parseInt(map.get("simWidth"));
 		windowWidth = Integer.parseInt(map.get("simWidth"));
-		windowHeight = Integer.parseInt(map.get("simHeight"))+BUTTON_PANE_HEIGHT;
+		windowHeight = Integer.parseInt(map.get("simHeight"))+ BUTTON_PANE_HEIGHT;
 		myDisplay = new Scene(root, windowWidth, windowHeight);
+		myDisplay.getStylesheets().add(DEFAULT_RESOURCE_PACKAGE + STYLESHEET);
 		canvas = new Canvas(canvasWidth, canvasHeight);
 		String simName = map.get("name");
 		if(simName.equals("GOL")) {
 			ca = new GameOfLife(map, this);
 		} else if(simName.equals("Fire")) {
 			ca = new Fire(map, this);
-		}
-		if(simName.equals("Segregation")) {
+		} else if(simName.equals("Segregation")) {
 			ca = new SchellingCA(map, this);
 		}
 		else if(simName.equals("Wator")) {
@@ -80,7 +79,7 @@ public class AutomatonDisplay {
 		window.setHeight(windowHeight);
 		setDisplayScene();
 		setCanvas();
-		AutomatonButtons controls = new AutomatonButtons(root);
+		AutomatonButtons controls = new AutomatonButtons(root, "English");
 		controls.setAutomatonButtons(this, ca);
 		window.show();
 	}
@@ -89,10 +88,6 @@ public class AutomatonDisplay {
 	 * Sets scene and background for the window
 	 */
 	private Scene setDisplayScene() {
-		
-		Image background = new Image(getClass().getClassLoader().getResourceAsStream("DisplayCA.jpg"));
-		ImageView display = new ImageView(background);
-		root.getChildren().add(display);
 		window.setScene(myDisplay);
 		return myDisplay;
 	}
@@ -103,9 +98,6 @@ public class AutomatonDisplay {
 	private void setCanvas() {
 		canvas.setLayoutX(canvasX);
 		canvas.setLayoutY(canvasY);
-		//GraphicsContext gc = canvas.getGraphicsContext2D();
-		//gc.setFill(Color.BLUE);
-		//gc.fillRect(0,0,500,500);
 		root.getChildren().add(canvas);
 	}
 	

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<content>
+<name>Fire</name>
+<title>Fire Simulation</title>
+<author>none</author>
+<simWidth>500</simWidth>
+<simHeight>500</simHeight>
+<numRow>3</numRow>
+<numCol>3</numCol>
+<probCatch>0.1</probCatch>
+<BurningCells_x>0</BurningCells_x>
+<BurningCells_y>0</BurningCells_y>
+<Empty_x>1</Empty_x>
+<Empty_y>1</Empty_y>
+</content>
