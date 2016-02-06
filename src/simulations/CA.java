@@ -8,6 +8,7 @@ import javafx.animation.Animation;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import javafx.animation.KeyFrame;
 import javafx.event.ActionEvent;
@@ -91,7 +92,11 @@ public abstract class CA {
 	protected void runSimulation() {
 		updateCells();
 		drawCells();
-		if(simOver) getTimeline().stop();
+		if(simOver){ getTimeline().stop();
+		graphicsContext.clearRect(0, 0, simWidth, simHeight);
+		graphicsContext.setFill(Color.GOLD);
+		graphicsContext.fill();
+		}
 	}
 	
 	public int getSimWidth() {

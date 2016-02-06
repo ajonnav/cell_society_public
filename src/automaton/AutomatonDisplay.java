@@ -47,6 +47,9 @@ public class AutomatonDisplay {
 		if(simName.equals("GOL")) {
 			ca = new GameOfLife(map, this);
 		}
+		if(simName.equals("Segregation")) {
+			ca = new SchellingCA(map, this);
+		}
 	}
 	
 	public Stage getwindow() {

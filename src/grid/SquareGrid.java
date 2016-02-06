@@ -18,11 +18,11 @@ public class SquareGrid {
 	private CA simulation;
 	public SquareGrid(CA ca, int cellNum){
 		numCells = cellNum;
-		cellWidth = ca.getCellWidth();
-		cellHeight = ca.getCellHeight();
-		gridWidth = ca.getCanvas().getWidth();
-		gridHeight = ca.getCanvas().getHeight();
-		states = ca.getStates();
+		//cellWidth = ca.getCellWidth();
+		//cellHeight = ca.getCellHeight();
+		//gridWidth = ca.getCanvas().getWidth();
+		//gridHeight = ca.getCanvas().getHeight();
+		//states = ca.getStates();
 		simulation = ca;
 		adjMatrix = new int [cellNum][cellNum];
 		makeCellGrid();
@@ -35,7 +35,7 @@ public class SquareGrid {
 		double yPixel = 0.0;
 		for(int i = 0; i < numCells; i++){
 			for(int j = 0; j < numCells; j++){
-				cells.add(new SquareCell(simulation.getStates()[0], xPixel, yPixel,VACANT_COLOR, cellWidth, cellHeight, i, j));
+			//	cells.add(new SquareCell(simulation.getStates()[0], xPixel, yPixel,VACANT_COLOR, cellWidth, cellHeight, i, j));
 				xPixel += cellWidth;
 			}
 			xPixel = 0.0;
