@@ -29,8 +29,10 @@ public class TypeTwoSegregationSquareCell extends SegregationSquareCell {
 		}
 		return this;
 	}
+	
+	
 
-	private boolean cellUnsatisfied(SegregationSquareCell[] cells) {
+	public boolean cellUnsatisfied(SegregationSquareCell[] cells) {
 		double numSimilar = getNumOfState(getNeighbor(), state, cells);
 		double numNotSimilar = getNumOfState(getNeighbor(), 1, cells);
 		return ((numSimilar / ( numNotSimilar + numSimilar)) < tPercentage);
@@ -49,14 +51,15 @@ public class TypeTwoSegregationSquareCell extends SegregationSquareCell {
 
 	private boolean moveRandomly(SegregationSquareCell[] cells, SegregationSquareCell[] noGo) {
 		boolean go = true;
-		int count = 1;
+		int count = 0;
 		while (go) {
 			int randCell = (int) (Math.random() * (cells.length));
-			if (cells[randCell].getState() == 0 && (noGo[randCell] == null || noGo[randCell].getState() == 0) ) {
-				SegregationSquareCell temp = cells[randCell];
-				cells[randCell] = new TypeTwoSegregationSquareCell(temp,
+			//if (cells[randCell].getState() == 0 && (noGo[randCell] == null || noGo[randCell].getState() == 0) ) {
+			if(noGo[randCell] == null || noGo[randCell].getState() == 0){ 	
+			SegregationSquareCell temp = cells[randCell];
+				noGo[randCell] = new TypeTwoSegregationSquareCell(temp,
 						tPercentage);
-				cells[randCell].setNeighbor(temp.getNeighbor());
+				noGo[randCell].setNeighbor(temp.getNeighbor());
 				go = false;
 				return true;
 			}
