@@ -1,7 +1,12 @@
 package cells;
-
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+
+/**
+ * Class for square cells
+ * @author aj168 - Anirudh Jonnavithula
+ *
+ */
 
 public abstract class SquareCell extends Cell {
 	/**

@@ -18,7 +18,7 @@ public class Main extends Application{
 	public void start (Stage s) {
 		SplashScreen n = new SplashScreen();
 		s.setTitle(TITLE);
-		Scene scene = n.initScreen();
+		Scene scene = n.initScreen("English");
         s.setScene(scene);
         s.show();
 	}

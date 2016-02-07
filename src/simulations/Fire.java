@@ -13,10 +13,10 @@ import automaton.AutomatonDisplay;
 public class Fire extends CA {
 	private double probCatch;
 	private FireCell[] allCells;
-	private ArrayList<Double> burning_x;
-	private ArrayList<Double> burning_y;
-	private ArrayList<Double> empty_x;
-	private ArrayList<Double> empty_y;
+	private ArrayList<Integer> burning_x;
+	private ArrayList<Integer> burning_y;
+	private ArrayList<Integer> empty_x;
+	private ArrayList<Integer> empty_y;
 	
 	public Fire (Map<String, String> mapArgs, AutomatonDisplay a) {
 		super(mapArgs, a);
@@ -36,16 +36,12 @@ public class Fire extends CA {
 					getAllCells()[numCell] = new FireBURNING(i*getCellWidth(), j*getCellHeight(), getCellWidth(), getCellHeight());
 				} else if (empty_x.contains(i) && empty_y.contains(j)) {
 					getAllCells()[numCell] = new FireEMPTY(i*getCellWidth(), j*getCellHeight(), getCellWidth(), getCellHeight());
-				} else if (Math.random() < 0.1) { //this should not need to be here
-					getAllCells()[numCell] = new FireBURNING(i*getCellWidth(), j*getCellHeight(), getCellWidth(), getCellHeight());
 				} else {
 					getAllCells()[numCell] = new FireTREE(i*getCellWidth(), j*getCellHeight(), getCellWidth(), getCellHeight(), probCatch);
 				}
 				numCell++;
 			}
 		}
-		
-		//set empty and set burning
 		initializeSimulationLoop();
 		calculateAdjacencyMatrixAndSetNeighbor();
 		drawCells();
@@ -103,17 +99,17 @@ public class Fire extends CA {
 		String [] burn_y = mapArgs.get("BurningCells_y").split("\\s+");
 		String [] emp_x = mapArgs.get("Empty_x").split("\\s+");
 		String [] emp_y = mapArgs.get("Empty_y").split("\\s+");
-		burning_x = new ArrayList<Double>();
-		burning_y = new ArrayList<Double>();
-		empty_x = new ArrayList<Double>();
-		empty_y = new ArrayList<Double>();
+		burning_x = new ArrayList<Integer>();
+		burning_y = new ArrayList<Integer>();
+		empty_x = new ArrayList<Integer>();
+		empty_y = new ArrayList<Integer>();
 		for (int i = 0; i < burn_x.length; i++) {
-			burning_x.add(Double.parseDouble(burn_x[i]));
-			burning_y.add(Double.parseDouble(burn_y[i]));
+			burning_x.add(Integer.parseInt(burn_x[i]));
+			burning_y.add(Integer.parseInt(burn_y[i]));
 		}
 		for (int i = 0; i < emp_x.length; i++) {
-			empty_x.add(Double.parseDouble(emp_x[i]));
-			empty_y.add(Double.parseDouble(emp_y[i]));
+			empty_x.add(Integer.parseInt(emp_x[i]));
+			empty_y.add(Integer.parseInt(emp_y[i]));
 		}
 	}
 

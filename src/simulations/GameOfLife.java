@@ -1,27 +1,36 @@
 package simulations;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Random;
-
 import cells.DeadGOLSquareCell;
 import cells.GOLSquareCell;
 import cells.LiveGOLSquareCell;
 import automaton.AutomatonDisplay;
 
+/**
+ * Class for Game of Life Simulation
+ * @author aj168 - Anirudh Jonnavithula
+ *
+ */
 public class GameOfLife extends CA{
 	
 	private double perAlive;
 	private GOLSquareCell[] allCells;
 	
+	/**
+	 * Constructor
+	 * @param mapArgs Map with arguments read in from XML file
+	 * @param a AutomatonDisplay on which simulation is drawn
+	 */
 	public GameOfLife(Map<String, String> mapArgs, AutomatonDisplay a) {
 		super(mapArgs, a);
 		perAlive = Double.parseDouble(mapArgs.get("perAlive"));
 		allCells = new GOLSquareCell[getNumCell()];
 	}
 
+	/**
+	 * Initilaizes the screen and simulation
+	 */
 	@Override
 	public void initializeScreen() {		
 		int numCell = 0;
@@ -41,6 +50,9 @@ public class GameOfLife extends CA{
 		drawCells();
 	}
 
+	/**
+	 * Updates the cells
+	 */
 	@Override
 	public void updateCells() {
 		GOLSquareCell[] list = new GOLSquareCell[getNumCell()];
@@ -50,6 +62,9 @@ public class GameOfLife extends CA{
 		setAllCells(list);
 	}
 
+	/**
+	 * Calculates the adjacency matrix/ neighbors
+	 */
 	@Override
 	protected void calculateAdjacencyMatrixAndSetNeighbor() {
 		for(int i=0; i<getNumCell(); i++) {
@@ -66,14 +81,25 @@ public class GameOfLife extends CA{
 		}
 	}
 	
+	/**
+	 * Returns all the cells in the current state
+	 * @return Cells in their current state
+	 */
 	public GOLSquareCell[] getAllCells() {
 		return allCells;
 	}
 	
+	/**
+	 * Sets the current states of all the cells
+	 * @param list List of new cells
+	 */
 	public void setAllCells(GOLSquareCell[] list) {
 		allCells = Arrays.copyOf(list, list.length);
 	}
 
+	/**
+	 * Draws the cells
+	 */
 	@Override
 	public void drawCells() {
 		getGraphicsContext().clearRect(0,0,getSimWidth(), getSimHeight());

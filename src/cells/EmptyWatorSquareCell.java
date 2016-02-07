@@ -1,8 +1,12 @@
 package cells;
-
 import java.util.HashMap;
-
 import javafx.scene.paint.Color;
+
+/**
+ * Class for empty cells in Wator
+ * @author ajonnav
+ *
+ */
 
 public class EmptyWatorSquareCell extends WatorSquareCell{
 
@@ -10,6 +14,13 @@ public class EmptyWatorSquareCell extends WatorSquareCell{
 	private final boolean IS_EMPTY= true;
 	private final boolean IS_SHARK= false;
 	
+	/**
+	 * Constructor
+	 * @param x X coordinate
+	 * @param y Y coordinate
+	 * @param w Width of cell
+	 * @param h Height of cell
+	 */
 	public EmptyWatorSquareCell(double x, double y, double w, double h) {
 		super(x, y, CELL_COLOR, w, h);
 		setEmpty(IS_EMPTY);
@@ -21,6 +32,12 @@ public class EmptyWatorSquareCell extends WatorSquareCell{
 		return null;
 	}
 
+	/**
+	 * Update method
+	 * @param cells List of cells of current state
+	 * @param map Maps new cell positions to old ones
+	 * @param position Position of current cell
+	 */
 	@Override
 	public WatorSquareCell updateWator(WatorSquareCell[] cells, HashMap<Integer, Integer> map, int position) {
 		if(map.containsKey(position)) {
@@ -33,6 +50,9 @@ public class EmptyWatorSquareCell extends WatorSquareCell{
 		return this;
 	}
 
+	/**
+	 * Returns a copy of this cell
+	 */
 	@Override
 	public WatorSquareCell copy() {
 		EmptyWatorSquareCell returnCell = new EmptyWatorSquareCell(getX(), getY(), getWidth(), getHeight());
