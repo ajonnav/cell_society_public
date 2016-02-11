@@ -1,12 +1,10 @@
 package automaton;
-
-
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.application.Application;
+import automaton.SplashScreen;
 
 public class Main extends Application{
 	

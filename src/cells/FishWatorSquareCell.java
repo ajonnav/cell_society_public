@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
  */
 public class FishWatorSquareCell extends WatorSquareCell{
 
-	private static final Color CELL_COLOR = Color.GREEN;
+	private static final Color CELL_COLOR = Color.YELLOW;
 	private final int BREED;
 	private int breedCount;
 	private boolean IS_EMPTY = false;
