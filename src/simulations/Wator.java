@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
 import cells.SharkWatorSquareCell;
 import cells.FishWatorSquareCell;
 import cells.EmptyWatorSquareCell;
+import cells.SquareCell;
 import cells.WatorSquareCell;
 import automaton.AutomatonDisplay;
 
@@ -153,7 +155,7 @@ public class Wator extends CA{
 	@Override
 	public void drawCells() {
 		getGraphicsContext().clearRect(0, 0, getSimWidth(), getSimHeight());
-		for(WatorSquareCell cell: getAllCells()) {
+		for(SquareCell cell: getAllCells()) {
 			cell.draw(getGraphicsContext());
 		}
 	}

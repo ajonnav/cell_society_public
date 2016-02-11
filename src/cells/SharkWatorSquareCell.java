@@ -1,7 +1,9 @@
 package cells;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
+
 import javafx.scene.paint.Color;
 
 /**
@@ -16,8 +18,8 @@ public class SharkWatorSquareCell extends WatorSquareCell{
 	private final int STARVE;
 	private int starveCount;
 	private int breedCount;
-	private final boolean IS_EMPTY = false;
-	private final boolean IS_SHARK = true;
+	private static final boolean IS_EMPTY = false;
+	private static final boolean IS_SHARK = true;
 	
 	/**
 	 * Constructor
@@ -29,9 +31,7 @@ public class SharkWatorSquareCell extends WatorSquareCell{
 	 * @param starve Number of rounds until cell dies (starves)
 	 */
 	public SharkWatorSquareCell(double x, double y, double w, double h, int breed, int starve) {
-		super(x, y, CELL_COLOR, w, h);
-		setEmpty(IS_EMPTY);
-		setShark(IS_SHARK);
+		super(x, y, CELL_COLOR, w, h, IS_EMPTY, IS_SHARK);
 		BREED = breed;
 		breedCount = BREED;
 		STARVE = starve;
@@ -50,7 +50,7 @@ public class SharkWatorSquareCell extends WatorSquareCell{
 	 * @param position Position of current cell
 	 */
 	@Override
-	public WatorSquareCell updateWator(WatorSquareCell[] cells, HashMap<Integer, Integer> map, int position) {
+	public WatorSquareCell updateWator(WatorSquareCell[] cells, Map<Integer, Integer> map, int position) {
 		Random rnd = new Random();
 		decrementBreedCount();
 		decrementStarveCount();
@@ -79,36 +79,29 @@ public class SharkWatorSquareCell extends WatorSquareCell{
 			int nextIndex = fishCells.get(rnd.nextInt(fishCells.size()));
 			map.put(nextIndex, position);
 			resetStarveCount();
-			
-			if(breedCount <= 0) {
-				SharkWatorSquareCell returnCell = new SharkWatorSquareCell(getX(), getY(), getWidth(), getHeight(), BREED, STARVE);
-				returnCell.setNeighbor(getNeighbor());
-				resetBreedCount();
-				return returnCell;
-			}
-			else {
-				EmptyWatorSquareCell returnCell = new EmptyWatorSquareCell(getX(), getY(), getWidth(), getHeight());
-				returnCell.setNeighbor(getNeighbor());
-				return returnCell;
-			}
+			return decideToReproduce();
 		}
 		
 		if(!emptyCells.isEmpty()) {
 			int nextIndex = emptyCells.get(rnd.nextInt(emptyCells.size()));
 			map.put(nextIndex,  position);
-			if(breedCount <= 0) {
-				SharkWatorSquareCell returnCell = new SharkWatorSquareCell(getX(), getY(), getWidth(), getHeight(), BREED, STARVE);
-				returnCell.setNeighbor(getNeighbor());
-				resetBreedCount();
-				return returnCell;
-			}
-			else {
-				EmptyWatorSquareCell returnCell = new EmptyWatorSquareCell(getX(), getY(), getWidth(), getHeight());
-				returnCell.setNeighbor(getNeighbor());
-				return returnCell;
-			}
+			return decideToReproduce();
 		}
 		return this;
+	}
+
+	private WatorSquareCell decideToReproduce() {
+		if(breedCount <= 0) {
+			SharkWatorSquareCell returnCell = new SharkWatorSquareCell(getX(), getY(), getWidth(), getHeight(), BREED, STARVE);
+			returnCell.setNeighbor(getNeighbor());
+			resetBreedCount();
+			return returnCell;
+		}
+		else {
+			EmptyWatorSquareCell returnCell = new EmptyWatorSquareCell(getX(), getY(), getWidth(), getHeight());
+			returnCell.setNeighbor(getNeighbor());
+			return returnCell;
+		}
 	}
 
 	/**

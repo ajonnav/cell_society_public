@@ -103,13 +103,17 @@ public class Fire extends CA {
 		burning_y = new ArrayList<Integer>();
 		empty_x = new ArrayList<Integer>();
 		empty_y = new ArrayList<Integer>();
-		for (int i = 0; i < burn_x.length; i++) {
-			burning_x.add(Integer.parseInt(burn_x[i]));
-			burning_y.add(Integer.parseInt(burn_y[i]));
-		}
+		addBurning(burn_x, burn_y);
 		for (int i = 0; i < emp_x.length; i++) {
 			empty_x.add(Integer.parseInt(emp_x[i]));
 			empty_y.add(Integer.parseInt(emp_y[i]));
+		}
+	}
+
+	private void addBurning(String[] burn_x, String[] burn_y) {
+		for (int i = 0; i < burn_x.length; i++) {
+			burning_x.add(Integer.parseInt(burn_x[i]));
+			burning_y.add(Integer.parseInt(burn_y[i]));
 		}
 	}
 
