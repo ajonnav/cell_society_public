@@ -8,7 +8,7 @@ public class VacantSegregationSquareCell extends SegregationSquareCell {
 			double h) {
 		super(x, y, Color.WHITE, w, h);
 		// TODO Auto-generated constructor stub
-		state = STATE;
+		setState(STATE);
 	}
 	/**
 	 * Always returns false - a vacant cell will never be unsatisfied.
