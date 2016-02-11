@@ -35,8 +35,8 @@ public abstract class SegregationTypeSquareCell extends SegregationSquareCell {
 
 	@Override
 	public boolean cellUnsatisfied(SegregationSquareCell[] cells) {
-		double numSimilar = getNumOfState(getNeighbor(), STATE, cells);
-		double numNotSimilar = getNumOfState(getNeighbor(), OTHER_STATE, cells);
+		double numSimilar = getNumOfState(new ArrayList<Integer>(getNeighbor()), STATE, cells);
+		double numNotSimilar = getNumOfState(new ArrayList<Integer>(getNeighbor()), OTHER_STATE, cells);
 		return ((numSimilar / (numNotSimilar + numSimilar)) < tPercentage);
 	}
 	
