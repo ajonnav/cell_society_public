@@ -77,6 +77,9 @@ public abstract class AntCell extends Cell {
 		}
 	}
 	
+	/*
+	 * Returns true if the ant has food, returns false otherwise
+	 */
 	public abstract boolean getFoodStatus();
 	
 }
