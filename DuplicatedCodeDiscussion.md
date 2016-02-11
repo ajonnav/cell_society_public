@@ -1,6 +1,7 @@
-==Duplicated Code==
--clz4 and mfz2-
-
+Duplicated Code
+===============
+clz4 and mfz2
+--------------
 For cell society team 19, I chose to refactor the easiest to refactor parts of the code. These were places were the 
 exact same code was used. The wator cells had some code that was exactly the same and I refactored this into a method.
 Segregation cells also had subclasses that had the exact same method with duplicate code. In this, I moved the 
