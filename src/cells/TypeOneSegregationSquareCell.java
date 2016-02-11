@@ -18,14 +18,6 @@ public class TypeOneSegregationSquareCell extends SegregationTypeSquareCell {
 		super(v.getX(), v.getY(), COLOR, v.getWidth(), v.getHeight(), t);
 		state = STATE;
 	}
-	/**
-	 * Returns true if the number of similar/total neighbors ratio is less than the tPercentage
-	 */
-	public boolean cellUnsatisfied(SegregationSquareCell[] cells) {
-		double numSimilar = getNumOfState(getNeighbor(), state, cells);
-		double numNotSimilar = getNumOfState(getNeighbor(), OTHER_STATE, cells);
-		return ((numSimilar / (numNotSimilar + numSimilar)) < tPercentage);
-	}
 
 
 }

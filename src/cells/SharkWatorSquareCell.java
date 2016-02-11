@@ -80,35 +80,29 @@ public class SharkWatorSquareCell extends WatorSquareCell{
 			map.put(nextIndex, position);
 			resetStarveCount();
 			
-			if(breedCount <= 0) {
-				SharkWatorSquareCell returnCell = new SharkWatorSquareCell(getX(), getY(), getWidth(), getHeight(), BREED, STARVE);
-				returnCell.setNeighbor(getNeighbor());
-				resetBreedCount();
-				return returnCell;
-			}
-			else {
-				EmptyWatorSquareCell returnCell = new EmptyWatorSquareCell(getX(), getY(), getWidth(), getHeight());
-				returnCell.setNeighbor(getNeighbor());
-				return returnCell;
-			}
+			return makeNewSharkOrEmptyCell();
 		}
 		
 		if(!emptyCells.isEmpty()) {
 			int nextIndex = emptyCells.get(rnd.nextInt(emptyCells.size()));
 			map.put(nextIndex,  position);
-			if(breedCount <= 0) {
-				SharkWatorSquareCell returnCell = new SharkWatorSquareCell(getX(), getY(), getWidth(), getHeight(), BREED, STARVE);
-				returnCell.setNeighbor(getNeighbor());
-				resetBreedCount();
-				return returnCell;
-			}
-			else {
-				EmptyWatorSquareCell returnCell = new EmptyWatorSquareCell(getX(), getY(), getWidth(), getHeight());
-				returnCell.setNeighbor(getNeighbor());
-				return returnCell;
-			}
+			return makeNewSharkOrEmptyCell();
 		}
 		return this;
+	}
+
+	private WatorSquareCell makeNewSharkOrEmptyCell() {
+		if(breedCount <= 0) {
+			SharkWatorSquareCell returnCell = new SharkWatorSquareCell(getX(), getY(), getWidth(), getHeight(), BREED, STARVE);
+			returnCell.setNeighbor(getNeighbor());
+			resetBreedCount();
+			return returnCell;
+		}
+		else {
+			EmptyWatorSquareCell returnCell = new EmptyWatorSquareCell(getX(), getY(), getWidth(), getHeight());
+			returnCell.setNeighbor(getNeighbor());
+			return returnCell;
+		}
 	}
 
 	/**
