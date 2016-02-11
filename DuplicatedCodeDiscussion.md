@@ -1,6 +1,6 @@
 Duplicated Code
 ===============
-clz4 and mfz2
+clz4 (Christine Zhou) and mfz2 (Melissa Zhang)
 --------------
 For cell society team 19, I chose to refactor the easiest to refactor parts of the code. These were places were the 
 exact same code was used. The wator cells had some code that was exactly the same and I refactored this into a method.
