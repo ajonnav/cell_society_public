@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import automaton.Controls;
+
 public class xmlStringtoCollection {
 
 	public static List<Integer> xmlStringtoIntegerCollection(String xmlString) {
@@ -29,6 +31,15 @@ public class xmlStringtoCollection {
 		String[] var = xmlString.split("\\s+");
 		for (String s : var) {
 			list.add(Double.parseDouble(s));
+		}
+		return list;
+	}
+	
+	public static List<Controls> xmlStringtoControlsCollection(String xmlString) {
+		List<Controls> list = new ArrayList<Controls>();
+		String[] var = xmlString.split("\\s+");
+		for (String s : var) {
+			list.add(Controls.valueOf(s));
 		}
 		return list;
 	}
