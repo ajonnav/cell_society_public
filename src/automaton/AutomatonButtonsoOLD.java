@@ -13,7 +13,7 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
-public class AutomatonButtons {
+public class AutomatonButtonsoOLD {
 	
 	private static final String DEFAULT_RESOURCE_PACKAGE = "ResourceBundle/";
 	private Button step;
@@ -29,7 +29,7 @@ public class AutomatonButtons {
 	/**
 	 * Constructor takes Group of Automaton window as a parameter 
 	 */
-	public AutomatonButtons(Group root, String language) {
+	public AutomatonButtonsOLD(Group root, String language) {
 		this.root = root;
 		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
 		hbox = new HBox(5);
