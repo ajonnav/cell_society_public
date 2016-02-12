@@ -27,13 +27,11 @@ public class AutomatonDisplay {
 	private Scene myDisplay;
 	private Group root;
 	private Canvas canvas;
-	private Button step;
-	private Button pause;
-	private Button start;
-	private Button reset;
 	private CA ca;
+	private Map<String, String> map;
 	
 	public AutomatonDisplay(Map<String, String> map) {
+		this.map = map;
 		root = new Group();
 		window = new Stage();
 		canvasHeight = Integer.parseInt(map.get("simHeight"));
@@ -79,8 +77,8 @@ public class AutomatonDisplay {
 		window.setHeight(windowHeight);
 		setDisplayScene();
 		setCanvas();
-		AutomatonButtons controls = new AutomatonButtons(root, "English");
-		controls.setAutomatonButtons(this, ca);
+		AutomatonDisplayButtons controls = new AutomatonDisplayButtons(root, "English");
+		controls.setDisplayControllers(ca);
 		window.show();
 	}
 	
