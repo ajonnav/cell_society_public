@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<content>
-<name>Simulation Name</name>
-<title>Simulation Title</title>
-<author>Author</author>
-<param1>Some parameter</param1>
-<gridSize>Size of Grid</gridSize>
-<cellParam1>Some param</cellParam1>
-</content>

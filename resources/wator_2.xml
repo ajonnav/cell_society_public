@@ -7,9 +7,9 @@
 <simHeight>500</simHeight>
 <numRow>100</numRow>
 <numCol>100</numCol>
-<perShark>0.10</perShark>
-<perFish>0.70</perFish>
-<fishBreed>4</fishBreed>
-<sharkBreed>20</sharkBreed>
-<sharkStarve>5</sharkStarve>
+<perShark>0.30</perShark>
+<perFish>0.40</perFish>
+<fishBreed>3</fishBreed>
+<sharkBreed>10</sharkBreed>
+<sharkStarve>4</sharkStarve>
 </content>
