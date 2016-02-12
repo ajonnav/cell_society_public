@@ -20,7 +20,6 @@ import utilities.xmlStringtoCollection;
 
 public class AutomatonDisplayButtons extends AutomatonButtons {
 	private static final int HBOX_SPACING = 5;
-	private static final String DEFAULT_RESOURCE_PACKAGE = "ResourceBundle/";
 	private HBox hbox;
 	private Group root;
 	private Collection<Control> myControllers;
