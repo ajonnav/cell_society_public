@@ -4,6 +4,11 @@ package automaton;
 import java.io.File;
 import java.io.IOException;
 import java.util.ResourceBundle;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -25,8 +30,11 @@ public class SplashScreen {
 	
 	/**
 	 * Initializes the display of the splash screen
+	 * @throws SAXException 
+	 * @throws ParserConfigurationException 
+	 * @throws IOException 
 	 */
-	public Scene initScreen(String language) {
+	public Scene initScreen(String language) throws IOException, ParserConfigurationException, SAXException {
 		root = new Group();
 		Scene s = new Scene(root, WIDTH, HEIGHT);
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream("CellSocietyBackground.jpg"));
@@ -34,6 +42,8 @@ public class SplashScreen {
 		ImageView background = new ImageView(image);
 		root.getChildren().add(background);
 		setupFileChoose();
+		SplashScreenButtons myChoices = new SplashScreenButtons(root, "English");
+		myChoices.setDisplayControllers();
 		return s;
 	}
 	
