@@ -3,14 +3,12 @@ package simulations;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-
 import FireCells.FireBURNING;
 import FireCells.FireCell;
 import FireCells.FireEMPTY;
 import FireCells.FireTREE;
 import automaton.AutomatonDisplay;
-import utilities.xmlStringtoCollection;
+import automaton.XMLArgs;
 
 public class Fire extends CA {
 	private double probCatch;
@@ -20,12 +18,15 @@ public class Fire extends CA {
 	private List<Integer> empty_x;
 	private List<Integer> empty_y;
 	
-	public Fire (Map<String, String> mapArgs, AutomatonDisplay a) {
-		super(mapArgs, a);
+	public Fire (XMLArgs xmlArgs, AutomatonDisplay a) {
+		super(xmlArgs, a);
 		// TODO Auto-generated constructor stub
-		probCatch = Double.parseDouble(mapArgs.get("probCatch"));
+		probCatch = xmlArgs.getAsDouble("probCatch");
 		allCells = new FireCell[getNumCell()];
-		getListsfromXMLMap(mapArgs);
+		burning_x = xmlArgs.getAsListOfInteger("burning_x");
+		burning_y = xmlArgs.getAsListOfInteger("burning_y");
+		empty_x = xmlArgs.getAsListOfInteger("empty_x");
+		empty_y = xmlArgs.getAsListOfInteger("empty_y");
 	}
 
 	@Override
@@ -94,12 +95,5 @@ public class Fire extends CA {
 	
 	private void setAllCells(FireCell[] newStates) {
 		allCells = Arrays.copyOf(newStates, newStates.length);
-	}
-	
-	private void getListsfromXMLMap(Map<String, String> mapArgs) {
-		burning_x = xmlStringtoCollection.xmlStringtoIntegerCollection(mapArgs.get("BurningCells_x"));
-		burning_y = xmlStringtoCollection.xmlStringtoIntegerCollection(mapArgs.get("BurningCells_y"));
-		empty_x = xmlStringtoCollection.xmlStringtoIntegerCollection(mapArgs.get("Empty_x"));
-		empty_y = xmlStringtoCollection.xmlStringtoIntegerCollection(mapArgs.get("Empty_y"));
 	}
 }

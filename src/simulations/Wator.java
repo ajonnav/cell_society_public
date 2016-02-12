@@ -12,6 +12,7 @@ import cells.EmptyWatorSquareCell;
 import cells.SquareCell;
 import cells.WatorSquareCell;
 import automaton.AutomatonDisplay;
+import automaton.XMLArgs;
 
 /**
  * This class is the Wator simulation class
@@ -34,13 +35,14 @@ public class Wator extends CA{
 	 * @param argsMap Map that contains parsed values
 	 * @param a	AutomatonDisplay on which simulations are drawn
 	 */
-	public Wator(Map<String, String> argsMap, AutomatonDisplay a) {
-		super(argsMap, a);
-		fishBreed = Integer.parseInt(argsMap.get(myResources.getString("fishBreed")));
-		sharkStarve = Integer.parseInt(argsMap.get(myResources.getString("sharkStarve")));
-		sharkBreed = Integer.parseInt(argsMap.get(myResources.getString("sharkBreed")));
-		perFish = Double.parseDouble(argsMap.get(myResources.getString("perFish")));
-		perShark = Double.parseDouble(argsMap.get(myResources.getString("perShark")));
+	public Wator(XMLArgs xmlArgs, AutomatonDisplay a) {
+		super(xmlArgs, a);
+		myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
+		fishBreed = xmlArgs.getAsInt(myResources.getString("fishBreed"));
+		sharkStarve = xmlArgs.getAsInt(myResources.getString("sharkStarve"));
+		sharkBreed = xmlArgs.getAsInt(myResources.getString("sharkBreed"));
+		perFish = xmlArgs.getAsDouble(myResources.getString("perFish"));
+		perShark = xmlArgs.getAsDouble(myResources.getString("perShark"));
 		setAllCells(new WatorSquareCell[getNumCell()]);
 	}
 

@@ -3,11 +3,12 @@ package simulations;
 import java.util.Map;
 
 import automaton.AutomatonDisplay;
+import automaton.XMLArgs;
 
 public class ForgingAnts extends CA {
 
-	public ForgingAnts(Map<String, String> argsMap, AutomatonDisplay a) {
-		super(argsMap, a);
+	public ForgingAnts(XMLArgs xmlArgs, AutomatonDisplay a) {
+		super(xmlArgs, a);
 		// TODO Auto-generated constructor stub
 	}
 

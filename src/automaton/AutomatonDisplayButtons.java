@@ -5,6 +5,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
@@ -22,15 +26,15 @@ public class AutomatonDisplayButtons extends AutomatonButtons {
 	private Collection<Control> myControllers;
 	private AutomatonControlFactory a;
 	
-	public AutomatonDisplayButtons(Group root, String language) throws IOException {
+	public AutomatonDisplayButtons(Group root, String language) throws IOException, ParserConfigurationException, SAXException {
 		super(root, language);
 		// TODO Auto-generated constructor stub
 		this.root = root;
 		XMLArgs x = new XMLArgs();
 		hbox = new HBox(HBOX_SPACING);
-		HashMap<String, String> myDefaults = x.readXML("testdefaultsim.xml");
-		a = new AutomatonControlFactory(xmlStringtoCollection.xmlStringtoStringCollection(myDefaults.get("controlNames")),
-				xmlStringtoCollection.xmlStringtoControlsCollection(myDefaults.get("controlTypes")), "English");
+		x.readXML("testdefaultsim.xml");
+		a = new AutomatonControlFactory(x.getAsListOfString("controlNames"),
+				xmlStringtoCollection.xmlStringtoControlsCollection(x.getAsString("controlTypes")), "English");
 	}
 	
 	public void setDisplayControllers(CA ca) {

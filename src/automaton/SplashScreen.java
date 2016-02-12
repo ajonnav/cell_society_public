@@ -3,10 +3,7 @@ package automaton;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ResourceBundle;
-
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -68,14 +65,15 @@ public class SplashScreen {
 		File file = f.showOpenDialog(root.getScene().getWindow());
 		if (file != null) {
 			String chosenFile = file.getName();
-			XMLArgs xmlargs = new XMLArgs();
-			HashMap<String, String> argsMap=null;
+			XMLArgs xmlArgs = new XMLArgs();
 			try {
-				argsMap = xmlargs.readXML(chosenFile);
-				openAutomationWindow(argsMap);
+				xmlArgs.readXML(chosenFile);
+				openAutomationWindow(xmlArgs);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				showError(myResources.getString("FileNotParsed"));
+			} catch(Exception ee) {
+				showError(ee.getMessage());
 			}
 		}
 	}
@@ -84,12 +82,11 @@ public class SplashScreen {
 	 * Creates an instance of Automaton display and opens a window for the automaton display
 	 * @throws IOException 
 	 */
-
-
-	private void openAutomationWindow(Map<String, String> argsMap) throws IOException {
+	
+	private void openAutomationWindow(XMLArgs xmlArgs) {
 		AutomatonDisplay myAutomaton = null;
 		try {
-			myAutomaton = new AutomatonDisplay(argsMap);
+			myAutomaton = new AutomatonDisplay(xmlArgs);
 			myAutomaton.loadAutomaton();
 		}catch(Exception e) {
 			showError(e.getMessage());
