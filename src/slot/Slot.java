@@ -59,6 +59,7 @@ public interface Slot {
 	public void setOccupants(Collection<Cell> cells);
 	
 	public int[] getRowCol();
+	public void addOccupant(Cell cell);
 	
 
 }

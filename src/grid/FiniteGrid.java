@@ -10,7 +10,8 @@ import slot.*;
 
 public class FiniteGrid implements AnyGrid {
 	protected List<Slot> slotList;
-	private int rows, cols, slotLength;
+	private int rows, cols;
+	private int slotLength;
 	// private final Slot SLOT_TYPE;
 	SquareSlot sq;
 	Direction[] directions;

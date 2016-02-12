@@ -117,5 +117,7 @@ public class HexagonalSlot implements Slot {
 		int[] ret = {row, col};
 		return ret;
 	}
-
+	public void addOccupant(Cell cell){
+		occupants.add(cell);
+	}
 }
