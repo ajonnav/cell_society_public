@@ -8,7 +8,10 @@ import java.util.ResourceBundle;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -42,6 +45,7 @@ public class SplashScreen {
 	public void setupFileChoose() {
 		FileChooser f = new FileChooser();
 		f.setTitle(myResources.getString("XMLButton"));
+		f.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("XML", "*.xml"));
 		setUploadButton(f);
 	}
 	
@@ -76,8 +80,15 @@ public class SplashScreen {
 
 
 	private void openAutomationWindow(Map<String, String> argsMap) {
-		AutomatonDisplay myAutomation = new AutomatonDisplay(argsMap);
-		myAutomation.loadAutomaton();
+		AutomatonDisplay myAutomaton = null;
+		try {
+			myAutomaton = new AutomatonDisplay(argsMap);
+		}catch(Exception e) {
+			showError(e.getMessage());
+		}
+		if(myAutomaton!=null) {
+			myAutomaton.loadAutomaton();
+		}
 	}
 	
 	/**
@@ -86,4 +97,13 @@ public class SplashScreen {
 	public String getChosenFile() {
 		return chosenFile;
 	}
+	
+	/**
+     * Display given message as an error in the GUI.
+     */
+    public void showError (String message) {
+        Alert alert = new Alert(AlertType.ERROR, message, ButtonType.OK);
+        alert.setTitle(myResources.getString("ErrorTitle"));
+        alert.showAndWait();
+    } 
 }
