@@ -1,6 +1,7 @@
 package cells;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javafx.scene.paint.Color;
 

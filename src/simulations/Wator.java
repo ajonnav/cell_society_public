@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
+
 import cells.SharkWatorSquareCell;
 import cells.FishWatorSquareCell;
 import cells.EmptyWatorSquareCell;
+import cells.SquareCell;
 import cells.WatorSquareCell;
 import automaton.AutomatonDisplay;
 
@@ -17,13 +20,14 @@ import automaton.AutomatonDisplay;
  */
 
 public class Wator extends CA{
-
+	private static final String RESOURCE_PACKAGE = "ResourceBundle/Wator.properties";
 	private int fishBreed;
 	private int sharkStarve;
 	private int sharkBreed;
 	private double perFish;
 	private double perShark;
 	private WatorSquareCell[] allCells;
+	private ResourceBundle myResources;
 	
 	/**
 	 * 
@@ -32,11 +36,11 @@ public class Wator extends CA{
 	 */
 	public Wator(Map<String, String> argsMap, AutomatonDisplay a) {
 		super(argsMap, a);
-		fishBreed = Integer.parseInt(argsMap.get("fishBreed"));
-		sharkStarve = Integer.parseInt(argsMap.get("sharkStarve"));
-		sharkBreed = Integer.parseInt(argsMap.get("sharkBreed"));
-		perFish = Double.parseDouble(argsMap.get("perFish"));
-		perShark = Double.parseDouble(argsMap.get("perShark"));
+		fishBreed = Integer.parseInt(argsMap.get(myResources.getString("fishBreed")));
+		sharkStarve = Integer.parseInt(argsMap.get(myResources.getString("sharkStarve")));
+		sharkBreed = Integer.parseInt(argsMap.get(myResources.getString("sharkBreed")));
+		perFish = Double.parseDouble(argsMap.get(myResources.getString("perFish")));
+		perShark = Double.parseDouble(argsMap.get(myResources.getString("perShark")));
 		setAllCells(new WatorSquareCell[getNumCell()]);
 	}
 
@@ -153,7 +157,7 @@ public class Wator extends CA{
 	@Override
 	public void drawCells() {
 		getGraphicsContext().clearRect(0, 0, getSimWidth(), getSimHeight());
-		for(WatorSquareCell cell: getAllCells()) {
+		for(SquareCell cell: getAllCells()) {
 			cell.draw(getGraphicsContext());
 		}
 	}

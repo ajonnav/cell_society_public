@@ -16,8 +16,8 @@ import javafx.event.EventHandler;
 public abstract class CA {
 
 	private final int DEFAULT_FRAMES_PER_SECOND = 30;
-	private int simWidth;
-	private int simHeight;
+	private double simWidth;
+	private double simHeight;
 	private int numRow;
 	private int numCol;
 	private String name;
@@ -33,17 +33,14 @@ public abstract class CA {
 	private Stage window;
 
 	/**
-	 * Default Constructor that I am going to use until we figure out XML file
-	 * format
-	 * 
-	 * @param width
-	 * @param height
-	 * @param states
+	 * Constructor
+	 * @param argsMap Map of input arguments
+	 * @param a AutomatonDisplay to display simulation
 	 */
 
 	public CA(Map<String, String> argsMap, AutomatonDisplay a) {
-		setSimWidth(Integer.parseInt(argsMap.get("simWidth")));
-		setSimHeight(Integer.parseInt(argsMap.get("simHeight")));
+		setSimWidth(Double.parseDouble(argsMap.get("simWidth")));
+		setSimHeight(Double.parseDouble(argsMap.get("simHeight")));
 		setNumRow(Integer.parseInt(argsMap.get("numRow")));
 		setNumCol(Integer.parseInt(argsMap.get("numCol")));
 		setName(argsMap.get("name"));
@@ -100,16 +97,16 @@ public abstract class CA {
 		}
 	}
 	
-	public int getSimWidth() {
+	public double getSimWidth() {
 		return simWidth;
 	}
-	public void setSimWidth(int simWidth) {
+	public void setSimWidth(double simWidth) {
 		this.simWidth = simWidth;
 	}
-	public int getSimHeight() {
+	public double getSimHeight() {
 		return simHeight;
 	}
-	public void setSimHeight(int simHeight) {
+	public void setSimHeight(double simHeight) {
 		this.simHeight = simHeight;
 	}
 	public int[][] getAdjacency() {

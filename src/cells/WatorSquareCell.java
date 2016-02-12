@@ -1,5 +1,7 @@
 package cells;
 import java.util.HashMap;
+import java.util.Map;
+
 import javafx.scene.paint.Color;
 
 /**
@@ -20,8 +22,10 @@ public abstract class WatorSquareCell extends SquareCell{
 	 * @param w Width of cell
 	 * @param h Height of cell
 	 */
-	public WatorSquareCell(double x, double y, Color c, double w, double h) {
+	public WatorSquareCell(double x, double y, Color c, double w, double h, boolean is_empty, boolean is_shark) {
 		super(x, y, c, w, h);
+		isEmpty = is_empty;
+		isShark = is_shark;
 	}
 
 	public abstract WatorSquareCell update(WatorSquareCell[] cells);
@@ -33,7 +37,7 @@ public abstract class WatorSquareCell extends SquareCell{
 	 * @param position Position of current cell
 	 * @return
 	 */
-	public abstract WatorSquareCell updateWator(WatorSquareCell[] cells, HashMap<Integer, Integer> map, int position);
+	public abstract WatorSquareCell updateWator(WatorSquareCell[] cells, Map<Integer, Integer> map, int position);
 
 	/**
 	 * Makes copy of the cell

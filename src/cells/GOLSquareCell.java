@@ -45,4 +45,13 @@ public abstract class GOLSquareCell extends SquareCell{
 	 * @return New cell to replace the current one with
 	 */
 	public abstract GOLSquareCell update(GOLSquareCell[] cells);
+	
+	protected int getNumNeighborsAlive(GOLSquareCell[] cells) {
+		int numAlive =0;
+		for(int i: getNeighbor()) {
+			if(cells[i].isAlive())
+				numAlive++;
+		}
+		return numAlive;
+	}
 }
