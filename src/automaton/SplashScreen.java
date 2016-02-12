@@ -2,13 +2,14 @@ package automaton;
 
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
 import java.util.ResourceBundle;
-
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -42,6 +43,7 @@ public class SplashScreen {
 	public void setupFileChoose() {
 		FileChooser f = new FileChooser();
 		f.setTitle(myResources.getString("XMLButton"));
+		f.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("XML", "*.xml"));
 		setUploadButton(f);
 	}
 	
@@ -62,22 +64,33 @@ public class SplashScreen {
 	private void selectFiletoParse(FileChooser f) {
 		File file = f.showOpenDialog(root.getScene().getWindow());
 		if (file != null) {
-			chosenFile = file.getName();
-			XMLArgs xmlargs = new XMLArgs();
-			HashMap<String, String> argsMap = xmlargs.readXML(file.getAbsolutePath());
-			//return object from parsed
-			openAutomationWindow(argsMap);
+			String chosenFile = file.getName();
+			XMLArgs xmlArgs = new XMLArgs();
+			try {
+				xmlArgs.readXML(chosenFile);
+				openAutomationWindow(xmlArgs);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				showError(myResources.getString("FileNotParsed"));
+			} catch(Exception ee) {
+				showError(ee.getMessage());
+			}
 		}
 	}
 	
 	/**
 	 * Creates an instance of Automaton display and opens a window for the automaton display
+	 * @throws IOException 
 	 */
-
-
-	private void openAutomationWindow(Map<String, String> argsMap) {
-		AutomatonDisplay myAutomation = new AutomatonDisplay(argsMap);
-		myAutomation.loadAutomaton();
+	
+	private void openAutomationWindow(XMLArgs xmlArgs) {
+		AutomatonDisplay myAutomaton = null;
+		try {
+			myAutomaton = new AutomatonDisplay(xmlArgs);
+			myAutomaton.loadAutomaton();
+		}catch(Exception e) {
+			showError(e.getMessage());
+		}
 	}
 	
 	/**
@@ -86,4 +99,13 @@ public class SplashScreen {
 	public String getChosenFile() {
 		return chosenFile;
 	}
+	
+	/**
+     * Display given message as an error in the GUI.
+     */
+    public void showError (String message) {
+        Alert alert = new Alert(AlertType.ERROR, message, ButtonType.OK);
+        alert.setTitle(myResources.getString("ErrorTitle"));
+        alert.showAndWait();
+    } 
 }

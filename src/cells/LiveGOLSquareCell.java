@@ -31,11 +31,7 @@ public class LiveGOLSquareCell extends GOLSquareCell{
 	 */
 	@Override
 	public GOLSquareCell update(GOLSquareCell[] cells) {
-		int numAlive = 0;
-		for(int i: getNeighbor()) {
-			if(cells[i].isAlive())
-				numAlive ++;
-		}
+		int numAlive = getNumNeighborsAlive(cells);
 		if(numAlive < 2 || numAlive > 3) {
 			DeadGOLSquareCell returnCell = new DeadGOLSquareCell(getX(), getY(), getWidth(), getHeight());
 			returnCell.setNeighbor(getNeighbor());

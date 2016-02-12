@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
+
 import cells.SharkWatorSquareCell;
 import cells.FishWatorSquareCell;
 import cells.EmptyWatorSquareCell;
+import cells.SquareCell;
 import cells.WatorSquareCell;
 import automaton.AutomatonDisplay;
+import automaton.XMLArgs;
 
 /**
  * This class is the Wator simulation class
@@ -17,26 +21,28 @@ import automaton.AutomatonDisplay;
  */
 
 public class Wator extends CA{
-
+	private static final String RESOURCE_PACKAGE = "ResourceBundle/Wator";
 	private int fishBreed;
 	private int sharkStarve;
 	private int sharkBreed;
 	private double perFish;
 	private double perShark;
 	private WatorSquareCell[] allCells;
+	private ResourceBundle myResources;
 	
 	/**
 	 * 
 	 * @param argsMap Map that contains parsed values
 	 * @param a	AutomatonDisplay on which simulations are drawn
 	 */
-	public Wator(Map<String, String> argsMap, AutomatonDisplay a) {
-		super(argsMap, a);
-		fishBreed = Integer.parseInt(argsMap.get("fishBreed"));
-		sharkStarve = Integer.parseInt(argsMap.get("sharkStarve"));
-		sharkBreed = Integer.parseInt(argsMap.get("sharkBreed"));
-		perFish = Double.parseDouble(argsMap.get("perFish"));
-		perShark = Double.parseDouble(argsMap.get("perShark"));
+	public Wator(XMLArgs xmlArgs, AutomatonDisplay a) {
+		super(xmlArgs, a);
+		myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
+		fishBreed = xmlArgs.getAsInt(myResources.getString("fishBreed"));
+		sharkStarve = xmlArgs.getAsInt(myResources.getString("sharkStarve"));
+		sharkBreed = xmlArgs.getAsInt(myResources.getString("sharkBreed"));
+		perFish = xmlArgs.getAsDouble(myResources.getString("perFish"));
+		perShark = xmlArgs.getAsDouble(myResources.getString("perShark"));
 		setAllCells(new WatorSquareCell[getNumCell()]);
 	}
 
@@ -153,7 +159,7 @@ public class Wator extends CA{
 	@Override
 	public void drawCells() {
 		getGraphicsContext().clearRect(0, 0, getSimWidth(), getSimHeight());
-		for(WatorSquareCell cell: getAllCells()) {
+		for(SquareCell cell: getAllCells()) {
 			cell.draw(getGraphicsContext());
 		}
 	}

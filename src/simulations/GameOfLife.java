@@ -2,10 +2,14 @@ package simulations;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.ResourceBundle;
+
 import cells.DeadGOLSquareCell;
 import cells.GOLSquareCell;
 import cells.LiveGOLSquareCell;
+import cells.SquareCell;
 import automaton.AutomatonDisplay;
+import automaton.XMLArgs;
 
 /**
  * Class for Game of Life Simulation
@@ -14,17 +18,20 @@ import automaton.AutomatonDisplay;
  */
 public class GameOfLife extends CA{
 	
+	private static final String RESOURCE_PACKAGE = "ResourceBundle/GameOfLife";
 	private double perAlive;
 	private GOLSquareCell[] allCells;
+	private ResourceBundle myResources;
 	
 	/**
 	 * Constructor
 	 * @param mapArgs Map with arguments read in from XML file
 	 * @param a AutomatonDisplay on which simulation is drawn
 	 */
-	public GameOfLife(Map<String, String> mapArgs, AutomatonDisplay a) {
-		super(mapArgs, a);
-		perAlive = Double.parseDouble(mapArgs.get("perAlive"));
+	public GameOfLife(XMLArgs xmlArgs, AutomatonDisplay a) {
+		super(xmlArgs, a);
+		myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
+		perAlive = xmlArgs.getAsDouble(myResources.getString("perAlive"));
 		allCells = new GOLSquareCell[getNumCell()];
 	}
 
@@ -103,7 +110,7 @@ public class GameOfLife extends CA{
 	@Override
 	public void drawCells() {
 		getGraphicsContext().clearRect(0,0,getSimWidth(), getSimHeight());
-		for(GOLSquareCell cell: getAllCells()) {
+		for(SquareCell cell: getAllCells()) {
 			cell.draw(getGraphicsContext());
 		}
 	}

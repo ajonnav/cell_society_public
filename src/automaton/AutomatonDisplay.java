@@ -1,8 +1,14 @@
 package automaton;
 
-
+import java.io.IOException;
 import java.util.Map;
+import java.util.ResourceBundle;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
+import simexception.ConfigFileException;
 import simulations.*;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -12,11 +18,10 @@ import javafx.stage.Stage;
 
 
 public class AutomatonDisplay {
-	private static final String DEFAULT_RESOURCE_PACKAGE = "uicss/";
-	private static final String STYLESHEET = "default.css";
-	private double canvasY = 0;//10;
-	private double canvasX = 0;//17.5;
-	private double canvasHeight; //350;
+	private static final String DEFAULT_RESOURCE_PACKAGE = "ResourceBundle/Errors";
+	private double canvasY = 0;
+	private double canvasX = 0;
+	private double canvasHeight;
 	private double canvasWidth;
 	private int windowWidth;
 	private int windowHeight;
@@ -27,32 +32,33 @@ public class AutomatonDisplay {
 	private Scene myDisplay;
 	private Group root;
 	private Canvas canvas;
-	private Button step;
-	private Button pause;
-	private Button start;
-	private Button reset;
 	private CA ca;
+	private ResourceBundle myResources;
 	
-	public AutomatonDisplay(Map<String, String> map) {
+	public AutomatonDisplay(XMLArgs xmlArgs) {
+		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE);
 		root = new Group();
 		window = new Stage();
-		canvasHeight = Integer.parseInt(map.get("simHeight"));
-		canvasWidth = Integer.parseInt(map.get("simWidth"));
-		windowWidth = Integer.parseInt(map.get("simWidth"));
-		windowHeight = Integer.parseInt(map.get("simHeight"))+ BUTTON_PANE_HEIGHT;
+		canvasHeight = xmlArgs.getAsDouble("simHeight");
+		canvasWidth = xmlArgs.getAsDouble("simWidth");
+		windowWidth = (int) canvasWidth;
+		windowHeight = (int) canvasHeight + BUTTON_PANE_HEIGHT;
 		myDisplay = new Scene(root, windowWidth, windowHeight);
-		myDisplay.getStylesheets().add(DEFAULT_RESOURCE_PACKAGE + STYLESHEET);
 		canvas = new Canvas(canvasWidth, canvasHeight);
-		String simName = map.get("name");
+		
+		String simName = xmlArgs.getAsString("name");
 		if(simName.equals("GOL")) {
-			ca = new GameOfLife(map, this);
+			ca = new GameOfLife(xmlArgs, this);
 		} else if(simName.equals("Fire")) {
-			ca = new Fire(map, this);
+			ca = new Fire(xmlArgs, this);
 		} else if(simName.equals("Segregation")) {
-			ca = new SchellingCA(map, this);
+			ca = new SchellingCA(xmlArgs, this);
 		}
 		else if(simName.equals("Wator")) {
-			ca = new Wator(map, this);
+			ca = new Wator(xmlArgs, this);
+		}
+		else {
+			throw new ConfigFileException(myResources.getString("NotValid"), "name");
 		}
 	}
 	
@@ -63,9 +69,12 @@ public class AutomatonDisplay {
 	/**
 	 * Loads the automaton
 	 * eventually will have a param for the object from XMLargs
+	 * @throws IOException 
+	 * @throws SAXException 
+	 * @throws ParserConfigurationException 
 	 */
 
-	public void loadAutomaton() {
+	public void loadAutomaton() throws IOException, ParserConfigurationException, SAXException {
 		openDisplay();
 		//make new CA and do stuff
 		ca.initializeScreen();
@@ -73,14 +82,17 @@ public class AutomatonDisplay {
 	
 	/**
 	 * Creates new window and a group for the window, also adds the buttons for the window
+	 * @throws IOException 
+	 * @throws SAXException 
+	 * @throws ParserConfigurationException 
 	 */
-	private void openDisplay() {
+	private void openDisplay() throws IOException, ParserConfigurationException, SAXException {
 		window.setWidth(windowWidth);
 		window.setHeight(windowHeight);
 		setDisplayScene();
 		setCanvas();
-		AutomatonButtons controls = new AutomatonButtons(root, "English");
-		controls.setAutomatonButtons(this, ca);
+		AutomatonDisplayButtons controls = new AutomatonDisplayButtons(root, "English");
+		controls.setDisplayControllers(ca);
 		window.show();
 	}
 	
@@ -126,5 +138,15 @@ public class AutomatonDisplay {
 	}
 	public double getCanvasWidth() {
 		return canvasWidth;
+	}
+	
+	public boolean isDouble(String s) {
+		try {
+			double num = Double.parseDouble(s);
+		}
+		catch(NumberFormatException e) { 
+	        return false; 
+		}
+		return true;
 	}
 }

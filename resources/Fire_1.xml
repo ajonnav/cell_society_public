@@ -5,11 +5,11 @@
 <author>none</author>
 <simWidth>500</simWidth>
 <simHeight>500</simHeight>
-<numRow>200</numRow>
+<numRow>100</numRow>
 <numCol>100</numCol>
 <probCatch>0.70</probCatch>
-<BurningCells_x>0 50</BurningCells_x>
-<BurningCells_y>3 50</BurningCells_y>
-<Empty_x>0</Empty_x>
-<Empty_y>0</Empty_y>
+<burning_x>0 50</burning_x>
+<burning_y>3 50</burning_y>
+<empty_x>0</empty_x>
+<empty_y>0</empty_y>
 </content>

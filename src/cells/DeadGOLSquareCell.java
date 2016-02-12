@@ -28,11 +28,7 @@ public class DeadGOLSquareCell extends GOLSquareCell{
 	 * @return New GOLSquareCell to replace current one
 	 */
 	public GOLSquareCell update(GOLSquareCell[] cells) {
-		int numAlive = 0;
-		for(int i: getNeighbor()) {
-			if(cells[i].isAlive())
-				numAlive++;
-		}
+		int numAlive = getNumNeighborsAlive(cells);
 		if(numAlive==3) {
 			LiveGOLSquareCell returnCell = new LiveGOLSquareCell(getX(), getY(), getWidth(), getHeight());
 			returnCell.setNeighbor(getNeighbor());

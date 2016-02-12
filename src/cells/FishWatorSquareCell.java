@@ -1,7 +1,9 @@
 package cells;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
+
 import javafx.scene.paint.Color;
 
 /**
@@ -11,11 +13,11 @@ import javafx.scene.paint.Color;
  */
 public class FishWatorSquareCell extends WatorSquareCell{
 
-	private static final Color CELL_COLOR = Color.GREEN;
+	private static final Color CELL_COLOR = Color.YELLOW;
 	private final int BREED;
 	private int breedCount;
-	private boolean IS_EMPTY = false;
-	private final boolean IS_SHARK= false;
+	private final static boolean IS_EMPTY = false;
+	private final static boolean IS_SHARK= false;
 	
 	/**
 	 * Constructor
@@ -26,11 +28,9 @@ public class FishWatorSquareCell extends WatorSquareCell{
 	 * @param breedCount The number of rounds until cell breeds
 	 */
 	public FishWatorSquareCell(double x, double y, double w, double h, int breedCount) {
-		super(x, y, CELL_COLOR, w, h);
+		super(x, y, CELL_COLOR, w, h, IS_EMPTY, IS_SHARK);
 		BREED = breedCount;
 		setBreedCount(BREED);
-		setEmpty(IS_EMPTY);
-		setShark(IS_SHARK);
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class FishWatorSquareCell extends WatorSquareCell{
 	 * @param position Position of current cell
 	 */
 	@Override
-	public WatorSquareCell updateWator(WatorSquareCell[] cells, HashMap<Integer, Integer> map, int position) {
+	public WatorSquareCell updateWator(WatorSquareCell[] cells, Map<Integer, Integer> map, int position) {
 		if(map.containsKey(position)) {
 			WatorSquareCell returnCell = cells[map.get(position)].copy();
 			returnCell.setX(getX());
