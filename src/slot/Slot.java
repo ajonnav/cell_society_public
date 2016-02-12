@@ -21,7 +21,7 @@ public interface Slot {
 	  * I could use some input from y'all about that.
 	  * @param neighbors
 	  */
-	public void setNeighbors(Collection<Slot> neighbors);
+	public void setNeighbors(Collection<Slot> newNeighbors);
 	
 	
 	/**
@@ -59,5 +59,6 @@ public interface Slot {
 	public void setOccupants(Collection<Cell> cells);
 	
 	public int[] getRowCol();
+	
 
 }

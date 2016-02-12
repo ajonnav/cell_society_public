@@ -1,18 +1,18 @@
-package slot;
 
-import java.util.ArrayList;
+package slot;
 import java.util.Collection;
 import java.util.List;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import cells.Cell;
+import java.util.ArrayList;
 
 public class SquareSlot implements Slot {
 	private int index, width, height, row, col;
 	private double xCoord, yCoord;
-	List<Cell> occupants;
-	List<Slot> neighbors;
+	private List<Cell> occupants;
+	private List<Slot> neighbors;
 	public SquareSlot(int r, int c, int w, int h, int n) {
 		// TODO Auto-generated constructor stub
 		width = w;
