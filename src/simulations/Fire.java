@@ -2,6 +2,7 @@ package simulations;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import FireCells.FireBURNING;
@@ -9,14 +10,15 @@ import FireCells.FireCell;
 import FireCells.FireEMPTY;
 import FireCells.FireTREE;
 import automaton.AutomatonDisplay;
+import utilities.xmlStringtoCollection;
 
 public class Fire extends CA {
 	private double probCatch;
 	private FireCell[] allCells;
-	private ArrayList<Integer> burning_x;
-	private ArrayList<Integer> burning_y;
-	private ArrayList<Integer> empty_x;
-	private ArrayList<Integer> empty_y;
+	private List<Integer> burning_x;
+	private List<Integer> burning_y;
+	private List<Integer> empty_x;
+	private List<Integer> empty_y;
 	
 	public Fire (Map<String, String> mapArgs, AutomatonDisplay a) {
 		super(mapArgs, a);
@@ -95,22 +97,11 @@ public class Fire extends CA {
 	}
 	
 	private void getListsfromXMLMap(Map<String, String> mapArgs) {
-		String [] burn_x = mapArgs.get("BurningCells_x").split("\\s+");
-		String [] burn_y = mapArgs.get("BurningCells_y").split("\\s+");
-		String [] emp_x = mapArgs.get("Empty_x").split("\\s+");
-		String [] emp_y = mapArgs.get("Empty_y").split("\\s+");
-		burning_x = new ArrayList<Integer>();
-		burning_y = new ArrayList<Integer>();
-		empty_x = new ArrayList<Integer>();
-		empty_y = new ArrayList<Integer>();
-		for (int i = 0; i < burn_x.length; i++) {
-			burning_x.add(Integer.parseInt(burn_x[i]));
-			burning_y.add(Integer.parseInt(burn_y[i]));
-		}
-		for (int i = 0; i < emp_x.length; i++) {
-			empty_x.add(Integer.parseInt(emp_x[i]));
-			empty_y.add(Integer.parseInt(emp_y[i]));
-		}
+		burning_x = xmlStringtoCollection.xmlStringtoIntegerCollection(mapArgs.get("BurningCells_x"));
+		burning_y = xmlStringtoCollection.xmlStringtoIntegerCollection(mapArgs.get("BurningCells_y"));
+		empty_x = xmlStringtoCollection.xmlStringtoIntegerCollection(mapArgs.get("Empty_x"));
+		empty_y = xmlStringtoCollection.xmlStringtoIntegerCollection(mapArgs.get("Empty_y"));
 	}
+
 
 }
