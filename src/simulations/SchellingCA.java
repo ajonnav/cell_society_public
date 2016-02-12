@@ -6,9 +6,11 @@ import java.util.Collections;
 import java.util.Map;
 
 
+
 //import javafx.scene.paint.Color;
 import cells.*;
 import automaton.AutomatonDisplay;
+import automaton.XMLArgs;
 
 //import grid.SquareGrid;
 
@@ -19,11 +21,11 @@ public class SchellingCA extends CA {
 	private double vacantP;
 	private SegregationSquareCell[] allCells;
 
-	public SchellingCA(Map<String, String> mapArgs, AutomatonDisplay a) {
-		super(mapArgs, a);
-		tPercentage = Double.parseDouble(mapArgs.get("tPercentage"));
-		typeOneP = Double.parseDouble(mapArgs.get("typeOneP"));
-		vacantP = Double.parseDouble(mapArgs.get("vacantP"));
+	public SchellingCA(XMLArgs xmlArgs, AutomatonDisplay a) {
+		super(xmlArgs, a);
+		tPercentage = xmlArgs.getAsDouble("tPercentage");
+		typeOneP = xmlArgs.getAsDouble("typeOneP");
+		vacantP = xmlArgs.getAsDouble("vacantP");
 		allCells = new SegregationSquareCell[getNumCell()];
 
 	}

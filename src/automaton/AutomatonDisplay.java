@@ -1,9 +1,7 @@
 package automaton;
 
-
 import java.util.Map;
 import java.util.ResourceBundle;
-
 import simexception.ConfigFileException;
 import simulations.*;
 import javafx.scene.Group;
@@ -14,11 +12,10 @@ import javafx.stage.Stage;
 
 
 public class AutomatonDisplay {
-	private static final String DEFAULT_RESOURCE_PACKAGE = "ResourceBundle/";
-	private static final String ERROR_RES = "Errors";
-	private double canvasY = 0;//10;
-	private double canvasX = 0;//17.5;
-	private double canvasHeight; //350;
+	private static final String DEFAULT_RESOURCE_PACKAGE = "ResourceBundle/Errors";
+	private double canvasY = 0;
+	private double canvasX = 0;
+	private double canvasHeight;
 	private double canvasWidth;
 	private int windowWidth;
 	private int windowHeight;
@@ -36,59 +33,27 @@ public class AutomatonDisplay {
 	private CA ca;
 	private ResourceBundle myResources;
 	
-	public AutomatonDisplay(Map<String, String> map) {
-		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE+ERROR_RES);
+	public AutomatonDisplay(XMLArgs xmlArgs) {
+		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE);
 		root = new Group();
 		window = new Stage();
-		
-		if(map.containsKey("simHeight")) {
-			if(isDouble(map.get("simHeight"))) {
-				canvasHeight = Double.parseDouble(map.get("simHeight"));
-			}
-			else {
-				throw new ConfigFileException(myResources.getString("NotValid"), "simHeight");
-			}
-		}
-		else {
-			throw new ConfigFileException(myResources.getString("NotFound"), "simHeight");
-		}
-		
-		if(map.containsKey("simWidth")) {
-			if(isDouble(map.get("simWidth"))) {
-				canvasWidth = Double.parseDouble(map.get("simWidth"));
-			}
-			else {
-				throw new ConfigFileException(myResources.getString("NotValid"), "simWidth");
-			}
-		}
-		else {
-			throw new ConfigFileException(myResources.getString("NotFound"), "simWidth");
-		}
-
+		canvasHeight = xmlArgs.getAsDouble("simHeight");
+		canvasWidth = xmlArgs.getAsDouble("simWidth");
 		windowWidth = (int) canvasWidth;
-		windowHeight = (int) canvasHeight;
-		
+		windowHeight = (int) canvasHeight + BUTTON_PANE_HEIGHT;
 		myDisplay = new Scene(root, windowWidth, windowHeight);
-		//myDisplay.getStylesheets().add(DEFAULT_RESOURCE_PACKAGE + STYLESHEET);
 		canvas = new Canvas(canvasWidth, canvasHeight);
 		
-		String simName = "";
-		if(map.containsKey("name")) {
-			simName = map.get("name");
-		}
-		else {
-			throw new ConfigFileException(myResources.getString("NotFound"), "name");
-		}
-		
+		String simName = xmlArgs.getAsString("name");
 		if(simName.equals("GOL")) {
-			ca = new GameOfLife(map, this);
+			ca = new GameOfLife(xmlArgs, this);
 		} else if(simName.equals("Fire")) {
-			ca = new Fire(map, this);
+			ca = new Fire(xmlArgs, this);
 		} else if(simName.equals("Segregation")) {
-			ca = new SchellingCA(map, this);
+			ca = new SchellingCA(xmlArgs, this);
 		}
 		else if(simName.equals("Wator")) {
-			ca = new Wator(map, this);
+			ca = new Wator(xmlArgs, this);
 		}
 		else {
 			throw new ConfigFileException(myResources.getString("NotValid"), "name");

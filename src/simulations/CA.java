@@ -1,5 +1,6 @@
 package simulations;
 import automaton.AutomatonDisplay;
+import automaton.XMLArgs;
 
 import java.util.*;
 
@@ -38,14 +39,14 @@ public abstract class CA {
 	 * @param a AutomatonDisplay to display simulation
 	 */
 
-	public CA(Map<String, String> argsMap, AutomatonDisplay a) {
-		setSimWidth(Double.parseDouble(argsMap.get("simWidth")));
-		setSimHeight(Double.parseDouble(argsMap.get("simHeight")));
-		setNumRow(Integer.parseInt(argsMap.get("numRow")));
-		setNumCol(Integer.parseInt(argsMap.get("numCol")));
-		setName(argsMap.get("name"));
-		setTitle(argsMap.get("title"));
-		setAuthor(argsMap.get("author"));
+	public CA(XMLArgs xmlArgs, AutomatonDisplay a) {
+		setSimWidth(xmlArgs.getAsDouble("simWidth"));
+		setSimHeight(xmlArgs.getAsDouble("simHeight"));
+		setNumRow(xmlArgs.getAsInt("numRow"));
+		setNumCol(xmlArgs.getAsInt("numCol"));
+		setName(xmlArgs.getAsString("name"));
+		setTitle(xmlArgs.getAsString("title"));
+		setAuthor(xmlArgs.getAsString("author"));
 		setTimeline(new Timeline());
 		setGraphicsContext(a.getCanvas().getGraphicsContext2D());
 		simOver = false;

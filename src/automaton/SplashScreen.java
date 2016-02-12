@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import simexception.ConfigFileException;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -68,17 +69,15 @@ public class SplashScreen {
 		File file = f.showOpenDialog(root.getScene().getWindow());
 		if (file != null) {
 			String chosenFile = file.getName();
-			XMLArgs xmlargs = new XMLArgs();
-			HashMap<String, String> argsMap=null;
+			XMLArgs xmlArgs = new XMLArgs();
 			try {
-				argsMap = xmlargs.readXML(chosenFile);
+				xmlArgs.readXML(chosenFile);
+				openAutomationWindow(xmlArgs);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				showError(myResources.getString("FileNotParsed"));
-			}
-			//return object from parsed
-			if(argsMap!=null) {
-				openAutomationWindow(argsMap);
+			} catch(Exception ee) {
+				showError(ee.getMessage());
 			}
 		}
 	}
@@ -88,15 +87,13 @@ public class SplashScreen {
 	 */
 
 
-	private void openAutomationWindow(Map<String, String> argsMap) {
+	private void openAutomationWindow(XMLArgs xmlArgs) {
 		AutomatonDisplay myAutomaton = null;
 		try {
-			myAutomaton = new AutomatonDisplay(argsMap);
+			myAutomaton = new AutomatonDisplay(xmlArgs);
+			myAutomaton.loadAutomaton();
 		}catch(Exception e) {
 			showError(e.getMessage());
-		}
-		if(myAutomaton!=null) {
-			myAutomaton.loadAutomaton();
 		}
 	}
 	
