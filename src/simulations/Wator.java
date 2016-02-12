@@ -20,7 +20,7 @@ import automaton.AutomatonDisplay;
  */
 
 public class Wator extends CA{
-	private static final String RESOURCE_PACKAGE = "ResourceBundle/Wator.properties";
+	private static final String RESOURCE_PACKAGE = "ResourceBundle/Wator";
 	private int fishBreed;
 	private int sharkStarve;
 	private int sharkBreed;

@@ -5,7 +5,7 @@
 <author>none</author>
 <simWidth>500</simWidth>
 <simHeight>500</simHeight>
-<numRow>200</numRow>
+<numRow>100</numRow>
 <numCol>100</numCol>
 <probCatch>0.70</probCatch>
 <burning_x>0 50</burning_x>

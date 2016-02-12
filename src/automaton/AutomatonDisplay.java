@@ -1,6 +1,7 @@
 package automaton;
 
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -29,10 +30,6 @@ public class AutomatonDisplay {
 	private Scene myDisplay;
 	private Group root;
 	private Canvas canvas;
-	private Button step;
-	private Button pause;
-	private Button start;
-	private Button reset;
 	private CA ca;
 	private ResourceBundle myResources;
 	
@@ -102,9 +99,10 @@ public class AutomatonDisplay {
 	/**
 	 * Loads the automaton
 	 * eventually will have a param for the object from XMLargs
+	 * @throws IOException 
 	 */
 
-	public void loadAutomaton() {
+	public void loadAutomaton() throws IOException {
 		openDisplay();
 		//make new CA and do stuff
 		ca.initializeScreen();
@@ -112,14 +110,15 @@ public class AutomatonDisplay {
 	
 	/**
 	 * Creates new window and a group for the window, also adds the buttons for the window
+	 * @throws IOException 
 	 */
-	private void openDisplay() {
+	private void openDisplay() throws IOException {
 		window.setWidth(windowWidth);
 		window.setHeight(windowHeight);
 		setDisplayScene();
 		setCanvas();
-		AutomatonButtons controls = new AutomatonButtons(root, "English");
-		controls.setAutomatonButtons(this, ca);
+		AutomatonDisplayButtons controls = new AutomatonDisplayButtons(root, "English");
+		controls.setDisplayControllers(ca);
 		window.show();
 	}
 	

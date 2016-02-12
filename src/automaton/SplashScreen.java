@@ -72,31 +72,27 @@ public class SplashScreen {
 			HashMap<String, String> argsMap=null;
 			try {
 				argsMap = xmlargs.readXML(chosenFile);
+				openAutomationWindow(argsMap);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				showError(myResources.getString("FileNotParsed"));
-			}
-			//return object from parsed
-			if(argsMap!=null) {
-				openAutomationWindow(argsMap);
 			}
 		}
 	}
 	
 	/**
 	 * Creates an instance of Automaton display and opens a window for the automaton display
+	 * @throws IOException 
 	 */
 
 
-	private void openAutomationWindow(Map<String, String> argsMap) {
+	private void openAutomationWindow(Map<String, String> argsMap) throws IOException {
 		AutomatonDisplay myAutomaton = null;
 		try {
 			myAutomaton = new AutomatonDisplay(argsMap);
+			myAutomaton.loadAutomaton();
 		}catch(Exception e) {
 			showError(e.getMessage());
-		}
-		if(myAutomaton!=null) {
-			myAutomaton.loadAutomaton();
 		}
 	}
 	
