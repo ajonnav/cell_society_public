@@ -2,6 +2,7 @@ package automaton;
 
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -66,11 +67,19 @@ public class SplashScreen {
 	private void selectFiletoParse(FileChooser f) {
 		File file = f.showOpenDialog(root.getScene().getWindow());
 		if (file != null) {
-			chosenFile = file.getName();
+			String chosenFile = file.getName();
 			XMLArgs xmlargs = new XMLArgs();
-			HashMap<String, String> argsMap = xmlargs.readXML(file.getAbsolutePath());
+			HashMap<String, String> argsMap=null;
+			try {
+				argsMap = xmlargs.readXML(chosenFile);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				showError(myResources.getString("FileNotParsed"));
+			}
 			//return object from parsed
-			openAutomationWindow(argsMap);
+			if(argsMap!=null) {
+				openAutomationWindow(argsMap);
+			}
 		}
 	}
 	

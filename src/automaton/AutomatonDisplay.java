@@ -42,8 +42,8 @@ public class AutomatonDisplay {
 		window = new Stage();
 		
 		if(map.containsKey("simHeight")) {
-			if(isInteger(map.get("simHeight"))) {
-				canvasHeight = Integer.parseInt(map.get("simHeight"));
+			if(isDouble(map.get("simHeight"))) {
+				canvasHeight = Double.parseDouble(map.get("simHeight"));
 			}
 			else {
 				throw new ConfigFileException(myResources.getString("NotValid"), "simHeight");
@@ -54,8 +54,8 @@ public class AutomatonDisplay {
 		}
 		
 		if(map.containsKey("simWidth")) {
-			if(isInteger(map.get("simWidth"))) {
-				canvasWidth = Integer.parseInt(map.get("simWidth"));
+			if(isDouble(map.get("simWidth"))) {
+				canvasWidth = Double.parseDouble(map.get("simWidth"));
 			}
 			else {
 				throw new ConfigFileException(myResources.getString("NotValid"), "simWidth");
@@ -64,10 +64,10 @@ public class AutomatonDisplay {
 		else {
 			throw new ConfigFileException(myResources.getString("NotFound"), "simWidth");
 		}
+
+		windowWidth = (int) canvasWidth;
+		windowHeight = (int) canvasHeight;
 		
-		canvasWidth = Integer.parseInt(map.get("simWidth"));
-		windowWidth = Integer.parseInt(map.get("simWidth"));
-		windowHeight = Integer.parseInt(map.get("simHeight"))+ BUTTON_PANE_HEIGHT;
 		myDisplay = new Scene(root, windowWidth, windowHeight);
 		//myDisplay.getStylesheets().add(DEFAULT_RESOURCE_PACKAGE + STYLESHEET);
 		canvas = new Canvas(canvasWidth, canvasHeight);
@@ -167,9 +167,9 @@ public class AutomatonDisplay {
 		return canvasWidth;
 	}
 	
-	public boolean isInteger(String s) {
+	public boolean isDouble(String s) {
 		try {
-			int num = Integer.parseInt(s);
+			double num = Double.parseDouble(s);
 		}
 		catch(NumberFormatException e) { 
 	        return false; 
