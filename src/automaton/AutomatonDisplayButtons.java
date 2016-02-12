@@ -1,5 +1,6 @@
 package automaton;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -21,13 +22,13 @@ public class AutomatonDisplayButtons extends AutomatonButtons {
 	private Collection<Control> myControllers;
 	private AutomatonControlFactory a;
 	
-	public AutomatonDisplayButtons(Group root, String language) {
+	public AutomatonDisplayButtons(Group root, String language) throws IOException {
 		super(root, language);
 		// TODO Auto-generated constructor stub
 		this.root = root;
 		XMLArgs x = new XMLArgs();
 		hbox = new HBox(HBOX_SPACING);
-		HashMap<String, String> myDefaults = x.readXML("C:/Users/Yoga2785/Documents/GitHub/cellsociety_team19/src/ResourceBundle/testdefaultsim.xml");
+		HashMap<String, String> myDefaults = x.readXML("testdefaultsim.xml");
 		a = new AutomatonControlFactory(xmlStringtoCollection.xmlStringtoStringCollection(myDefaults.get("controlNames")),
 				xmlStringtoCollection.xmlStringtoControlsCollection(myDefaults.get("controlTypes")), "English");
 	}

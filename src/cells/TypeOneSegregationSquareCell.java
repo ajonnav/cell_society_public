@@ -10,14 +10,15 @@ public class TypeOneSegregationSquareCell extends SegregationTypeSquareCell {
 	public TypeOneSegregationSquareCell(double x, double y, double w, double h,
 			double t) {
 		super(x, y, COLOR, w, h, t);
-		state = STATE;
+		setState(STATE);
 
 	}
 
 	public TypeOneSegregationSquareCell(SegregationSquareCell v, double t) {
 		super(v.getX(), v.getY(), COLOR, v.getWidth(), v.getHeight(), t);
-		state = STATE;
+		setState(STATE);
 	}
+
 
 
 }

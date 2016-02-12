@@ -1,8 +1,10 @@
 package grid;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import javafx.scene.paint.Color;
 import simulations.*;
+import slot.Slot;
 import cells.*;
 
 public class SquareGrid {
@@ -77,4 +79,6 @@ public class SquareGrid {
 	public int[][] getAdjacencyList(){
 		return adjMatrix;
 	}
+
+	
 }

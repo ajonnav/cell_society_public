@@ -2,9 +2,11 @@ package simulations;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
+
 import cells.DeadGOLSquareCell;
 import cells.GOLSquareCell;
 import cells.LiveGOLSquareCell;
+import cells.SquareCell;
 import automaton.AutomatonDisplay;
 
 /**
@@ -103,7 +105,7 @@ public class GameOfLife extends CA{
 	@Override
 	public void drawCells() {
 		getGraphicsContext().clearRect(0,0,getSimWidth(), getSimHeight());
-		for(GOLSquareCell cell: getAllCells()) {
+		for(SquareCell cell: getAllCells()) {
 			cell.draw(getGraphicsContext());
 		}
 	}

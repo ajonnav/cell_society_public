@@ -1,6 +1,7 @@
 package cells;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -82,7 +83,8 @@ public abstract class Cell {
 		return neighbor;
 	}
 
-	public void setNeighbor(ArrayList<Integer> list) {
-		this.neighbor = list;
+	public void setNeighbor(Collection<Integer> list) {
+		ArrayList<Integer> neighborList = new ArrayList<Integer>(list);
+		this.neighbor = neighborList;
 	}
 }

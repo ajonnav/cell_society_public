@@ -102,6 +102,4 @@ public class Fire extends CA {
 		empty_x = xmlStringtoCollection.xmlStringtoIntegerCollection(mapArgs.get("Empty_x"));
 		empty_y = xmlStringtoCollection.xmlStringtoIntegerCollection(mapArgs.get("Empty_y"));
 	}
-
-
 }

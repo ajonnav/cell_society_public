@@ -10,8 +10,7 @@ public class TypeTwoSegregationSquareCell extends SegregationTypeSquareCell {
 	public TypeTwoSegregationSquareCell(double x, double y, double w, double h,
 			double t) {
 		super(x, y, COLOR, w, h, t);
-		// TODO Auto-generated constructor stub
-		state = STATE;
+		setState(STATE);
 	}
 /**
  * Take any type of SegregationSquareCell and create a new version of TypeSegregationCell
@@ -20,7 +19,6 @@ public class TypeTwoSegregationSquareCell extends SegregationTypeSquareCell {
  */
 	public TypeTwoSegregationSquareCell(SegregationSquareCell v, double t) {
 		super(v.getX(), v.getY(), COLOR, v.getWidth(), v.getHeight(), t);
-		state = STATE;
+		setState(STATE);
 	}
-
 }
