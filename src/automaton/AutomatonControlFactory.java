@@ -6,10 +6,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javax.imageio.ImageIO;
 import javax.swing.JSlider;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class AutomatonControlFactory {
 	private static final String DEFAULT_RESOURCE_PACKAGE = "ResourceBundle/";
@@ -48,9 +51,19 @@ public class AutomatonControlFactory {
 	}
 	
 	private Button createButton(String text, String id) {
-		Button b = new Button(text);
-		b.setId(id);
-		return b;
+		Button result = new Button();
+		String label = text;
+		final String IMAGEFILE_SUFFIXES = 
+		            String.format(".*\\.(%s)", String.join("|", ImageIO.getReaderFileSuffixes()));
+//		if (label.matches(IMAGEFILE_SUFFIXES)) {
+//            result.setGraphic(new ImageView(
+//                new Image(getClass().getResourceAsStream(DEFAULT_RESOURCE_PACKAGE + label))));
+//        } else {
+//            result.setText(label);
+//        }
+		result.setText(label);
+		result.setId(id);
+		return result;
 	}
 	
 	private JSlider createSlider() {
