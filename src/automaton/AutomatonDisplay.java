@@ -1,7 +1,6 @@
 package automaton;
 
 import java.io.IOException;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -13,7 +12,6 @@ import simulations.*;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 
