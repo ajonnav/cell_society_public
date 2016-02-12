@@ -3,9 +3,11 @@ package grid;
 public class Direction {
 
 	private int[] vec;
-	public Direction(int v, int h) {
+	private Direction(int v, int h) {
 		// TODO Auto-generated constructor stub
 		vec = new int[2];
+		vec[0] = v;
+		vec[1] = h;
 	}
 	
 	public static final Direction NORTH = new Direction(-1, 0);

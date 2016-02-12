@@ -18,7 +18,7 @@ public class SquareGrid {
 	private int[][] adjMatrix;
 	private static final Color VACANT_COLOR = Color.GRAY;
 	private CA simulation;
-	public SquareGrid(CA ca, int cellNum){
+	public SquareGrid (CA ca, int cellNum){
 		numCells = cellNum;
 		//cellWidth = ca.getCellWidth();
 		//cellHeight = ca.getCellHeight();
