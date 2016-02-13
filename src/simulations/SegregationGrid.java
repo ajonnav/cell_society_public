@@ -1,7 +1,8 @@
 package simulations;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
+import java.util.Stack;
 
 import javafx.scene.paint.Color;
 import cells.*;
@@ -15,16 +16,16 @@ public class SegregationGrid extends CA {
 	private double typeOneP;
 	private double vacantP;
 	private AnyGrid simGrid;
-	private List<Slot> slotsToChange;
+	private Stack<Slot> slotsToChange;
 	public SegregationGrid(XMLArgs xmlArgs, AutomatonDisplay a) {
 		super(xmlArgs, a);
 		// TODO Auto-generated constructor stub
 		tPercentage = xmlArgs.getAsDouble("tPercentage");
 		typeOneP = xmlArgs.getAsDouble("typeOneP");
 		vacantP = xmlArgs.getAsDouble("vacantP");
-		simGrid = new FiniteGrid(getNumRow(), getNumCol(), 1,
-				(int) getCellWidth(), Direction.ALL_DIRECTIONS);
-		slotsToChange = new ArrayList<Slot>();
+		simGrid = new FiniteGrid(getNumRow(), getNumCol(), (int)getCellWidth(),
+				(int) getCellHeight(), "Hexagonal", Direction.ALL_DIRECTIONS);
+		slotsToChange = new Stack<Slot>();
 	}
 
 	@Override
@@ -66,15 +67,31 @@ public class SegregationGrid extends CA {
 					.get(0);
 			ArrayList<Integer> neighborStates = getNeighborStates(s);
 			if(resident.isUnsatisfied(neighborStates)){
-				slotsToChange.add(s);
+				slotsToChange.push(s);
 			}
 			
 		}
+		//randomize slots containing unsatisfied cells
+		Collections.shuffle(slotsToChange);
 		moveUnsatisfiedCells();
 	}
 	
 	private void moveUnsatisfiedCells(){
-		
+		while(!slotsToChange.isEmpty()){
+			Slot s = slotsToChange.pop();
+			ArrayList<Slot> slotRound  = (ArrayList<Slot>) simGrid.getSlots();
+			boolean go = true;
+			while(go){
+				int randIndex = (int)Math.random()*slotRound.size();
+				ArrayList<Cell> cells = new ArrayList<Cell>(slotRound.get(randIndex).getOccupants());
+				SegregationSlotCell seg = (SegregationSlotCell)cells.get(0);
+				if(seg.getState() == 0){
+					slotRound.get(randIndex).setOccupants(s.getOccupants());
+					s.setOccupants(cells);
+					go = false;
+				}
+			}
+		}
 	}
 
 	private ArrayList<Integer> getNeighborStates(Slot s) {

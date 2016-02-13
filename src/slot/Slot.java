@@ -57,12 +57,6 @@ public interface Slot {
 	 * @param cells
 	 */
 	public void setOccupants(Collection<Cell> cells);
-<<<<<<< HEAD
 	
-	public int[] getRowCol();
 	public void addOccupant(Cell cell);
-	
-
-=======
->>>>>>> master
 }

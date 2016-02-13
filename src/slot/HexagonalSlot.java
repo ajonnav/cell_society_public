@@ -105,16 +105,7 @@ public class HexagonalSlot implements Slot {
 		occupants = new ArrayList<Cell>(cells);
 
 	}
-<<<<<<< HEAD
-
-	@Override
-	public int[] getRowCol() {
-		int[] ret = {row, col};
-		return ret;
-	}
 	public void addOccupant(Cell cell){
 		occupants.add(cell);
 	}
-=======
->>>>>>> master
 }
