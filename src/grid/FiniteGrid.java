@@ -1,16 +1,12 @@
 package grid;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import automaton.XMLArgs;
 import slot.*;
 
-public class FiniteGrid extends Grid {
+
+public class FiniteGrid extends Grid implements AnyGrid {
 	
+
 
 	public FiniteGrid(int r, int c, int w, int h, String s, Direction[] neighborsToCheck) {
 		super(r, c, w, h, s, neighborsToCheck);
@@ -21,12 +17,6 @@ public class FiniteGrid extends Grid {
 	 * slot coordinates are made depend on the slot type. assigns an index in a
 	 * linear fashion.
 	 */
-	@Override
-	public void initializeGrid() {
-		// TODO Auto-generated method stub
-		int index = 0;
-		
-	}
 	
 	public void setNeighbors() {
 		for (Slot s : slotList) {
