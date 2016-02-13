@@ -5,11 +5,15 @@ import java.util.Comparator;
 import cells.Cell;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import slot.Slot;
 
 public class GroundCell extends Cell {
+	private Slot mySlot;
 	private double homeHormone;
 	private double foodHormone;
 	private double hormoneLimit;
+	private boolean home;
+	private boolean food;
 	
 	public GroundCell(double x, double y, Color color, double w, double h) {
 		super(x, y, color, w, h);
@@ -40,6 +44,10 @@ public class GroundCell extends Cell {
 	
 	public double getfoodHormone() {
 		return foodHormone;
+	}
+	
+	public Slot getSlot() {
+		return mySlot;
 	}
 	
 	public void update(GroundCell[] cells) {
