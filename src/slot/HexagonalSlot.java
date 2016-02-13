@@ -9,36 +9,28 @@ import javafx.scene.paint.Color;
 import cells.Cell;
 
 public class HexagonalSlot implements Slot {
-	private int index, side, row, col;
-	private double xCoord, yCoord;
+	private int index;
+	private double x, y, width, height, side;
 	private List<Cell> occupants;
 	private List<Slot> neighbors;
 	
-	public HexagonalSlot(int r, int c, int s, int n) {
+	public HexagonalSlot(double x, double y, double w, int h, int i) {
 		// TODO Auto-generated constructor stub
-		row = r;
-		col = c;
-		side = s;
-		index = n;
+		this.x = x;
+		this.y = y;
+		width = w;
+		height = h;
+		side = height/2;
+		index = i;
 		occupants = new ArrayList<Cell>();
 		neighbors = new ArrayList<Slot>();
-		setCoordinates();
 	}
 
 	@Override
 	public void setNeighbors(Collection<Slot> newNeighbors) {
 		neighbors = new ArrayList<Slot>(newNeighbors);
 	}
-	private void setCoordinates(){
-		double h = trig(30.0, 1);
-		double r = trig(30.0, 2);
-		yCoord = row * (h + side);
-		if(row % 2 == 0){
-			xCoord = col * r * 2;
-		}else{
-			xCoord = col * r * 2 + 2;
-		}
-	}
+	
 	private double trig(double angleInDegrees, int trigFunc){
 		double angle = radAngle(angleInDegrees);
 		if(trigFunc == 1){
@@ -51,9 +43,11 @@ public class HexagonalSlot implements Slot {
 			return r;
 		}
 	}
+	
 	private double radAngle(double angleInDegrees){
 		return Math.toRadians(angleInDegrees);
 	}
+	
 	@Override
 	public void addNeighbor(Slot newSlot) {
 		neighbors.add(newSlot);
@@ -81,23 +75,23 @@ public class HexagonalSlot implements Slot {
 	
 	double [] getXPoints(){
 		double [] xPoints = new double[6];
-		xPoints[0] = xCoord;
-		xPoints[1] = xCoord + trig(30, 2);
-		xPoints[2] = xCoord + 2*trig(30,2);
-		xPoints[3] = xCoord + 2*trig(30,2);
-		xPoints[4] = xCoord + trig(30, 2);
-		xPoints[5] = xCoord;
+		xPoints[0] = x;
+		xPoints[1] = x + trig(30, 2);
+		xPoints[2] = x + 2*trig(30,2);
+		xPoints[3] = x + 2*trig(30,2);
+		xPoints[4] = x + trig(30, 2);
+		xPoints[5] = x;
 		return xPoints;
 	}
 	
 	double [] getYPoints(){
 		double [] yPoints = new double[6];
-		yPoints[0] = yCoord;
-		yPoints[1] = yCoord - trig(30, 1);
-		yPoints[2] = yCoord;
-		yPoints[3] = yCoord + side;
-		yPoints[4] = yCoord + side + trig(30, 1);
-		yPoints[5] = yCoord + side;
+		yPoints[0] = y;
+		yPoints[1] = y - trig(30, 1);
+		yPoints[2] = y;
+		yPoints[3] = y + side;
+		yPoints[4] = y + side + trig(30, 1);
+		yPoints[5] = y + side;
 		return yPoints;
 	}
 
@@ -111,11 +105,4 @@ public class HexagonalSlot implements Slot {
 		occupants = new ArrayList<Cell>(cells);
 
 	}
-
-	@Override
-	public int[] getRowCol() {
-		int[] ret = {row, col};
-		return ret;
-	}
-
 }
