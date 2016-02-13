@@ -7,13 +7,20 @@ import java.util.List;
 import slot.Slot;
 
 public class AntOrientationFactory {
-	Collection<Slot> forwardNeighbors;
-	Collection<Slot> backwardNeighbors;
-	Collection<Slot> Neighbors;
+	private Collection<Slot> forwardNeighbors;
+	private Collection<Slot> backwardNeighbors;
+	private Collection<Slot> Neighbors;
 	
 	private int tcol;
 	
 	public AntOrientationFactory() {	
+	}
+	
+	public AntOrientationFactory(CardinalDirection d, Slot s) {
+		Collection<Slot> Neighbors = s.getNeighbors();
+		forwardNeighbors = new ArrayList<Slot>();
+		backwardNeighbors = new ArrayList<Slot>();
+		findNeighborDirection(d, s);
 	}
 	
 	public Collection<Slot> getForwardNeighbors() {
@@ -22,12 +29,6 @@ public class AntOrientationFactory {
 	
 	public Collection<Slot> getBackwardNeighbors() {
 		return backwardNeighbors;
-	}
-	public AntOrientationFactory(CardinalDirection d, Slot s) {
-		Collection<Slot> Neighbors = s.getNeighbors();
-		forwardNeighbors = new ArrayList<Slot>();
-		backwardNeighbors = new ArrayList<Slot>();
-		findNeighborDirection(d, s);
 	}
 	
 	private void getSlotsfromArray(Slot s, int[] dx, int[] dy) {
