@@ -1,6 +1,7 @@
 package simulations;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javafx.scene.paint.Color;
 import cells.*;
@@ -14,7 +15,7 @@ public class SegregationGrid extends CA {
 	private double typeOneP;
 	private double vacantP;
 	private AnyGrid simGrid;
-
+	private List<Slot> slotsToChange;
 	public SegregationGrid(XMLArgs xmlArgs, AutomatonDisplay a) {
 		super(xmlArgs, a);
 		// TODO Auto-generated constructor stub
@@ -23,6 +24,7 @@ public class SegregationGrid extends CA {
 		vacantP = xmlArgs.getAsDouble("vacantP");
 		simGrid = new FiniteGrid(getNumRow(), getNumCol(), 1,
 				(int) getCellWidth(), Direction.ALL_DIRECTIONS);
+		slotsToChange = new ArrayList<Slot>();
 	}
 
 	@Override
@@ -64,11 +66,15 @@ public class SegregationGrid extends CA {
 					.get(0);
 			ArrayList<Integer> neighborStates = getNeighborStates(s);
 			if(resident.isUnsatisfied(neighborStates)){
-				
+				slotsToChange.add(s);
 			}
 			
 		}
-
+		moveUnsatisfiedCells();
+	}
+	
+	private void moveUnsatisfiedCells(){
+		
 	}
 
 	private ArrayList<Integer> getNeighborStates(Slot s) {
@@ -85,6 +91,12 @@ public class SegregationGrid extends CA {
 	@Override
 	public void drawCells() {
 		// TODO Auto-generated method stub
+		getGraphicsContext().clearRect(0, 0, getSimWidth(), getSimHeight());
+		for(Slot s : simGrid.getSlots()){
+			ArrayList<Cell> occupant = new ArrayList<Cell> (s.getOccupants());
+			SegregationSlotCell seg = (SegregationSlotCell)occupant.get(0);
+			s.draw(getGraphicsContext(), seg.getCellColor());
+		}
 
 	}
 
