@@ -1,9 +1,16 @@
 package ForgingAntCells;
 
+import slot.Slot;
+
 public class AntOrientationFactory {
-	public AntOrientationFactory() {
-		// TODO Auto-generated constructor stub
+	
+	public AntOrientationFactory() {	
 	}
+	
+	public AntOrientationFactory(CardinalDirection d, Slot s) {
+		
+	}
+	
 	
 	private void findForwardNeighbors(CardinalDirection d) {
 		int[] dx; 
