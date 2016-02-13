@@ -9,32 +9,21 @@ import cells.Cell;
 import java.util.ArrayList;
 
 public class SquareSlot implements Slot {
-	private int index, width, height, row, col;
-	private double xCoord, yCoord;
+	private int index, width, height;
+	private double x, y;
 	private List<Cell> occupants;
 	private List<Slot> neighbors;
-	public SquareSlot(int r, int c, int w, int h, int n) {
+	public SquareSlot(int x, int y, int w, int h, int n) {
 		// TODO Auto-generated constructor stub
 		width = w;
 		height = h;
-		row = r;
-		col = c;
+		this.x = x;
+		this.y = y;
 		index = n;
 		occupants = new ArrayList<Cell>();
 		neighbors = new ArrayList<Slot>();
-		setCoordinates();
-		
-	}
-
-	private void setCoordinates(){
-		xCoord = col * width;
-		yCoord = row * height;
 	}
 	
-	public int[] getRowCol(){
-		int[] ret = {row , col};
-		return ret;
-	}
 	@Override
 	public void setNeighbors(Collection<Slot> newNeighbors) {
 		// TODO Auto-generated method stub
@@ -65,8 +54,7 @@ public class SquareSlot implements Slot {
 	public void draw(GraphicsContext gc, Color c) {
 		// TODO Auto-generated method stub
 		gc.setFill(c);
-		gc.fillRect(xCoord, yCoord, width, height);
-
+		gc.fillRect(x, y, width, height);
 	}
 
 	@Override

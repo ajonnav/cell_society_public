@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -115,7 +116,6 @@ public class XMLArgs {
 		}
 	}
 	
-	
 	private boolean isDouble(String s) {
 		try {
 			double num = Double.parseDouble(s);
@@ -125,7 +125,6 @@ public class XMLArgs {
 		}
 		return true;
 	}
-	
 	
 	private boolean isInteger(String s) {
 		try {
@@ -137,7 +136,9 @@ public class XMLArgs {
 		return true;
 	}
 	
-
+	protected Map<String, String> getMap() {
+		return map;
+	}
 	/**
 	 * Clears the map
 	 */

@@ -57,8 +57,4 @@ public interface Slot {
 	 * @param cells
 	 */
 	public void setOccupants(Collection<Cell> cells);
-	
-	public int[] getRowCol();
-	
-
 }

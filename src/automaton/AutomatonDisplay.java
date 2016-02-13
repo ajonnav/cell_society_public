@@ -1,24 +1,22 @@
 package automaton;
 
 import java.io.IOException;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import factory.SimulationFactory;
 import simexception.ConfigFileException;
 import simulations.*;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 
 public class AutomatonDisplay {
-	private static final String DEFAULT_RESOURCE_PACKAGE = "ResourceBundle/Errors";
 	private double canvasY = 0;
 	private double canvasX = 0;
 	private double canvasHeight;
@@ -33,10 +31,10 @@ public class AutomatonDisplay {
 	private Group root;
 	private Canvas canvas;
 	private CA ca;
-	private ResourceBundle myResources;
+	
 	
 	public AutomatonDisplay(XMLArgs xmlArgs) {
-		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE);
+		
 		root = new Group();
 		window = new Stage();
 		canvasHeight = xmlArgs.getAsDouble("simHeight");
@@ -45,21 +43,8 @@ public class AutomatonDisplay {
 		windowHeight = (int) canvasHeight + BUTTON_PANE_HEIGHT;
 		myDisplay = new Scene(root, windowWidth, windowHeight);
 		canvas = new Canvas(canvasWidth, canvasHeight);
-		
 		String simName = xmlArgs.getAsString("name");
-		if(simName.equals("GOL")) {
-			ca = new GameOfLife(xmlArgs, this);
-		} else if(simName.equals("Fire")) {
-			ca = new Fire(xmlArgs, this);
-		} else if(simName.equals("Segregation")) {
-			ca = new SchellingCA(xmlArgs, this);
-		}
-		else if(simName.equals("Wator")) {
-			ca = new Wator(xmlArgs, this);
-		}
-		else {
-			throw new ConfigFileException(myResources.getString("NotValid"), "name");
-		}
+		ca=SimulationFactory.create(simName, xmlArgs, this);
 	}
 	
 	public Stage getwindow() {
