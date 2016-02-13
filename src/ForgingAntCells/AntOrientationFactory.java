@@ -1,20 +1,55 @@
 package ForgingAntCells;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import slot.Slot;
 
 public class AntOrientationFactory {
+	Collection<Slot> forwardNeighbors;
+	Collection<Slot> backwardNeighbors;
+	Collection<Slot> Neighbors;
+	
+	private int tcol;
 	
 	public AntOrientationFactory() {	
 	}
 	
-	public AntOrientationFactory(CardinalDirection d, Slot s) {
-		
+	public Collection<Slot> getForwardNeighbors() {
+		return forwardNeighbors;
 	}
 	
+	public Collection<Slot> getBackwardNeighbors() {
+		return backwardNeighbors;
+	}
+	public AntOrientationFactory(CardinalDirection d, Slot s) {
+		Collection<Slot> Neighbors = s.getNeighbors();
+		forwardNeighbors = new ArrayList<Slot>();
+		backwardNeighbors = new ArrayList<Slot>();
+		findNeighborDirection(d, s);
+	}
 	
-	private void findForwardNeighbors(CardinalDirection d) {
-		int[] dx; 
-		int[] dy;
+	private void getSlotsfromArray(Slot s, int[] dx, int[] dy) {
+		int index = s.index();
+		int myX = index / tcol;
+		int myY = index % tcol;
+		List<Integer> f_indexes = new ArrayList<Integer>();
+		for (int k = 0; k < dx.length; k++) {
+			f_indexes.add((myX + dx[k])*(tcol) + (myY + dy[k]));
+		}
+		for (Slot slot : Neighbors) {
+			if (f_indexes.contains(slot.index())) {
+				forwardNeighbors.add(slot);
+			} else {
+				backwardNeighbors.add(slot);
+			}
+		}
+	}
+	
+	private void findNeighborDirection(CardinalDirection d, Slot s) {
+		int[] dx = null; 
+		int[] dy = null;
 		switch (d) {
 			case N:
 				dx = new int[]{-1, -1, -1};
@@ -51,7 +86,7 @@ public class AntOrientationFactory {
 			default:
 				break;
 		}
-		// give these to some other method to calculate slot numbers and return a list of slots
+		getSlotsfromArray(s, dx, dy);
 	}
 
 }
