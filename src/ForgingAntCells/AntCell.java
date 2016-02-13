@@ -1,16 +1,21 @@
 package ForgingAntCells;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import cells.Cell;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import slot.Slot;
 
 public abstract class AntCell extends Cell {
 	private int lifeCycle;
 	private boolean hasFood;
 	private double addHormone;
 	private GroundCell currentground;
+	private CardinalDirection direction;
 	
 	public AntCell(double x, double y, Color color, double w, double h) {
 		super(x, y, color, w, h);
@@ -31,14 +36,57 @@ public abstract class AntCell extends Cell {
 		dropHormone(currentground);
 		//remove from neighbors list, get another neighbor list...etc
 	}
+	
+	public Slot findBestNeighbor(Slot s) {
+		AntOrientationFactory myFactory = new AntOrientationFactory();
+		//Collection<Slot> myF_Neighbors = myFactory.getForwardNeighbors();
+		Collection<GroundCell> possibleGround = getGroundCellsFromSlot(myFactory.getForwardNeighbors());
+		sortCollectionbyFoodStatus(possibleGround);
+		Slot newSlot = checkMaxOccupantsandReturnSlot(possibleGround);
+		if (newSlot == null) {
+			Collection<GroundCell> otherPossible = getGroundCellsFromSlot(myFactory.getBackwardNeighbors());
+			return checkMaxOccupantsandReturnSlot(otherPossible);
+		}
+		return newSlot;
+		
+	}
 
+	private Slot checkMaxOccupantsandReturnSlot(Collection<GroundCell> possibleGround) {
+		for (GroundCell g : possibleGround) {
+			if (!(g.getSlot().getOccupants().size() > 10)) {
+				return g.getSlot();
+			}
+		}
+		return null;
+	}
+
+	private void sortCollectionbyFoodStatus(Collection<GroundCell> possibleGround) {
+		if (hasFood) {
+			Collections.sort(possibleGround, GroundCell.homeCompare);
+		} else {
+			Collections.sort(possibleGround, GroundCell.foodCompare);
+		}
+	}
+	
+	private Collection<GroundCell> getGroundCellsFromSlot(Collection<Slot> slots) {
+		Collection<GroundCell> my_groundcells = new ArrayList<GroundCell>();
+		for (Slot s : slots) {
+			Collection<Cell> occupants = s.getOccupants();
+			for (Cell c : occupants) {
+				if(c instanceof GroundCell) {
+					my_groundcells.add((GroundCell) c);
+				}
+			}			
+		}
+		return my_groundcells;
+	}
 	/*
 	 * Finds the next location for the ant and creates an ant in that location
 	 */
 	private AntCell nextOrientationAnt(GroundCell[] cells) {
 		return moveToNextLocation(findBestNeighbor(getForwardNeighbors()));
 	}
-	
+	 
 	/*
 	 * Gets the forward neighbors for the ant based on its orientation
 	 */
@@ -80,6 +128,20 @@ public abstract class AntCell extends Cell {
 	/*
 	 * Returns true if the ant has food, returns false otherwise
 	 */
-	public abstract boolean getFoodStatus();
+	public boolean getFoodStatus() {
+		return hasFood;
+	}
+	
+	public void setFoodStatus(boolean hasFood) {
+		this.hasFood = hasFood;
+	}
+	
+	public CardinalDirection getCurrentDirection() {
+		return direction;
+	}
+	
+	public void setDirection(CardinalDirection d) {
+		this.direction = d;
+	}
 	
 }
