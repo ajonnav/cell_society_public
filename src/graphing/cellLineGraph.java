@@ -21,11 +21,12 @@ public class cellLineGraph {
 	List<XYChart.Series<Number, Number>> seriesList;
 	
 	public cellLineGraph() {
-		List<XYChart.Series<Number, Number>> seriesList = new ArrayList<XYChart.Series<Number, Number>>();
+		seriesList = new ArrayList<XYChart.Series<Number, Number>>();
 		cellTypes = new HashSet<String>();
+		createGraph();
 	}
 	
-	public void createGraph() {
+	private void createGraph() {
 		final NumberAxis xAxis = new NumberAxis();
 	    final NumberAxis yAxis = new NumberAxis();
 	    xAxis.setLabel("Cycles");
@@ -39,9 +40,9 @@ public class cellLineGraph {
 		for (int k = 0; k < cellData.size(); k++) {
 			String cellName = cellIterate.next().toString();
 			if(!cellTypes.contains(cellName)) {
-				seriesList.get(k).setName(cellName);
 				seriesList.add(new XYChart.Series<Number, Number>());
-				seriesList.get(k).getData().add(new XYChart.Data<Number, Number>(cycle, cellData.get(cellName)));
+				seriesList.get(seriesList.size()-1).setName(cellName);
+				seriesList.get(seriesList.size()-1).getData().add(new XYChart.Data<Number, Number>(cycle, cellData.get(cellName)));
 				cellTypes.add(cellName);
 			} else {
 				for (Series<Number, Number> s : seriesList) {
