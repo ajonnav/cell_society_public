@@ -1,5 +1,7 @@
 package ForgingAntCells;
 
+import java.util.Comparator;
+
 import cells.Cell;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -46,5 +48,29 @@ public class GroundCell extends Cell {
 	}
 	
 	//use comparable or comparator to sort by either food hormones or home hormones?
+	public class foodCompare implements Comparator<GroundCell> {
+
+		@Override
+		public int compare(GroundCell c1, GroundCell c2) {
+			if (c1.getfoodHormone() != c2.getfoodHormone()) {
+				return c1.getfoodHormone() > c2.getfoodHormone() ? 1 : -1;
+			}
+			return 0;
+		}
+
+		
+	}
+	
+	public class homeCompare implements Comparator<GroundCell> {
+
+		@Override
+		public int compare(GroundCell c1, GroundCell c2) {
+			if (c1.gethomeHormone() != c2.gethomeHormone()) {
+				return c1.gethomeHormone() > c2.gethomeHormone() ? 1 : -1;
+			}
+			return 0;
+		}
+
+	}
 
 }
