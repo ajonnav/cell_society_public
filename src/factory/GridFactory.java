@@ -16,10 +16,10 @@ public class GridFactory {
 
 	public static AnyGrid create(String id, XMLArgs xmlArgs, AutomatonDisplay autoDisp) {
 		if(id.equals("Finite")) {
-			return new FiniteGrid(xmlArgs, autoDisp);
+			return new FiniteGrid();
 		}
 		else if(id.equals("Toroid")) {
-			return new ToroidalGrid(xmlArgs, autoDisp);
+			return new ToroidalGrid();
 		}
 		else if(id.equals("Infinite")) {
 			return null;

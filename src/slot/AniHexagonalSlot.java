@@ -11,11 +11,12 @@ public class AniHexagonalSlot extends AniSlot{
 		super(x, y, height, width, index);
 	}
 	
-	public void setToroidNeighbors(int numRow, int numCol, int depth, String hoodType, List<AniSlot> slotList) {
+	@Override
+	public void calculateNeighbors(int numRow, int numCol, int depth, boolean toroidal, String hoodType, List<AniSlot> slotList) {
 		if(hoodType.equals("all")) {
 			int[] dX = {-1, -1, 0, 1, 1, 0};
 			int[] dY = {-1, 0, 1, 0, -1, -1};
-			setNeighbors(numRow, numCol, depth, true, slotList, dX, dY);
+			super.calculateNeighbors(numRow, numCol, depth, toroidal, slotList, dX, dY);
 		}
 	}
 }

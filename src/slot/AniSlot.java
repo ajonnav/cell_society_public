@@ -45,7 +45,11 @@ public class AniSlot {
 		this.neighbors = neighbors;
 	}
 	
-	public void setNeighbors(int numRow, int numCol, int depth, boolean torroidal, List<AniSlot> slotList, int[] dX, int[] dY) {
+	public void calculateNeighbors(int numRow, int numCol, int depth, boolean toroidal, String hoodType, List<AniSlot> slotList) {
+		return;
+	}
+	
+	public void calculateNeighbors(int numRow, int numCol, int depth, boolean torroidal, List<AniSlot> slotList, int[] dX, int[] dY) {
 		List<AniSlot> neighbor = new ArrayList<AniSlot>();
 		int row = getIndex()/numCol;
 		int col = getIndex()%numCol;

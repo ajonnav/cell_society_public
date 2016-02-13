@@ -1,16 +1,21 @@
 package grid;
 import java.util.Collection;
 import java.util.List;
-
+import automaton.*;
 import slot.*;
+
 public abstract class AniAnyGrid {
 	
+	private boolean toroidal;
 	private int cellWidth;
 	private int cellHeight;
 	private int numRow;
 	private int numCol;
 	private List<AniSlot> slotList;
-	String gridShape;
+	private int neighborDepth;
+	private String hoodType;
+	private String gridShape;
+	
 	/**
 	 * The Constructor for each implementation of AnyGrid will get the necessary parameters for each type of grid
 	 * Simulation can initialize the grid by calling this  method.
@@ -21,6 +26,11 @@ public abstract class AniAnyGrid {
 	 * Infinite Grids are a special case - they will be initialized to a certain r x c, however they will be ordered
 	 * using a dovetailing technique.
 	 */
+	
+	public AniAnyGrid(XMLArgs xmlArgs, AutomatonDisplay autoDisp) {
+		
+	}
+	
 	public void initializeGrid() {
 		
 	}
@@ -65,4 +75,9 @@ public abstract class AniAnyGrid {
 		}
 	}
 	
+	public void calculateNeighbors() {
+		for(AniSlot slot: slotList) {
+			slot.calculateNeighbors(numRow, numCol, neighborDepth, toroidal, hoodType, slotList);
+		}
+	}
 }

@@ -17,17 +17,17 @@ public class AniSquareSlot extends AniSlot {
 		if(hoodType.equals("all")) {
 			int[] dX = {-1, 0, 1, 1, 1, 0, -1, -1};
 			int[] dY = {-1, -1, -1, 0, 1, 1, 1, 0};
-			setNeighbors(numRow, numCol, depth, true, slotList, dX, dY);
+			calculateNeighbors(numRow, numCol, depth, true, slotList, dX, dY);
 		}
 		if(hoodType.equals("corner")) {
 			int[] dX = {-1, 1, 1, -1};
 			int[] dY = {-1, -1, 1, 1};
-			setNeighbors(numRow, numCol, depth, true, slotList, dX, dY);
+			calculateNeighbors(numRow, numCol, depth, true, slotList, dX, dY);
 		}
 		if(hoodType.equals("cardinal")) {
 			int[] dX = {0, 1, 0, -1};
 			int[] dY = {-1, 0, 1, 0};
-			setNeighbors(numRow, numCol, depth, true, slotList, dX, dY);
+			calculateNeighbors(numRow, numCol, depth, true, slotList, dX, dY);
 		}
 	}
 }
