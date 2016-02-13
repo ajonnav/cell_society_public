@@ -6,8 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import automaton.XMLArgs;
 import slot.*;
 
+<<<<<<< HEAD
 public class FiniteGrid implements AnyGrid {
 	protected List<Slot> slotList;
 	private int rows, cols;
@@ -16,15 +18,13 @@ public class FiniteGrid implements AnyGrid {
 	SquareSlot sq;
 	Direction[] directions;
 	Map<String, Slot> rcMap;
+=======
+public class FiniteGrid extends Grid {
+	
+>>>>>>> master
 
-	public FiniteGrid(int r, int c, int slotType, int length,
-			Direction[] neighborsToCheck) {
-		// TODO Auto-generated constructor stub
-		rows = r;
-		cols = c;
-		slotList = new ArrayList<Slot>();
-		slotLength = length;
-		directions = neighborsToCheck;
+	public FiniteGrid(int r, int c, int w, int h, String s, Direction[] neighborsToCheck) {
+		super(r, c, w, h, s, neighborsToCheck);
 	}
 
 	/**
@@ -36,61 +36,30 @@ public class FiniteGrid implements AnyGrid {
 	public void initializeGrid() {
 		// TODO Auto-generated method stub
 		int index = 0;
-		rcMap = new HashMap<String, Slot>();
-		for (int i = 0; i < rows; i++) {
-			for (int j = 0; j < cols; j++) {
-				Slot s = new SquareSlot(i, j, slotLength, slotLength, index);
-				slotList.add(s); // will change when I figure out how to choose
-									// which slot type to build
-				String ij = buildKey(i, j);
-				rcMap.put(ij, s);
-				index++;
-			}
-		}
-		setNeighbors();
+		
 	}
-
-	protected String buildKey(int i, int j) {
-		StringBuilder st = new StringBuilder();
-		st.append(Integer.toString(i));
-		st.append(Integer.toString(j));
-		String ij = st.toString();
-		return ij;
-	}
-
-	protected void setNeighbors() {
+	
+	public void setNeighbors() {
 		for (Slot s : slotList) {
-			for (Direction d : directions) {
+			for (Direction d : getDirections()) {
 				addIfInBounds(s, d);
 			}
 		}
 	}
 
-	private void addIfInBounds(Slot s, Direction d) {
+	protected void addIfInBounds(Slot s, Direction d) {
 		int[] rcDelta = new int[2];
-		rcDelta[0] = s.getRowCol()[0] + d.getVec()[0];
-		rcDelta[1] = s.getRowCol()[1] + d.getVec()[1];
+		int row = s.index()/getNumCol();
+		int col = s.index()%getNumCol();
+		rcDelta[0] = row + d.getVec()[0];
+		rcDelta[1] = col + d.getVec()[1];
 		if (inBounds(rcDelta)) {
-			s.addNeighbor(rcMap.get(buildKey(rcDelta[0], rcDelta[1])));
+			s.addNeighbor(slotList.get(rcDelta[0]*getNumCol()+rcDelta[1]));
 		}
 	}
 
 	protected boolean inBounds(int[] rcDelta) {
-		return (0 <= rcDelta[0] && rcDelta[0] < rows && 0 <= rcDelta[1]
-				&& rcDelta[1] < cols && rcDelta[0] != rcDelta[1]);
-	}
-
-	@Override
-	public Collection<Slot> getSlots() {
-		// TODO Auto-generated method stub
-		return slotList;
-	}
-
-	protected int getRows() {
-		return rows;
-	}
-
-	protected int getCols() {
-		return cols;
+		return (0 <= rcDelta[0] && rcDelta[0] < getNumRow() && 0 <= rcDelta[1]
+				&& rcDelta[1] < getNumCol() && rcDelta[0] != rcDelta[1]);
 	}
 }
