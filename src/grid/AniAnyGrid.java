@@ -77,6 +77,7 @@ public abstract class AniAnyGrid {
 	
 	public void calculateNeighbors() {
 		for(AniSlot slot: slotList) {
+			
 			slot.calculateNeighbors(numRow, numCol, neighborDepth, toroidal, hoodType, slotList);
 		}
 	}
