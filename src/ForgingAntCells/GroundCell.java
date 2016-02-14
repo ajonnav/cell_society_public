@@ -4,8 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import cells.Cell;
-import grid.ForgingAntCell;
-import javafx.scene.canvas.GraphicsContext;
+import ForgingAntCells.ForgingAntCell;
 import javafx.scene.paint.Color;
 import slot.Slot;
 
@@ -19,15 +18,16 @@ public class GroundCell extends ForgingAntCell {
 	private boolean home;
 	private boolean food;
 	
-	public GroundCell(double x, double y, Color color, double w, double h) {
-		super(x, y, color, w, h);
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public void draw(GraphicsContext gc) {
-		// TODO Auto-generated method stub
-
+	public GroundCell(double pheromoneLimit, double diffusionRate, double evapRate, boolean home, boolean food) {
+		super(Color.GREEN);
+		homePheromone = 0;
+		foodPheromone = 0;
+		this.pheromoneLimit = pheromoneLimit;
+		this.diffusionRate = diffusionRate;
+		this.evapRate = evapRate;
+		this.home = home;
+		this.food = food;
+		
 	}
 	
 	public void sethomeHormone(double addHormone) {

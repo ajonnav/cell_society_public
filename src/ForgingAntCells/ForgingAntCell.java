@@ -1,4 +1,4 @@
-package grid;
+package ForgingAntCells;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,15 +12,9 @@ import slot.Slot;
 
 public class ForgingAntCell extends Cell {
 
-	public ForgingAntCell(double x, double y, Color color, double w, double h) {
-		super(x, y, color, w, h);
+	public ForgingAntCell(Color color) {
+		super(color);
 		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public void draw(GraphicsContext gc) {
-		// TODO Auto-generated method stub
-
 	}
 	
 	/*

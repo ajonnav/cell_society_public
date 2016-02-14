@@ -1,33 +1,23 @@
 package ForgingAntCells;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import cells.Cell;
-import grid.ForgingAntCell;
-import javafx.scene.canvas.GraphicsContext;
+import ForgingAntCells.ForgingAntCell;
 import javafx.scene.paint.Color;
 import slot.Slot;
 
-public abstract class AntCell extends ForgingAntCell {
+public class AntCell extends ForgingAntCell {
 	private int lifeCycle;
 	private boolean hasFood;
 	private CardinalDirection direction;
 	
-	public AntCell(double x, double y, Color color, double w, double h, int lifeSpan) {
-		super(x, y, color, w, h);
+	public AntCell(int lifeSpan) {
+		super(Color.RED);
 		// TODO Auto-generated constructor stub
-		lifeCycle = lifeSpan;
-	}
-
-	@Override
-	public void draw(GraphicsContext gc) {
-		// TODO Auto-generated method stub
-
-	}
-	
+		this.lifeCycle = lifeSpan;
+	}	
 
 	public void update() {
 		lifeCycle--;
