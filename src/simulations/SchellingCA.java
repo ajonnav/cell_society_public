@@ -9,6 +9,8 @@ import java.util.Map;
 
 //import javafx.scene.paint.Color;
 import cells.*;
+import graphing.GraphData;
+import graphing.cellLineGraph;
 import automaton.AutomatonDisplay;
 import automaton.XMLArgs;
 
@@ -20,6 +22,8 @@ public class SchellingCA extends CA {
 	private double typeOneP;
 	private double vacantP;
 	private SegregationSquareCell[] allCells;
+	private GraphData data;
+	private cellLineGraph graph;
 
 	public SchellingCA(XMLArgs xmlArgs, AutomatonDisplay a) {
 		super(xmlArgs, a);
@@ -27,7 +31,6 @@ public class SchellingCA extends CA {
 		typeOneP = xmlArgs.getAsDouble("typeOneP");
 		vacantP = xmlArgs.getAsDouble("vacantP");
 		allCells = new SegregationSquareCell[getNumCell()];
-
 	}
 
 	@Override
@@ -37,7 +40,8 @@ public class SchellingCA extends CA {
 		initializeSimulationLoop();
 		calculateAdjacencyMatrixAndSetNeighbor();
 		drawCells();
-
+		data = new GraphData();
+		graph = new cellLineGraph();
 	}
 /**
  * Random number is used to determine which cell is built where.  If random is less than Vacant percentage, vacant cell built
@@ -88,6 +92,8 @@ public class SchellingCA extends CA {
 		Collections.shuffle(unsatisfiedList);
 		SegregationSquareCell[] swappedCells = swapCells(vacantList, unsatisfiedList);
 		setAllCells(mergeList(swappedCells, gridThisRound));
+		data.setGraphData(allCells);
+		graph.setCellSeries(data.getMap(), data.getCycle());
 	}
 /**
  * Determines the neighbors of each Cell.  Adjacency list is also built for future abstractions.
