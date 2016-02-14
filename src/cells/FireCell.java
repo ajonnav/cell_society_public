@@ -4,6 +4,9 @@ import java.util.List;
 import slot.Slot;
 import javafx.scene.paint.Color;
 
+/*
+* Author: Christine Zhou, updated by Ani
+*/
 public abstract class FireCell extends Cell {
 	private boolean isEmpty;
 	private boolean isBurning;
