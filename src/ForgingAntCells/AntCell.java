@@ -40,7 +40,7 @@ public abstract class AntCell extends Cell {
 	public Slot findBestNeighbor(Slot s) {
 		AntOrientationFactory myFactory = new AntOrientationFactory();
 		//Collection<Slot> myF_Neighbors = myFactory.getForwardNeighbors();
-		Collection<GroundCell> possibleGround = getGroundCellsFromSlot(myFactory.getForwardNeighbors());
+		List<GroundCell> possibleGround = getGroundCellsFromSlot(myFactory.getForwardNeighbors());
 		sortCollectionbyFoodStatus(possibleGround);
 		Slot newSlot = checkMaxOccupantsandReturnSlot(possibleGround);
 		if (newSlot == null) {
@@ -68,8 +68,8 @@ public abstract class AntCell extends Cell {
 		}
 	}
 	
-	private Collection<GroundCell> getGroundCellsFromSlot(Collection<Slot> slots) {
-		Collection<GroundCell> my_groundcells = new ArrayList<GroundCell>();
+	private List<GroundCell> getGroundCellsFromSlot(Collection<Slot> slots) {
+		List<GroundCell> my_groundcells = new ArrayList<GroundCell>();
 		for (Slot s : slots) {
 			Collection<Cell> occupants = s.getOccupants();
 			for (Cell c : occupants) {
