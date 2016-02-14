@@ -60,11 +60,11 @@ public abstract class AntCell extends Cell {
 		return null;
 	}
 
-	private void sortCollectionbyFoodStatus(Collection<GroundCell> possibleGround) {
+	private void sortCollectionbyFoodStatus(List<GroundCell> possibleGround) {
 		if (hasFood) {
-			Collections.sort(possibleGround, GroundCell.homeCompare);
+			Collections.sort(possibleGround, GroundCell.homeComparator());
 		} else {
-			Collections.sort(possibleGround, GroundCell.foodCompare);
+			Collections.sort(possibleGround, GroundCell.foodComparator());
 		}
 	}
 	
