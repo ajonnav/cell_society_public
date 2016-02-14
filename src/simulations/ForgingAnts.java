@@ -131,9 +131,10 @@ public class ForgingAnts extends CA {
 			} else if (foodSpot.contains(s.index())) {
 				antAtFoodOrHome(antDropFoodPheromone, antDropHomePheromone, s, nextOccupants, true);
 			} else {
+				List<Cell> toRemove = new ArrayList<Cell>();
 				for (Cell c : nextOccupants) {
 					if (c instanceof AntCell) {
-						antCellUpdate(antDropFoodPheromone, antDropHomePheromone, s, nextOccupants, c);
+						antCellUpdate(antDropFoodPheromone, antDropHomePheromone, s, nextOccupants, c, toRemove);
 						
 					} else {
 						groundCells.add((GroundCell) c);
@@ -151,13 +152,18 @@ public class ForgingAnts extends CA {
 
 	private void antAtFoodOrHome(double[] antDropFoodPheromone, double[] antDropHomePheromone, Slot s,
 			List<Cell> nextOccupants, boolean atFood) {
+		List<Cell> toRemove = new ArrayList<Cell>();
 		for (Cell c : nextOccupants) {
 			if (c instanceof AntCell) {
 				((AntCell) c).setFoodStatus(atFood);
 				((AntCell) c).setDirection(null);
-				antCellUpdate(antDropFoodPheromone, antDropHomePheromone, s, nextOccupants, c);
+				antCellUpdate(antDropFoodPheromone, antDropHomePheromone, s, nextOccupants, c, toRemove);
 			}
 		}
+		for (Cell c : toRemove) {
+			nextOccupants.remove(c);
+		}
+		toRemove.clear();
 	}
 
 	private void setNewGroundPheromoneLevels(List<GroundCell> groundCells, double[] antDropFoodPheromone,
@@ -177,7 +183,7 @@ public class ForgingAnts extends CA {
 	}
 
 	private void antCellUpdate(double[] antDropFoodPheromone, double[] antDropHomePheromone, Slot s,
-			List<Cell> nextOccupants, Cell c) {
+			List<Cell> nextOccupants, Cell c, List<Cell> toRemove) {
 		if (((AntCell) c).getFoodStatus() == true) {
 			antDropHomePheromone[s.index()] += addPheromone;
 		} else {
@@ -191,7 +197,7 @@ public class ForgingAnts extends CA {
 		if (((AntCell) c).getLifeLeft() > 0) {
 			copiesOfCells.get(nextSlot.index()).add(c);			
 		}
-		nextOccupants.remove(c);
+		toRemove.add(c);
 	}
 
 	@Override
