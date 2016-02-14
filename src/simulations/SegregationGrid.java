@@ -61,8 +61,7 @@ public class SegregationGrid extends CA {
 
 	@Override
 	public void updateCells() {
-		// TODO Auto-generated method stub
-		
+
 		for (Slot s : simGrid.getSlots()) {
 			ArrayList<Cell> occupant = new ArrayList<Cell>(s.getOccupants());
 			SegregationSlotCell resident = (SegregationSlotCell) occupant
