@@ -1,15 +1,20 @@
 <?xml version="1.0"?>
 <content>
-<name>Fire</name>
-<title>Fire Simulation</title>
+<name>Forging Ants</name>
+<title>Forging Ants</title>
 <author>none</author>
-<simWidth>500</simWidth>
+<sim>500</simWidth>
 <simHeight>500</simHeight>
 <numRow>100</numRow>
 <numCol>100</numCol>
-<probCatch>0.70</probCatch>
-<BurningCells_x>50 51 53</BurningCells_x>
-<BurningCells_y>50 52 50</BurningCells_y>
-<Empty_x>0</Empty_x>
-<Empty_y>0</Empty_y>
+<diffRate>0.1</diffRate>
+<evapRate>0.1</evapRate>
+<life_span>500</life_span>
+<pheromonelimit>0.8</pheromonelimit>
+<home_x>50 50 50 51</home_x>
+<home_y>50 51 52 52</home_y>
+<food_x>20 20 21 21</food_x>
+<food_y>20 20 20 20</food_y>
+<ant_x>50 50 50</ant_x>
+<ant_y>50 50 50</ant_y>
 </content>
