@@ -11,6 +11,7 @@
 <evapRate>0.1</evapRate>
 <life_span>500</life_span>
 <pheromonelimit>0.8</pheromonelimit>
+<addPheromone>0.05</addPheromone>
 <home_x>50 50 50 51</home_x>
 <home_y>50 51 52 52</home_y>
 <food_x>20 20 21 21</food_x>
