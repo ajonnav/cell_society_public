@@ -40,7 +40,7 @@ public class GridFactory {
 				return Direction.CARDINAL_DIRECTIONS;
 			}else if(type.equals("All") && shape.equals("Square")){
 				return Direction.ALL_DIRECTIONS_SQUARE;
-			}else if(type.equals("All") && shape.equals("Square")) {
+			}else if(type.equals("All") && shape.equals("Hexagon")) {
 				return Direction.ALL_DIRECTIONS_HEXAGON;
 			}return Direction.CARDINAL_DIRECTIONS;
 			

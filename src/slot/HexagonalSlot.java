@@ -9,7 +9,7 @@ import cells.Cell;
 
 public class HexagonalSlot implements Slot {
 	private int index;
-	private double x, y, width, height, side;
+	private double x, y, height, side;
 	private List<Cell> occupants;
 	private List<Slot> neighbors;
 	
@@ -17,7 +17,6 @@ public class HexagonalSlot implements Slot {
 		// TODO Auto-generated constructor stub
 		this.x = x;
 		this.y = y;
-		width = w;
 		height = h;
 		side = height/2;
 		index = i;
@@ -106,7 +105,8 @@ public class HexagonalSlot implements Slot {
 	}
 	
 	@Override
-	public void addOccupants(Cell cell) {
+
+	public void addOccupant(Cell cell) {
 		occupants.add(cell);
 	}
 }
