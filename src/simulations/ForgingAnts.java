@@ -36,22 +36,8 @@ public class ForgingAnts extends CA {
 	private List<Integer> ant_y;
 	
 	/*
-	 * Pseudo for Forging Ants
-	 * //get occupants in slot
-				//loop through slot
-					//if its ant check if its at home or at food source
-						//if so, get max hormone of opposite variety, set food 
-						//else 
-							//get forward slots
-							//make list for ground cells and sort
-							//check # of ants
-							//ant deposits pheromone in spot (may do this within update)
-							//add to new slot, remove from current slot
-					//if ground
-						// mark ground for slot
-					//before moving to next slot, get the ground cell and deposit the pheromones 
-	}
-	 */
+	* Creates a Forging ants simulation
+	*/
 	public ForgingAnts(XMLArgs xmlArgs, AutomatonDisplay a) {
 		super(xmlArgs, a);
 		// TODO Auto-generated constructor stub
@@ -73,6 +59,9 @@ public class ForgingAnts extends CA {
 		tcol = xmlArgs.getAsInt("numCol");
 	}
 
+	/*
+	* Initializes the grid for Forging Ants
+	*/
 	@Override
 	public void initializeScreen() {
 		// TODO Auto-generated method stub
@@ -112,12 +101,17 @@ public class ForgingAnts extends CA {
 		drawCells();
 	}
 
+	
 	private void makeCopyofCellLists() {
 		for (Slot s : allSlots) {
 			copiesOfCells.add(new ArrayList<Cell>(s.getOccupants()));
 		}
 	}
 
+	/*
+	* Attempts to update the grid by making a copy of all the cells and changing the new list of cells during update according t
+	* individual rules.
+	*/
 	@Override
 	public void updateCells() {
 		makeCopyofCellLists();
@@ -202,7 +196,10 @@ public class ForgingAnts extends CA {
 		}
 		toRemove.add(c);
 	}
-
+	
+	/*
+	* Draws the cells
+	*/
 	@Override
 	public void drawCells() {
 		getGraphicsContext().clearRect(0,0,getSimWidth(), getSimHeight());
