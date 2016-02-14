@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<content>
+<name>Forging Ants</name>
+<title>Forging Ants</title>
+<author>none</author>
+<simWidth>500</simWidth>
+<simHeight>500</simHeight>
+<numRow>100</numRow>
+<numCol>100</numCol>
+<diffRate>0.1</diffRate>
+<evapRate>0.1</evapRate>
+<life_span>500</life_span>
+<pheromonelimit>0.8</pheromonelimit>
+<addPheromone>0.05</addPheromone>
+<home_x>50 50 50 51</home_x>
+<home_y>50 51 52 52</home_y>
+<food_x>20 20 21 21</food_x>
+<food_y>20 20 20 20</food_y>
+<ant_x>0 50 50 50</ant_x>
+<ant_y>0 50 50 50</ant_y>
+<direction>All</direction>
+<edgeType>Finite</edgeType>
+<gridShape>Square</gridShape>
+</content>

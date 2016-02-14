@@ -1,87 +1,31 @@
 package automaton;
 
+import java.util.Collection;
 
+import javafx.scene.Group;
+import javafx.scene.control.Control;
 import simulations.CA;
 
-import java.util.ResourceBundle;
-
-import javafx.animation.Animation;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
-import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
-
-public class AutomatonButtons {
-	
-	private static final String DEFAULT_RESOURCE_PACKAGE = "ResourceBundle/";
-	private Button step;
-	private Button pause;
-	private Button start;
-	private Button reset;
-	private Button speedUp;
-	private Button slowDown;
+public abstract class AutomatonButtons {
 	private Group root;
-	private HBox hbox;
-	private ResourceBundle myResources;
+	private Collection<Control> myControllers;
+	private AutomatonControlFactory a;
 	
-	/**
-	 * Constructor takes Group of Automaton window as a parameter 
-	 */
-	public AutomatonButtons(Group root, String language) {
-		this.root = root;
-		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
-		hbox = new HBox(5);
-		hbox.setAlignment(Pos.BOTTOM_RIGHT);
-		root.getChildren().add(hbox);
-		hbox.setLayoutX(70);
-		hbox.setLayoutY(510);
+	public AutomatonButtons(Group root, String language) {	
 	}
 	
-	/**
-	 * Creates a button with a certain layout and text
-	 */
-	private Button createButton(String text, String id) {
-		Button b = new Button(text);
-		b.setId(id);
-		hbox.getChildren().add(b);
-		return b;
-	}
+	public abstract void setDisplayControllers(CA ca);
 	
-	/**
-	 * Sets the buttons for the automaton display
-	 */
-	public void setAutomatonButtons(AutomatonDisplay a, CA ca) {
-		reset = createButton(myResources.getString("ResetButton"), "resetButton");
-		start = createButton(myResources.getString("StartButton"), "startButton");
-		pause = createButton(myResources.getString("PauseButton"), "pauseButton");
-		step = createButton(myResources.getString("StepButton"), "stepButton");
-		speedUp = createButton(myResources.getString("SpeedUpButton"), "speedUpButton");
-		slowDown = createButton(myResources.getString("SlowDownButton"), "slowDownButton");
-		setButtonActions(ca);
+	public abstract void setControlActions(Collection<Control> controllers, CA ca);
+
+	public void setControlActions(Collection<Control> controllers) {
+		// TODO Auto-generated method stub
+		
 	}
-	
-	/**
-	 * Sets the actions of the buttons
-	 */
-	private void setButtonActions(CA ca) {
-		start.setOnAction(e -> ca.getTimeline().play());
-		pause.setOnAction(e -> ca.getTimeline().pause());
-		step.setOnAction(e -> {
-		    	ca.updateCells();
-		    	ca.drawCells();
-		    });
-		reset.setOnAction(e -> {
-		    	ca.getTimeline().stop();
-		    	ca.initializeScreen();
-		    });
-		speedUp.setOnAction(e -> {
-		    	if(ca.getTimeline().getRate()<=8)
-		    		ca.getTimeline().setRate(ca.getTimeline().getRate()*2);
-		    });
-		slowDown.setOnAction(e -> {
-		    	ca.getTimeline().setRate(ca.getTimeline().getRate()/2);
-		    });
+
+	public void setDisplayControllers() {
+		// TODO Auto-generated method stub
+		
 	}
+
 }
