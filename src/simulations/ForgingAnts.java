@@ -13,18 +13,45 @@ import automaton.XMLArgs;
 import cells.Cell;
 import slot.Slot;
 
-public class ForgingAnts extends CA {
-	List<Slot> allSlots;
-	List<Integer> homeSpot;
-	List<Integer> foodSpot;
-	int tcol;
-	double addPheromone;
-	List<List<Cell>> copiesOfCells;
-
+public class ForgingAnts extends AniCA {
+	private List<Slot> allSlots;
+	private List<Integer> homeSpot;
+	private List<Integer> foodSpot;
+	private int tcol;
+	private double addPheromone;
+	private double diffRate;
+	private double evapRate;
+	private int life_span;
+	private double pheromonelimit;
+	private List<List<Cell>> copiesOfCells;
+	
+	/*
+	 * Pseudo for Forging Ants
+	 * //get occupants in slot
+				//loop through slot
+					//if its ant check if its at home or at food source
+						//if so, get max hormone of opposite variety, set food 
+						//else 
+							//get forward slots
+							//make list for ground cells and sort
+							//check # of ants
+							//ant deposits pheromone in spot (may do this within update)
+							//add to new slot, remove from current slot
+					//if ground
+						// mark ground for slot
+					//before moving to next slot, get the ground cell and deposit the pheromones 
+	}
+	 */
 	public ForgingAnts(XMLArgs xmlArgs, AutomatonDisplay a) {
 		super(xmlArgs, a);
 		// TODO Auto-generated constructor stub
-		List<List<Cell>> copiesOfCells = new ArrayList<List<Cell>>();
+		copiesOfCells = new ArrayList<List<Cell>>();
+		allSlots = new ArrayList<Slot>();
+		addPheromone = xmlArgs.getAsDouble("addPheromone");
+		diffRate = xmlArgs.getAsDouble("diffRate");
+		evapRate = xmlArgs.getAsDouble("evapRate");
+		life_span = xmlArgs.getAsInt("life_span");
+		pheromonelimit = xmlArgs.getAsDouble("pheromonelimit");
 	}
 
 	@Override
@@ -32,6 +59,8 @@ public class ForgingAnts extends CA {
 		// TODO Auto-generated method stub
 		//give slot number to the ant
 		//parse from an xml the food spots, home spots;
+		int numCell = 0;
+		allSlots = getAllSlots();
 	}
 
 	@Override
@@ -58,15 +87,9 @@ public class ForgingAnts extends CA {
 		for (Slot s : allSlots) {
 			List<Cell> nextOccupants = copiesOfCells.get(s.index());
 			if (homeSpot.contains(s.index())) {
-				//write for ant cell
-				for (Cell c : nextOccupants) {
-					if (c instanceof AntCell) {
-						((AntCell) c).setDirection(null);
-						antCellUpdate(antDropFoodPheromone, antDropHomePheromone, s, nextOccupants, c);
-					}
-				}
+				antAtFoodOrHome(antDropFoodPheromone, antDropHomePheromone, s, nextOccupants, false);
 			} else if (foodSpot.contains(s.index())) {
-				//write for ground cell
+				antAtFoodOrHome(antDropFoodPheromone, antDropHomePheromone, s, nextOccupants, true);
 			} else {
 				for (Cell c : nextOccupants) {
 					if (c instanceof AntCell) {
@@ -81,19 +104,17 @@ public class ForgingAnts extends CA {
 		}
 		setNewGroundPheromoneLevels(groundCells, antDropFoodPheromone, antDropHomePheromone, diffusionFoodPheromone,
 				diffusionHomePheromone);
-			//get occupants in slot
-				//loop through slot
-					//if its ant check if its at home or at food source
-						//if so, get max hormone of opposite variety, set food 
-						//else 
-							//get forward slots
-							//make list for ground cells and sort
-							//check # of ants
-							//ant deposits pheromone in spot (may do this within update)
-							//add to new slot, remove from current slot
-					//if ground
-						// mark ground for slot
-					//before moving to next slot, get the ground cell and deposit the pheromones 
+	}
+
+	private void antAtFoodOrHome(double[] antDropFoodPheromone, double[] antDropHomePheromone, Slot s,
+			List<Cell> nextOccupants, boolean atFood) {
+		for (Cell c : nextOccupants) {
+			if (c instanceof AntCell) {
+				((AntCell) c).setFoodStatus(atFood);
+				((AntCell) c).setDirection(null);
+				antCellUpdate(antDropFoodPheromone, antDropHomePheromone, s, nextOccupants, c);
+			}
+		}
 	}
 
 	private void setNewGroundPheromoneLevels(List<GroundCell> groundCells, double[] antDropFoodPheromone,
