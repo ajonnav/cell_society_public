@@ -56,43 +56,31 @@ public class ForgingAnts extends CA {
 		double[] diffusionFoodPheromone = new double[allSlots.size()];
 		double[] diffusionHomePheromone = new double[allSlots.size()];
 		for (Slot s : allSlots) {
+			List<Cell> nextOccupants = copiesOfCells.get(s.index());
 			if (homeSpot.contains(s.index())) {
 				//write for ant cell
+				for (Cell c : nextOccupants) {
+					if (c instanceof AntCell) {
+						((AntCell) c).setDirection(null);
+						antCellUpdate(antDropFoodPheromone, antDropHomePheromone, s, nextOccupants, c);
+					}
+				}
 			} else if (foodSpot.contains(s.index())) {
 				//write for ground cell
 			} else {
-				List<Cell> nextOccupants = copiesOfCells.get(s.index());
 				for (Cell c : nextOccupants) {
 					if (c instanceof AntCell) {
-						if (((AntCell) c).getFoodStatus() == true) {
-							antDropHomePheromone[s.index()] += addPheromone;
-						} else {
-							antDropFoodPheromone[s.index()] += addPheromone;
-						}
-						Slot nextSlot = ((AntCell) c).findBestNeighbor(allSlots.get(s.index()));
-						if (nextSlot == null) {
-							nextSlot = s;
-						}
-						((AntCell) c).setDirection(getDirectionbetweenSlots(s, nextSlot));
-						//updatedSlots.get(nextSlot.index()).getOccupants().add(c);
-						//updatedSlots.get(s.index()).getOccupants().remove(c);
-						copiesOfCells.get(nextSlot.index()).add(c);
-						nextOccupants.remove(c);
+						antCellUpdate(antDropFoodPheromone, antDropHomePheromone, s, nextOccupants, c);
 						
 					} else {
 						groundCells.add((GroundCell) c);
-						double [] diffusion = ((GroundCell) c).getDiffusionAmount();
-						diffusionFoodPheromone[s.index()] += diffusion[0];
-						diffusionHomePheromone[s.index()] += diffusion[1];
+						addUpGroundDiffusion(diffusionFoodPheromone, diffusionHomePheromone, s, c);
 					}
 				}
 			}
 		}
-		for (GroundCell g : groundCells) {
-			g.setfoodHormone(antDropFoodPheromone[g.getSlot().index()] + diffusionFoodPheromone[g.getSlot().index()]);
-			g.sethomeHormone(antDropHomePheromone[g.getSlot().index()] + diffusionHomePheromone[g.getSlot().index()]);
-			g.update();
-		}
+		setNewGroundPheromoneLevels(groundCells, antDropFoodPheromone, antDropHomePheromone, diffusionFoodPheromone,
+				diffusionHomePheromone);
 			//get occupants in slot
 				//loop through slot
 					//if its ant check if its at home or at food source
@@ -106,6 +94,40 @@ public class ForgingAnts extends CA {
 					//if ground
 						// mark ground for slot
 					//before moving to next slot, get the ground cell and deposit the pheromones 
+	}
+
+	private void setNewGroundPheromoneLevels(List<GroundCell> groundCells, double[] antDropFoodPheromone,
+			double[] antDropHomePheromone, double[] diffusionFoodPheromone, double[] diffusionHomePheromone) {
+		for (GroundCell g : groundCells) {
+			g.setfoodHormone(antDropFoodPheromone[g.getSlot().index()] + diffusionFoodPheromone[g.getSlot().index()]);
+			g.sethomeHormone(antDropHomePheromone[g.getSlot().index()] + diffusionHomePheromone[g.getSlot().index()]);
+			g.update();
+		}
+	}
+
+	private void addUpGroundDiffusion(double[] diffusionFoodPheromone, double[] diffusionHomePheromone, Slot s,
+			Cell c) {
+		double [] diffusion = ((GroundCell) c).getDiffusionAmount();
+		diffusionFoodPheromone[s.index()] += diffusion[0];
+		diffusionHomePheromone[s.index()] += diffusion[1];
+	}
+
+	private void antCellUpdate(double[] antDropFoodPheromone, double[] antDropHomePheromone, Slot s,
+			List<Cell> nextOccupants, Cell c) {
+		if (((AntCell) c).getFoodStatus() == true) {
+			antDropHomePheromone[s.index()] += addPheromone;
+		} else {
+			antDropFoodPheromone[s.index()] += addPheromone;
+		}
+		Slot nextSlot = ((AntCell) c).findBestNeighbor(allSlots.get(s.index()));
+		if (nextSlot == null) {
+			nextSlot = s;
+		}
+		((AntCell) c).setDirection(getDirectionbetweenSlots(s, nextSlot));
+		if (((AntCell) c).getLifeLeft() > 0) {
+			copiesOfCells.get(nextSlot.index()).add(c);			
+		}
+		nextOccupants.remove(c);
 	}
 
 	@Override
