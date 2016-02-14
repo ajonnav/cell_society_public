@@ -1,5 +1,7 @@
 package grid;
 
+import automaton.AutomatonDisplay;
+import automaton.XMLArgs;
 import slot.Slot;
 
 public class ToroidalGrid extends FiniteGrid {
@@ -7,6 +9,11 @@ public class ToroidalGrid extends FiniteGrid {
 	public ToroidalGrid(int r, int c, int w, int h, String s, Direction[] neighborsToCheck) {
 		super(r, c, w, h, s, neighborsToCheck);
 		// TODO Auto-generated constructor stub
+	}
+	public ToroidalGrid(XMLArgs xmlArgs, AutomatonDisplay autoDisp, Direction[] neighborsToCheck){
+		super(xmlArgs.getAsInt("numRow"), xmlArgs.getAsInt("numCol"), xmlArgs.getAsInt("simWidth")/xmlArgs.getAsInt("numCol"),
+				xmlArgs.getAsInt("simHeight")/xmlArgs.getAsInt("numRow"),xmlArgs.getAsString("edgeType"), neighborsToCheck);
+				
 	}
 	
 	/**
