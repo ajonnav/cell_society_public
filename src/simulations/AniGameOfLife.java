@@ -7,10 +7,10 @@ import slot.*;
 import cells.*;
 import automaton.*;
 
-public class GameOfLife extends CA{
+public class AniGameOfLife extends AniCA{
 	private double perAlive; 
 	
-	public GameOfLife(XMLArgs xmlArgs, AutomatonDisplay autoDisp) {
+	public AniGameOfLife(XMLArgs xmlArgs, AutomatonDisplay autoDisp) {
 		super(xmlArgs, autoDisp);
 		perAlive = xmlArgs.getAsDouble("perAlive");
 	}

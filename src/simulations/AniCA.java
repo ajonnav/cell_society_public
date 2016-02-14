@@ -7,7 +7,6 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import automaton.*;
@@ -18,7 +17,6 @@ public class AniCA {
 	
 	private final int DEFAULT_FRAMES_PER_SECOND = 30;
 	private Grid grid;
-	private String edgeType;
 	private Timeline timeline;
 	private GraphicsContext graphicsContext;
 	private Stage window;
@@ -26,21 +24,26 @@ public class AniCA {
 	private double simHeight;
 	
 	public AniCA (XMLArgs xmlArgs, AutomatonDisplay autoDisp) {
-		grid = (Grid) GridFactory.create(edgeType, xmlArgs, autoDisp);
+		grid = (Grid) GridFactory.create(xmlArgs, autoDisp);
 		grid.initializeGrid();
+		timeline= new Timeline();
+		simWidth = xmlArgs.getAsDouble("simWidth");
+		simHeight = xmlArgs.getAsDouble("simHeight");
+		graphicsContext = autoDisp.getCanvas().getGraphicsContext2D();
+		window = autoDisp.getwindow();
 	}
 	
 	protected void initializeSimulationLoop() {
-		timeline.setCycleCount(Animation.INDEFINITE);
+		getTimeline().setCycleCount(Animation.INDEFINITE);
 		KeyFrame simulate = new KeyFrame(Duration.millis(1000/getFramesPerSecond()),
 				new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
 						runSimulation();
 					}
 				});
-		timeline.getKeyFrames().add(simulate);
+		getTimeline().getKeyFrames().add(simulate);
 		//getTimeline().play();
-		window.setOnCloseRequest(e -> timeline.stop());
+		window.setOnCloseRequest(e -> getTimeline().stop());
 	}
 	
 	protected void runSimulation() {
@@ -48,10 +51,10 @@ public class AniCA {
 		drawCells();
 	}
 	
-	protected void updateCells() {
+	public void updateCells() {
 	}
 	
-	protected void drawCells() {
+	public void drawCells() {
 	}
 	
 	private int getFramesPerSecond() {
@@ -96,5 +99,17 @@ public class AniCA {
 
 	public void setSimHeight(double simHeight) {
 		this.simHeight = simHeight;
+	}
+
+	
+	public void initializeScreen() {		
+	}
+
+	public Timeline getTimeline() {
+		return timeline;
+	}
+
+	private void setTimeline(Timeline timeline) {
+		this.timeline = timeline;
 	}
 }

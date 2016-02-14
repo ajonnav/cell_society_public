@@ -57,4 +57,5 @@ public interface Slot {
 	public void setOccupants(List<Cell> cells);
 	
 	public void addOccupants(Cell cell);
+	
 }
