@@ -8,6 +8,10 @@ import ForgingAntCells.ForgingAntCell;
 import javafx.scene.paint.Color;
 import slot.Slot;
 
+
+/*
+ * Author: Christine Zhou
+ */
 public class GroundCell extends ForgingAntCell {
 	private Slot mySlot;
 	private double homePheromone;

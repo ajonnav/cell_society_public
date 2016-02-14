@@ -6,6 +6,9 @@ import java.util.List;
 
 import automaton.Controls;
 
+/*
+ * Author: Christine Zhou
+ */
 public class xmlStringtoCollection {
 
 	public static List<Integer> xmlStringtoIntegerCollection(String xmlString) {

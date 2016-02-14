@@ -10,6 +10,9 @@ import FireCells.FireTREE;
 import automaton.AutomatonDisplay;
 import automaton.XMLArgs;
 
+/*
+ * Author: Christine Zhou
+ */
 public class Fire extends CA {
 	private double probCatch;
 	private FireCell[] allCells;

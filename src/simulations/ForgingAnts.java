@@ -14,6 +14,9 @@ import cells.Cell;
 import javafx.scene.paint.Color;
 import slot.Slot;
 
+/*
+ * Author: Christine Zhhou
+ */
 public class ForgingAnts extends CA {
 	private List<Slot> allSlots;
 	private List<Integer> homeSpot;

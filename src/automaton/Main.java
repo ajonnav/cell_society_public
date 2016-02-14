@@ -12,6 +12,9 @@ import javafx.stage.Stage;
 import javafx.application.Application;
 import automaton.SplashScreen;
 
+/*
+ * Author: Christine Zhou
+ */
 public class Main extends Application{
 	
 	private static final String TITLE = "Cell Society";

@@ -19,6 +19,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 
+/*
+ * Author: Christine Zhou, exception handling: Ani
+ */
 public class SplashScreen {
 	private static final String DEFAULT_RESOURCE_PACKAGE = "ResourceBundle/";
 	private static final int WIDTH = 800;
