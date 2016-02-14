@@ -1,19 +1,22 @@
 package grid;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import automaton.AutomatonDisplay;
 import automaton.XMLArgs;
 import slot.*;
 
-public class FiniteGrid extends Grid {
-	
+public class FiniteGrid extends Grid implements AnyGrid {
 
-	public FiniteGrid(int r, int c, int w, int h, String s, Direction[] neighborsToCheck) {
+	public FiniteGrid(int r, int c, int w, int h, String s,
+			Direction[] neighborsToCheck) {
 		super(r, c, w, h, s, neighborsToCheck);
+	}
+
+	public FiniteGrid(XMLArgs xmlArgs, AutomatonDisplay autoDisp,
+			Direction[] neighborsToCheck) {
+		super(xmlArgs.getAsInt("numRow"), xmlArgs.getAsInt("numCol"), xmlArgs
+				.getAsInt("simWidth") / xmlArgs.getAsInt("numCol"), xmlArgs
+				.getAsInt("simHeight") / xmlArgs.getAsInt("numRow"), xmlArgs
+				.getAsString("edgeType"), neighborsToCheck);
 	}
 
 	/**
@@ -21,13 +24,7 @@ public class FiniteGrid extends Grid {
 	 * slot coordinates are made depend on the slot type. assigns an index in a
 	 * linear fashion.
 	 */
-	@Override
-	public void initializeGrid() {
-		// TODO Auto-generated method stub
-		int index = 0;
-		
-	}
-	
+
 	public void setNeighbors() {
 		for (Slot s : slotList) {
 			for (Direction d : getDirections()) {
@@ -38,12 +35,12 @@ public class FiniteGrid extends Grid {
 
 	protected void addIfInBounds(Slot s, Direction d) {
 		int[] rcDelta = new int[2];
-		int row = s.index()/getNumCol();
-		int col = s.index()%getNumCol();
+		int row = s.index() / getNumCol();
+		int col = s.index() % getNumCol();
 		rcDelta[0] = row + d.getVec()[0];
 		rcDelta[1] = col + d.getVec()[1];
 		if (inBounds(rcDelta)) {
-			s.addNeighbor(slotList.get(rcDelta[0]*getNumCol()+rcDelta[1]));
+			s.addNeighbor(slotList.get(rcDelta[0] * getNumCol() + rcDelta[1]));
 		}
 	}
 

@@ -1,13 +1,7 @@
 package grid;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-
-import slot.AniHexagonalSlot;
-import slot.AniSlot;
-import slot.AniSquareSlot;
 import slot.HexagonalSlot;
 import slot.Slot;
 import slot.SquareSlot;
