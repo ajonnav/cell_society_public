@@ -28,12 +28,6 @@ Main needed to Initialize simulation Screen
 ##files used to test the project
 Fire_1, Fire_2, gol_1, gol_2, gol_3, gol_DEFAULT, Seg_1, Seg_2, Seg_3, Seg_DEFAULT wator_1, wator_2, wator_3, wator_DEFAULT
 
-### Names of all people who worked on the project
-### Date you started, date you finished, and an estimate of the number of hours worked on the project
-### Each person's role in developing the project
-### Any books, papers, online, or human resources that you used in developing the project
-### Files used to start the project (the class(es) containing main)
-### Files used to test the project
 ### Any data or resource files required by the project (including format of non-standard files)
 Everything in the Resource Bundle is required for displaying errors and for setting defaults. XML files in the folder 'resources' are for running the simulations. The images in 'resources' are used for backgrounds.
 ### Any information about using the program (i.e., command-line/applet arguments, key inputs, interesting example data files, or easter eggs)
