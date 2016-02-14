@@ -56,29 +56,29 @@ public class GroundCell extends Cell {
 	}
 	
 	//use comparable or comparator to sort by either food hormones or home hormones?
-	public class foodCompare implements Comparator<GroundCell> {
-
+	static Comparator<GroundCell> foodComparator() {
+		return new Comparator<GroundCell>() {
 		@Override
-		public int compare(GroundCell c1, GroundCell c2) {
-			if (c1.getfoodHormone() != c2.getfoodHormone()) {
-				return c1.getfoodHormone() > c2.getfoodHormone() ? 1 : -1;
+			public int compare(GroundCell c1, GroundCell c2) {
+				if (c1.getfoodHormone() != c2.getfoodHormone()) {
+					return c1.getfoodHormone() > c2.getfoodHormone() ? 1 : -1;
+				}
+				return 0;
 			}
-			return 0;
-		}
+		};
 
-		
 	}
 	
-	public class homeCompare implements Comparator<GroundCell> {
-
+	static Comparator<GroundCell> homeCompard() {
+		return new Comparator<GroundCell>() {
 		@Override
-		public int compare(GroundCell c1, GroundCell c2) {
-			if (c1.gethomeHormone() != c2.gethomeHormone()) {
-				return c1.gethomeHormone() > c2.gethomeHormone() ? 1 : -1;
+			public int compare(GroundCell c1, GroundCell c2) {
+				if (c1.gethomeHormone() != c2.gethomeHormone()) {
+					return c1.gethomeHormone() > c2.gethomeHormone() ? 1 : -1;
+				}
+				return 0;
 			}
-			return 0;
-		}
-
+		};
 	}
 
 }
