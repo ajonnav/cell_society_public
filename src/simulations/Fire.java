@@ -8,6 +8,9 @@ import cells.Cell;
 import automaton.AutomatonDisplay;
 import automaton.XMLArgs;
 
+/*
+ * Author: Christine Zhou
+ */
 public class Fire extends CA {
 	private double probCatch;
 	private List<Integer> burning_x;

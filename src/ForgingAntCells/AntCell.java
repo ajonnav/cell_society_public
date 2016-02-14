@@ -8,6 +8,9 @@ import ForgingAntCells.ForgingAntCell;
 import javafx.scene.paint.Color;
 import slot.Slot;
 
+/*
+ * Author: Christine Zhou
+ */
 public class AntCell extends ForgingAntCell {
 	private int lifeCycle;
 	private boolean hasFood;

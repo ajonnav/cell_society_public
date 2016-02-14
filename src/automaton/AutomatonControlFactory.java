@@ -13,7 +13,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Control;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
+/*
+ * @Author Christine Zhou 
+ */
 public class AutomatonControlFactory {
 	private static final String DEFAULT_RESOURCE_PACKAGE = "ResourceBundle/";
 	private List<Control> controllers;

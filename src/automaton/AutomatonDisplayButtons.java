@@ -17,6 +17,9 @@ import javafx.scene.layout.HBox;
 import simulations.CA;
 import utilities.xmlStringtoCollection;
 
+/*
+ * Author: Christine Zhou
+ */
 public class AutomatonDisplayButtons extends AutomatonButtons {
 	private static final int HBOX_SPACING = 5;
 	private HBox hbox;

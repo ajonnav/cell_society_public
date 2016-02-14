@@ -15,6 +15,9 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.stage.Stage;
 
+/*
+ * @ Author: Christine Zhou
+ */
 
 public class AutomatonDisplay {
 	private double canvasY = 0;
