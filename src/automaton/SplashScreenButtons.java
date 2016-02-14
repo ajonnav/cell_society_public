@@ -14,6 +14,9 @@ import javafx.scene.layout.HBox;
 import simulations.CA;
 import utilities.xmlStringtoCollection;
 
+/*
+ * Author: Christine Zhou
+ */
 public class SplashScreenButtons extends AutomatonButtons {
 	private static final String DEFAULT_RESOURCE_PACKAGE = "ResourceBundle/";
 	private static final int HBOX_SPACING = 20;

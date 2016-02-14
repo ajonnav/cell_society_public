@@ -5,6 +5,9 @@ import java.util.List;
 import slot.Slot;
 import javafx.scene.paint.Color;
 
+/*
+* Author: Christine Zhou, updated by Ani
+*/
 public class TreeFireCell extends FireCell {
 
 	private static final boolean isBurning = false;

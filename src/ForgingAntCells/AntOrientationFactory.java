@@ -6,6 +6,9 @@ import java.util.List;
 
 import slot.Slot;
 
+/*
+ * Author: Christine Zhou
+ */
 public class AntOrientationFactory {
 	private Collection<Slot> forwardNeighbors;
 	private Collection<Slot> backwardNeighbors;

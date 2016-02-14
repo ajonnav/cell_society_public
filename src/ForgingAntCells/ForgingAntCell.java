@@ -10,6 +10,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import slot.Slot;
 
+/*
+ * Author: Christine Zhou
+ */
 public class ForgingAntCell extends Cell {
 
 	public ForgingAntCell(Color color) {
