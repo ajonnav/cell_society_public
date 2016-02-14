@@ -14,13 +14,12 @@ import slot.Slot;
 public abstract class AntCell extends ForgingAntCell {
 	private int lifeCycle;
 	private boolean hasFood;
-	private double addHormone;
-	private GroundCell currentground;
 	private CardinalDirection direction;
 	
-	public AntCell(double x, double y, Color color, double w, double h) {
+	public AntCell(double x, double y, Color color, double w, double h, int lifeSpan) {
 		super(x, y, color, w, h);
 		// TODO Auto-generated constructor stub
+		lifeCycle = lifeSpan;
 	}
 
 	@Override
@@ -30,7 +29,12 @@ public abstract class AntCell extends ForgingAntCell {
 	}
 	
 
-	public void update(AntCell[] ants, GroundCell[] groundcells) {
+	public void update() {
+		lifeCycle--;
+	}
+	
+	public int getLifeLeft() {
+		return lifeCycle;
 	}
 	
 	/*
