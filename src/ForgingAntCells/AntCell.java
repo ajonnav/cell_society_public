@@ -19,15 +19,20 @@ public class AntCell extends ForgingAntCell {
 	
 	public AntCell(int lifeSpan, int tcol) {
 		super(Color.RED);
-		// TODO Auto-generated constructor stub
 		this.lifeCycle = lifeSpan;
 		this.tcol = tcol;
 	}	
-
+	
+	/*
+	* Updates and subtracts from life cycle
+	*/
 	public void update() {
 		lifeCycle--;
 	}
 	
+	/*
+	* Returns the life cycle
+	*/
 	public int getLifeLeft() {
 		return lifeCycle;
 	}
