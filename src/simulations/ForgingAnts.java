@@ -19,10 +19,12 @@ public class ForgingAnts extends CA {
 	List<Integer> foodSpot;
 	int tcol;
 	double addPheromone;
+	List<List<Cell>> copiesOfCells;
 
 	public ForgingAnts(XMLArgs xmlArgs, AutomatonDisplay a) {
 		super(xmlArgs, a);
 		// TODO Auto-generated constructor stub
+		List<List<Cell>> copiesOfCells = new ArrayList<List<Cell>>();
 	}
 
 	@Override
@@ -37,24 +39,30 @@ public class ForgingAnts extends CA {
 		// TODO Auto-generated method stub
 
 	}
+	
+	private void makeCopyofCellLists() {
+		for (Slot s : allSlots) {
+			copiesOfCells.add(new ArrayList<Cell>(s.getOccupants()));
+		}
+	}
 
 	@Override
 	public void updateCells() {
+		makeCopyofCellLists();
 		//loop through slots
-		List<Slot> updatedSlots = new ArrayList<Slot>(allSlots);
 		List<GroundCell> groundCells = new ArrayList<GroundCell>();
 		double[] antDropFoodPheromone = new double[allSlots.size()];
 		double[] antDropHomePheromone = new double[allSlots.size()];
 		double[] diffusionFoodPheromone = new double[allSlots.size()];
 		double[] diffusionHomePheromone = new double[allSlots.size()];
-		for (Slot s : updatedSlots) {
-			Collection<Cell> occupants = s.getOccupants();
+		for (Slot s : allSlots) {
 			if (homeSpot.contains(s.index())) {
 				//write for ant cell
 			} else if (foodSpot.contains(s.index())) {
 				//write for ground cell
 			} else {
-				for (Cell c : occupants) {
+				List<Cell> nextOccupants = copiesOfCells.get(s.index());
+				for (Cell c : nextOccupants) {
 					if (c instanceof AntCell) {
 						if (((AntCell) c).getFoodStatus() == true) {
 							antDropHomePheromone[s.index()] += addPheromone;
@@ -66,8 +74,10 @@ public class ForgingAnts extends CA {
 							nextSlot = s;
 						}
 						((AntCell) c).setDirection(getDirectionbetweenSlots(s, nextSlot));
-						updatedSlots.get(nextSlot.index()).getOccupants().add(c);
-						updatedSlots.get(s.index()).getOccupants().remove(c);
+						//updatedSlots.get(nextSlot.index()).getOccupants().add(c);
+						//updatedSlots.get(s.index()).getOccupants().remove(c);
+						copiesOfCells.get(nextSlot.index()).add(c);
+						nextOccupants.remove(c);
 						
 					} else {
 						groundCells.add((GroundCell) c);
