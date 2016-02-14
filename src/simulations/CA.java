@@ -15,6 +15,11 @@ import automaton.*;
 import factory.*;
 import grid.*;
 
+/**
+ * Base class for our simulations
+ * @author aj168, clz4, cbd20
+ *
+ */
 public class CA {
 	
 	private final int DEFAULT_FRAMES_PER_SECOND = 30;
@@ -25,6 +30,11 @@ public class CA {
 	private double simWidth;
 	private double simHeight;
 	
+	/**
+	 * Constructor
+	 * @param xmlArgs XML arguments parsed in
+	 * @param autoDisp AutonmatonDisplay to display the simulation
+	 */
 	public CA (XMLArgs xmlArgs, AutomatonDisplay autoDisp) {
 		grid = (Grid) GridFactory.create(xmlArgs, autoDisp);
 		grid.initializeGrid();
@@ -35,6 +45,9 @@ public class CA {
 		window = autoDisp.getwindow();
 	}
 	
+	/**
+	 * Initializes simulation loop
+	 */
 	protected void initializeSimulationLoop() {
 		getTimeline().setCycleCount(Animation.INDEFINITE);
 		KeyFrame simulate = new KeyFrame(Duration.millis(1000/getFramesPerSecond()),
@@ -48,14 +61,23 @@ public class CA {
 		window.setOnCloseRequest(e -> getTimeline().stop());
 	}
 	
+	/**
+	 * The actual simulation loop
+	 */
 	protected void runSimulation() {
 		updateCells();
 		drawCells();
 	}
 	
+	/**
+	 * Updates cells
+	 */
 	public void updateCells() {
 	}
 	
+	/**
+	 * Method that draws the cells
+	 */
 	public void drawCells() {
 		getGraphicsContext().clearRect(0,0,getSimWidth(), getSimHeight());
 		for(Slot slot: getAllSlots()) {
@@ -64,6 +86,10 @@ public class CA {
 		}
 	}
 	
+	/**
+	 * Returns the frames per second
+	 * @return Frames per second
+	 */
 	private int getFramesPerSecond() {
 		return DEFAULT_FRAMES_PER_SECOND;
 	}
@@ -76,6 +102,12 @@ public class CA {
 		return grid.getNumRow();
 	}
 	
+	/**
+	 * Returns the index of the slot if you know the row and column
+	 * @param row Row of slot
+	 * @param col Column of slot
+	 * @return Index of slot
+	 */
 	public int getIndexFromRowCol(int row, int col) {
 		return grid.getIndexFromRowCol( row, col);
 	}

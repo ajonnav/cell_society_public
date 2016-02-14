@@ -5,15 +5,29 @@ import simexception.ConfigFileException;
 import automaton.AutomatonDisplay;
 import automaton.XMLArgs;
 
+/**
+ * Class that chooses the appropriate grid type
+ * @author aj168
+ *
+ */
 public class GridFactory {
 
 	private static final String DEFAULT_RESOURCE_PACKAGE = "ResourceBundle/Errors"; 
 	private static ResourceBundle myResources;
 	
+	/**
+	 * Constructor
+	 */
 	private GridFactory(){
 		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE);
 	}
 
+	/**
+	 * Method that returns the right grid
+	 * @param xmlArgs XML arguments that have been parsed
+	 * @param autoDisp AutonmatonDisplay to display the simulation
+	 * @return Grid
+	 */
 	public static AnyGrid create(XMLArgs xmlArgs, AutomatonDisplay autoDisp) {
 		Direction[] d = DirectionFactory.create(xmlArgs.getAsString("direction"), xmlArgs.getAsString("gridShape"));
 		if(xmlArgs.getAsString("edgeType").equals("Finite")) {

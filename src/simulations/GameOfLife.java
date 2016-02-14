@@ -5,16 +5,28 @@ import slot.*;
 import cells.*;
 import automaton.*;
 
+/**
+ * Class for Game of Life Simulation
+ * @author aj168
+ *
+ */
 public class GameOfLife extends CA{
 	private double perAlive; 
 	
+	/**
+	 * Constructor
+	 * @param xmlArgs XML Arguments read in
+	 * @param autoDisp AutomatonDisplay to display the simulation
+	 */
 	public GameOfLife(XMLArgs xmlArgs, AutomatonDisplay autoDisp) {
 		super(xmlArgs, autoDisp);
 		perAlive = xmlArgs.getAsDouble("perAlive");
 	}
 	
+	/**
+	 * Initializes the simulation.screen
+	 */
 	@Override
-
 	public void initializeScreen() {
 		List<Slot> list = getAllSlots();
 		for(Slot slot:list) {
@@ -36,6 +48,9 @@ public class GameOfLife extends CA{
 		drawCells();
 	}
 	
+	/**
+	 * Updates the cells
+	 */
 	@Override
 	public void updateCells() {
 		List<Cell> newCellList = new ArrayList<Cell>();
@@ -49,7 +64,5 @@ public class GameOfLife extends CA{
 			list.add(newCellList.get(i));
 			slotList.get(i).setOccupants(list);
 		}
-		int x=0;
-		int y=x+1;
 	}
 }

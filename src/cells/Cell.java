@@ -4,7 +4,11 @@ import java.util.List;
 
 import slot.Slot;
 import javafx.scene.paint.Color;
-
+/**
+ * Class that abstracts the idea of a cell
+ * @author aj168
+ *
+ */
 public abstract class Cell {
 	private Color cellColor;
 
