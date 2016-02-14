@@ -18,7 +18,7 @@ public class LiveGOLCell extends GOLCell {
 	public Cell update(List<Slot> neighborSlot) {
 		int numAlive = getNumberAlive(neighborSlot);
 		if(numAlive > 3 || numAlive < 2) {
-			return new LiveGOLCell();
+			return new DeadGOLCell();
 		}
 		return this;
 	}

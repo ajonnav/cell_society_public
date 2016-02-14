@@ -1,74 +1,19 @@
 package cells;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
-import javafx.scene.canvas.GraphicsContext;
+import slot.Slot;
 import javafx.scene.paint.Color;
+
 public abstract class Cell {
 	private Color cellColor;
-	private double xCoord, yCoord;
-	private ArrayList<Integer> neighbor;
-	private double width, height;
-	public Cell(double x, double y, Color color, double w, double h) {
+
+	public Cell(Color color) {
 		setCellColor(color);
-		xCoord = x;
-		yCoord = y;
-		neighbor = new ArrayList<Integer>();
-		setWidth(w);
-		setHeight(h);
 	}
 
-	/**
-	 * This Class will vary from extension to extension of the Cell class.
-	 * Every inherited class will require GraphicsContext to draw.
-	 * @param gc
-	 */
-	public abstract void draw(GraphicsContext gc);
-	
-	/**
-	 * returns x pixel coordinate of cell
-	 * @return xCoord
-	 */
-	public double getX(){
-		return xCoord;
-	}
-	/**
-	 * y pixel coordinate of a cell
-	 * @return yCoord
-	 */
-	public double getY(){
-		return yCoord;
-	}
-	/**
-	 * Sets X coordinate
-	 * @param newXcoord
-	 */
-	public void setX(double newXcoord){
-		xCoord = newXcoord;
-	}
-	/**
-	 * Set Y coordinate
-	 * @param newYcoord
-	 */
-	public void setY(double newYcoord){
-		yCoord = newYcoord;
-	}
-	
-	public double getWidth() {
-		return width;
-	}
-	
-	protected void setWidth(double w) {
-		this.width = w;
-	}
-	
-	public double getHeight() {
-		return height;
-	}
-	
-	protected void setHeight(double h) {
-		this.height = h;
+	public Cell update(List<Slot> neighborSlots) {
+		return null;
 	}
 	
 	public Color getCellColor() {
@@ -77,14 +22,5 @@ public abstract class Cell {
 
 	public void setCellColor(Color cellColor) {
 		this.cellColor = cellColor;
-	}
-
-	public ArrayList<Integer> getNeighbor() {
-		return neighbor;
-	}
-
-	public void setNeighbor(Collection<Integer> list) {
-		ArrayList<Integer> neighborList = new ArrayList<Integer>(list);
-		this.neighbor = neighborList;
 	}
 }

@@ -19,10 +19,11 @@ public class Direction {
 	public static final Direction SOUTHWEST = new Direction(1, -1);
 	public static final Direction SOUTHEAST = new Direction(1, 1);
 	
-	public static final Direction[] ALL_DIRECTIONS = 
+	public static final Direction[] ALL_DIRECTIONS_SQUARE = 
 		{NORTH, SOUTH, EAST, WEST, NORTHWEST, NORTHEAST, SOUTHWEST, SOUTHEAST};
 	public static final Direction[] CARDINAL_DIRECTIONS = 
 		{NORTH, SOUTH, EAST, WEST};
-	
+	public static final Direction[] ALL_DIRECTIONS_HEXAGON = 
+		{NORTH, SOUTH, EAST, WEST, NORTHWEST, SOUTHWEST};
 	public int[] getVec(){ return vec; }
 }

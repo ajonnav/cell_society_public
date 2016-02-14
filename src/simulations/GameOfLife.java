@@ -1,114 +1,69 @@
 package simulations;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.List;
 
-import cells.SquareCell;
-import automaton.AutomatonDisplay;
-import automaton.XMLArgs;
+import javafx.scene.paint.Color;
+import slot.*;
+import cells.*;
+import automaton.*;
 
-/**
- * Class for Game of Life Simulation
- * @author aj168 - Anirudh Jonnavithula
- *
- */
 public class GameOfLife extends CA{
+	private double perAlive; 
 	
-	private static final String RESOURCE_PACKAGE = "ResourceBundle/GameOfLife";
-	private double perAlive;
-	private GOLSquareCell[] allCells;
-	private ResourceBundle myResources;
-	
-	/**
-	 * Constructor
-	 * @param mapArgs Map with arguments read in from XML file
-	 * @param a AutomatonDisplay on which simulation is drawn
-	 */
-	public GameOfLife(XMLArgs xmlArgs, AutomatonDisplay a) {
-		super(xmlArgs, a);
-		myResources = ResourceBundle.getBundle(RESOURCE_PACKAGE);
-		perAlive = xmlArgs.getAsDouble(myResources.getString("perAlive"));
-		allCells = new GOLSquareCell[getNumCell()];
+	public GameOfLife(XMLArgs xmlArgs, AutomatonDisplay autoDisp) {
+		super(xmlArgs, autoDisp);
+		perAlive = xmlArgs.getAsDouble("perAlive");
 	}
-
-	/**
-	 * Initilaizes the screen and simulation
-	 */
+	
 	@Override
 	public void initializeScreen() {		
 		int numCell = 0;
-		for(int i = 0; i<getNumCol(); i++) {
-			for(int j = 0; j<getNumRow(); j++) {
+		List<Slot> list = getAllSlots();
+		for(Slot slot:list) {
+			slot.getOccupants().clear();
+		}
+		for(int col = 0; col<getNumCol(); col++) {
+			for(int row = 0; row<getNumRow(); row++) {
+				Cell cell;
 				if(Math.random()<perAlive) {
-					getAllCells()[numCell] = new LiveGOLSquareCell(i*getCellWidth(), j*getCellHeight(), getCellWidth(), getCellHeight());
+					cell = new LiveGOLCell();
 				}
 				else {
-					getAllCells()[numCell] = new DeadGOLSquareCell(i*getCellWidth(), j*getCellHeight(), getCellWidth(), getCellHeight());
+					cell = new DeadGOLCell();
 				}
+				list.get(getIndexFromRowCol(col, row)).addOccupants(cell);
 				numCell++;
 			}
 		}
 		initializeSimulationLoop();
-		calculateAdjacencyMatrixAndSetNeighbor();
 		drawCells();
 	}
-
-	/**
-	 * Updates the cells
-	 */
+	
 	@Override
 	public void updateCells() {
-		GOLSquareCell[] list = new GOLSquareCell[getNumCell()];
-		for(int i=0; i<getNumCell(); i++) {
-			list[i] = getAllCells()[i].update(getAllCells());
+		List<Cell> newCellList = new ArrayList<Cell>();
+		List<Slot> slotList = getAllSlots();
+		for(Slot slot : slotList) {
+			Cell newCell=slot.getOccupants().get(0).update(slot.getNeighbors());
+			newCellList.add(newCell);
 		}
-		setAllCells(list);
-	}
-
-	/**
-	 * Calculates the adjacency matrix/ neighbors
-	 */
-	@Override
-	protected void calculateAdjacencyMatrixAndSetNeighbor() {
-		for(int i=0; i<getNumCell(); i++) {
-			GOLSquareCell cell = getAllCells()[i];
-			ArrayList<Integer> list = new ArrayList<Integer>();
-			for(int j=0; j<getNumCell(); j++) {
-				GOLSquareCell temp = getAllCells()[j];
-				if(Math.abs(cell.getX() - temp.getX())<=getCellWidth() && Math.abs(cell.getY()-temp.getY())<=getCellHeight() && i!=j) {
-					getAdjacency()[i][j] =1;
-					list.add(j);
-				}
-			}
-			cell.setNeighbor(list);
+		
+		for(int i=0; i < slotList.size(); i++) {
+			List<Cell> list = new ArrayList<Cell>();
+			list.add(newCellList.get(i));
+			slotList.get(i).setOccupants(list);
 		}
 	}
 	
-	/**
-	 * Returns all the cells in the current state
-	 * @return Cells in their current state
-	 */
-	public GOLSquareCell[] getAllCells() {
-		return allCells;
-	}
-	
-	/**
-	 * Sets the current states of all the cells
-	 * @param list List of new cells
-	 */
-	public void setAllCells(GOLSquareCell[] list) {
-		allCells = Arrays.copyOf(list, list.length);
-	}
-
-	/**
-	 * Draws the cells
-	 */
 	@Override
 	public void drawCells() {
 		getGraphicsContext().clearRect(0,0,getSimWidth(), getSimHeight());
-		for(SquareCell cell: getAllCells()) {
-			cell.draw(getGraphicsContext());
+		
+		for(Slot slot: getAllSlots()) {
+			Color c = slot.getOccupants().get(0).getCellColor();
+			slot.draw(getGraphicsContext(), c);
 		}
+		int x=0;
+		int y=x+1;
 	}
 }

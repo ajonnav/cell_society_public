@@ -18,7 +18,9 @@ public class DeadGOLCell extends GOLCell{
 		if(numAlive == 3) {
 			return new LiveGOLCell();
 		}
-		return this;
+		else{
+			return this;
+		}
 	}
 
 }
