@@ -9,7 +9,7 @@ import automaton.AutomatonDisplay;
 import automaton.XMLArgs;
 
 /*
- * Author: Christine Zhou
+ * Author: Christine Zhou, Ani
  */
 public class Fire extends CA {
 	private double probCatch;
