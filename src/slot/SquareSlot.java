@@ -1,6 +1,5 @@
 
 package slot;
-import java.util.Collection;
 import java.util.List;
 
 import javafx.scene.canvas.GraphicsContext;
@@ -25,7 +24,7 @@ public class SquareSlot implements Slot {
 	}
 	
 	@Override
-	public void setNeighbors(Collection<Slot> newNeighbors) {
+	public void setNeighbors(List<Slot> newNeighbors) {
 		// TODO Auto-generated method stub
 		neighbors = new ArrayList<Slot>(newNeighbors);
 
@@ -45,7 +44,7 @@ public class SquareSlot implements Slot {
 	}
 
 	@Override
-	public Collection<Slot> getNeighbors() {
+	public List<Slot> getNeighbors() {
 		// TODO Auto-generated method stub
 		return neighbors;
 	}
@@ -58,18 +57,23 @@ public class SquareSlot implements Slot {
 	}
 
 	@Override
-	public Collection<Cell> getOccupants() {
+	public List<Cell> getOccupants() {
 		// TODO Auto-generated method stub
 		return occupants;
 	}
 
 	@Override
-	public void setOccupants(Collection<Cell> cells) {
+	public void setOccupants(List<Cell> cells) {
 		// TODO Auto-generated method stub
 		occupants = new ArrayList<Cell>(cells);
 
 	}
 	public void addOccupant(Cell cell){
+		occupants.add(cell);
+	}
+
+	@Override
+	public void addOccupants(Cell cell) {
 		occupants.add(cell);
 	}
 

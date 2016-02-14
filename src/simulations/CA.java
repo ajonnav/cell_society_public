@@ -1,69 +1,38 @@
 package simulations;
-import automaton.AutomatonDisplay;
-import automaton.XMLArgs;
-
-import java.util.*;
-
+import java.util.List;
+import slot.*;
 import javafx.animation.Animation;
-import javafx.animation.Timeline;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import javafx.util.Duration;
 import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+import automaton.*;
+import factory.*;
+import grid.*;
 
-public abstract class CA {
-
+public class CA {
+	
 	private final int DEFAULT_FRAMES_PER_SECOND = 30;
-	private double simWidth;
-	private double simHeight;
-	private int numRow;
-	private int numCol;
-	private String name;
-	private String title;
-	private String author;
-	private int[][] adjacency;
-	private boolean simOver;
+	private Grid grid;
 	private Timeline timeline;
 	private GraphicsContext graphicsContext;
-	private double cellWidth;
-	private double cellHeight;
-	private int numCell;
 	private Stage window;
-
-	/**
-	 * Constructor
-	 * @param argsMap Map of input arguments
-	 * @param a AutomatonDisplay to display simulation
-	 */
-
-	public CA(XMLArgs xmlArgs, AutomatonDisplay a) {
-		setSimWidth(xmlArgs.getAsDouble("simWidth"));
-		setSimHeight(xmlArgs.getAsDouble("simHeight"));
-		setNumRow(xmlArgs.getAsInt("numRow"));
-		setNumCol(xmlArgs.getAsInt("numCol"));
-		setName(xmlArgs.getAsString("name"));
-		setTitle(xmlArgs.getAsString("title"));
-		setAuthor(xmlArgs.getAsString("author"));
-		setTimeline(new Timeline());
-		setGraphicsContext(a.getCanvas().getGraphicsContext2D());
-		simOver = false;
-		setCellWidth((double)getSimWidth()/getNumCol());
-		setCellHeight((double)getSimHeight()/getNumRow());
-		setNumCell(getNumRow()*getNumCol());
-		adjacency = new int[getNumCell()][getNumCell()];
-		window = a.getwindow();
-	}
-	/**
-	 * Initializes each cell to its starting state, varies from simulation to simulation
-	 */
-	public abstract void initializeScreen();
+	private double simWidth;
+	private double simHeight;
 	
-	/**
-	 * Creates Timeline object that will animate simulations
-	 */
+	public CA (XMLArgs xmlArgs, AutomatonDisplay autoDisp) {
+		grid = (Grid) GridFactory.create(xmlArgs, autoDisp);
+		grid.initializeGrid();
+		timeline= new Timeline();
+		simWidth = xmlArgs.getAsDouble("simWidth");
+		simHeight = xmlArgs.getAsDouble("simHeight");
+		graphicsContext = autoDisp.getCanvas().getGraphicsContext2D();
+		window = autoDisp.getwindow();
+	}
+	
 	protected void initializeSimulationLoop() {
 		getTimeline().setCycleCount(Animation.INDEFINITE);
 		KeyFrame simulate = new KeyFrame(Duration.millis(1000/getFramesPerSecond()),
@@ -76,117 +45,71 @@ public abstract class CA {
 		//getTimeline().play();
 		window.setOnCloseRequest(e -> getTimeline().stop());
 	}
-
-	/**
-	 * How cells are updated also vary depending on CA. This will only be used
-	 * by simulation loop. No need for public visibility
-	 */
 	
-	protected abstract void calculateAdjacencyMatrixAndSetNeighbor();
-	
-	public abstract void updateCells();
-
-	public abstract void drawCells();
-
 	protected void runSimulation() {
 		updateCells();
 		drawCells();
-		if(simOver){ getTimeline().stop();
-		graphicsContext.clearRect(0, 0, simWidth, simHeight);
-		graphicsContext.setFill(Color.GOLD);
-		graphicsContext.fill();
-		}
 	}
 	
-	public double getSimWidth() {
-		return simWidth;
-	}
-	public void setSimWidth(double simWidth) {
-		this.simWidth = simWidth;
-	}
-	public double getSimHeight() {
-		return simHeight;
-	}
-	public void setSimHeight(double simHeight) {
-		this.simHeight = simHeight;
-	}
-	public int[][] getAdjacency() {
-		return adjacency;
-	}
-	public void setAdjacency(int[][] adjacency) {
-		this.adjacency = adjacency;
+	public void updateCells() {
 	}
 	
-	public boolean getSimOver() {
-		return simOver;
-	}
-	public void setSimOver(boolean opt) {
-		simOver = opt;
-	}
-	
-	public int getNumRow() {
-		return numRow;
-	}
-	public void setNumRow(int numRow) {
-		this.numRow = numRow;
-	}
-	public int getNumCol() {
-		return numCol;
-	}
-	public void setNumCol(int numCol) {
-		this.numCol = numCol;
-	}
-	public Timeline getTimeline() {
-		return timeline;
-	}
-	private void setTimeline(Timeline timeline) {
-		this.timeline = timeline;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public String getAuthor() {
-		return author;
-	}
-	public void setAuthor(String author) {
-		this.author = author;
-	}
-	public double getCellWidth() {
-		return cellWidth;
-	}
-	public void setCellWidth(double d) {
-		this.cellWidth = d;
-	}
-	public double getCellHeight() {
-		return cellHeight;
-	}
-	public void setCellHeight(double d) {
-		this.cellHeight = d;
-	}
-	public GraphicsContext getGraphicsContext() {
-		return graphicsContext;
-	}
-	private void setGraphicsContext(GraphicsContext graphicsContext) {
-		this.graphicsContext = graphicsContext;
-	}
-	public int getNumCell() {
-		return numCell;
-	}
-	public void setNumCell(int numCell) {
-		this.numCell = numCell;
+	public void drawCells() {
 	}
 	
 	private int getFramesPerSecond() {
 		return DEFAULT_FRAMES_PER_SECOND;
 	}
+	
+	public int getNumCol() {
+		return grid.getNumCol();
+	}
+	
+	public int getNumRow() {
+		return grid.getNumRow();
+	}
+	
+	public int getIndexFromRowCol(int row, int col) {
+		return grid.getIndexFromRowCol( row, col);
+	}
+	
+	public List<Slot> getAllSlots() {
+		return grid.getSlots();
+	}
 
+	public GraphicsContext getGraphicsContext() {
+		return graphicsContext;
+	}
+
+	public void setGraphicsContext(GraphicsContext graphicsContext) {
+		this.graphicsContext = graphicsContext;
+	}
+
+	public double getSimWidth() {
+		return simWidth;
+	}
+
+	public void setSimWidth(double simWidth) {
+		this.simWidth = simWidth;
+	}
+
+	public double getSimHeight() {
+		return simHeight;
+	}
+
+	public void setSimHeight(double simHeight) {
+		this.simHeight = simHeight;
+	}
+
+	
+	public void initializeScreen() {		
+	}
+
+	public Timeline getTimeline() {
+		return timeline;
+	}
+
+	private void setTimeline(Timeline timeline) {
+		this.timeline = timeline;
+	}
 }

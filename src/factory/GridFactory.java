@@ -15,7 +15,7 @@ public class GridFactory {
 	}
 
 	public static AnyGrid create(XMLArgs xmlArgs, AutomatonDisplay autoDisp) {
-		Direction[] d = DirectionFactory.create(xmlArgs.getAsString("direction"));
+		Direction[] d = DirectionFactory.create(xmlArgs.getAsString("direction"), xmlArgs.getAsString("gridShape"));
 		if(xmlArgs.getAsString("edgeType").equals("Finite")) {
 			return new FiniteGrid(xmlArgs, autoDisp, d);
 		}
@@ -31,16 +31,19 @@ public class GridFactory {
 	}
 	
 	static class DirectionFactory{
-			private DirectionFactory(){
-				myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE);
-			}
+		private DirectionFactory(){
+			myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE);
+		}
+		
+		private static Direction[] create(String type, String shape){
+			if(type.equals("Cardinal")){
+				return Direction.CARDINAL_DIRECTIONS;
+			}else if(type.equals("All") && shape.equals("Square")){
+				return Direction.ALL_DIRECTIONS_SQUARE;
+			}else if(type.equals("All") && shape.equals("Square")) {
+				return Direction.ALL_DIRECTIONS_HEXAGON;
+			}return Direction.CARDINAL_DIRECTIONS;
 			
-			private static Direction[] create(String type){
-				if(type.equals("Cardinal")){
-					return Direction.CARDINAL_DIRECTIONS;
-				}else if(type.equals("All")){
-					return Direction.ALL_DIRECTIONS;
-				}else return Direction.ALL_DIRECTIONS;
-			}
+		}
 	}
 }

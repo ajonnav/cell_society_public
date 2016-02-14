@@ -12,7 +12,6 @@ import org.xml.sax.SAXException;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBase;
 import javafx.scene.control.Control;
 import javafx.scene.layout.HBox;
 import simulations.CA;

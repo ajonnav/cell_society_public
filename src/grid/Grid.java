@@ -39,7 +39,7 @@ public abstract class Grid {
 				}
 			}
 		}
-		if(gridShape.equals("Hexagonal")) {
+		if(gridShape.equals("Hexagon")) {
 			int numCell = 0;
 			for(int row=0;row<numRow;row++) {
 				for(int col=0; col<getNumCol();col++) {
@@ -60,7 +60,6 @@ public abstract class Grid {
 		}
 	}
 
-	
 	public abstract void setNeighbors();
 	
 	public int getIndexFromRowCol(int row, int col) {
@@ -70,7 +69,6 @@ public abstract class Grid {
 	public Direction[] getDirections() {
 		return directions;
 	}
-
 	
 	public void setDirections(Direction[] directions) {
 		this.directions = directions;
@@ -94,6 +92,10 @@ public abstract class Grid {
 	
 	public List<Slot> getSlots() {
 		return slotList;
+	}
+	
+	public void setSlots(List<Slot> list) {
+		slotList = list;
 	}
 	
 }

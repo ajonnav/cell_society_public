@@ -16,7 +16,11 @@ public class FiniteGrid extends Grid implements AnyGrid {
 		super(xmlArgs.getAsInt("numRow"), xmlArgs.getAsInt("numCol"), xmlArgs
 				.getAsInt("simWidth") / xmlArgs.getAsInt("numCol"), xmlArgs
 				.getAsInt("simHeight") / xmlArgs.getAsInt("numRow"), xmlArgs
+<<<<<<< HEAD
 				.getAsString("slotType"), neighborsToCheck);
+=======
+				.getAsString("gridShape"), neighborsToCheck);
+>>>>>>> master
 	}
 
 	/**
@@ -46,6 +50,6 @@ public class FiniteGrid extends Grid implements AnyGrid {
 
 	protected boolean inBounds(int[] rcDelta) {
 		return (0 <= rcDelta[0] && rcDelta[0] < getNumRow() && 0 <= rcDelta[1]
-				&& rcDelta[1] < getNumCol() && rcDelta[0] != rcDelta[1]);
+				&& rcDelta[1] < getNumCol());
 	}
 }

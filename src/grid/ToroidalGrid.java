@@ -8,12 +8,13 @@ public class ToroidalGrid extends FiniteGrid {
 
 	public ToroidalGrid(int r, int c, int w, int h, String s, Direction[] neighborsToCheck) {
 		super(r, c, w, h, s, neighborsToCheck);
-		// TODO Auto-generated constructor stub
 	}
+	
 	public ToroidalGrid(XMLArgs xmlArgs, AutomatonDisplay autoDisp, Direction[] neighborsToCheck){
-		super(xmlArgs.getAsInt("numRow"), xmlArgs.getAsInt("numCol"), xmlArgs.getAsInt("simWidth")/xmlArgs.getAsInt("numCol"),
-				xmlArgs.getAsInt("simHeight")/xmlArgs.getAsInt("numRow"),xmlArgs.getAsString("edgeType"), neighborsToCheck);
-				
+		super(xmlArgs.getAsInt("numRow"), xmlArgs.getAsInt("numCol"), xmlArgs
+				.getAsInt("simWidth") / xmlArgs.getAsInt("numCol"), xmlArgs
+				.getAsInt("simHeight") / xmlArgs.getAsInt("numRow"), xmlArgs
+				.getAsString("gridShape"), neighborsToCheck);			
 	}
 	
 	/**
@@ -25,8 +26,8 @@ public class ToroidalGrid extends FiniteGrid {
 		int[] rcDelta = new int[2];
 		int row = s.index()/getNumCol();
 		int col = s.index()%getNumCol();
-		rcDelta[0] = (row + d.getVec()[0])%getNumRow();
-		rcDelta[1] = (col + d.getVec()[1])%getNumCol();
+		rcDelta[0] = Math.abs((row + d.getVec()[0])%getNumRow());
+		rcDelta[1] = Math.abs((col + d.getVec()[1])%getNumCol());
 		s.addNeighbor(slotList.get(getIndexFromRowCol(rcDelta[0], rcDelta[1])));
 	}
 }
