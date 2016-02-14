@@ -19,6 +19,9 @@ public class AntOrientationFactory {
 	public AntOrientationFactory() {	
 	}
 	
+	/*
+	* Factory will return the list of neighbors both forward and backward
+	*/
 	public AntOrientationFactory(CardinalDirection d, Slot s, int tcol) {
 		Neighbors = s.getNeighbors();
 		forwardNeighbors = new ArrayList<Slot>();
@@ -27,10 +30,16 @@ public class AntOrientationFactory {
 		findNeighborDirection(d, s);
 	}
 	
+	/*
+	* Returns forward neighbors
+	*/
 	public Collection<Slot> getForwardNeighbors() {
 		return forwardNeighbors;
 	}
 	
+	/*
+	* Returns backward neighbors
+	*/
 	public Collection<Slot> getBackwardNeighbors() {
 		return backwardNeighbors;
 	}
