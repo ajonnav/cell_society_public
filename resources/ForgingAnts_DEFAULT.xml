@@ -3,7 +3,7 @@
 <name>Forging Ants</name>
 <title>Forging Ants</title>
 <author>none</author>
-<sim>500</simWidth>
+<simWidth>500</simWidth>
 <simHeight>500</simHeight>
 <numRow>100</numRow>
 <numCol>100</numCol>
@@ -18,4 +18,7 @@
 <food_y>20 20 20 20</food_y>
 <ant_x>50 50 50</ant_x>
 <ant_y>50 50 50</ant_y>
+<edgeType>Finite</edgeType>
+<gridShape>Square</gridShape>
+<direction>all</direction>
 </content>
