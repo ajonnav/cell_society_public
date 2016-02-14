@@ -42,7 +42,7 @@ public class SegregationSlotCell extends Cell {
 		return state;
 	}
 
-	public void setState(int newState) {
+	private void setState(int newState) {
 		state = newState;
 	}
 

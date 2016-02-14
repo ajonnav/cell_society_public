@@ -9,7 +9,7 @@ import cells.Cell;
 
 public class HexagonalSlot implements Slot {
 	private int index;
-	private double x, y, width, height, side;
+	private double x, y, height, side;
 	private List<Cell> occupants;
 	private List<Slot> neighbors;
 	
@@ -17,7 +17,6 @@ public class HexagonalSlot implements Slot {
 		// TODO Auto-generated constructor stub
 		this.x = x;
 		this.y = y;
-		width = w;
 		height = h;
 		side = height/2;
 		index = i;
@@ -68,9 +67,6 @@ public class HexagonalSlot implements Slot {
 		//corners will be ordered in a clockwise fashion, starting at reference point xCoord, yCoord
 		double [] xPoints = getXPoints();
 		double [] yPoints = getYPoints();
-		for (int i = 0; i < 6; i++){
-			System.out.println("X: " + xPoints[i] + " Y: " + yPoints[i]);  
-		}
 		gc.fillPolygon(xPoints, yPoints, 6);
 
 	}

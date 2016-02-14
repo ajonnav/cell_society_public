@@ -18,6 +18,9 @@ public class SegregationGrid extends CA {
 	private double vacantP;
 	private AnyGrid simGrid;
 	private Stack<Slot> slotsToChange;
+	private final static Color TYPE_ONE_COLOR = Color.RED;
+	private static Color TYPE_TWO_COLOR = Color.BLUE;
+	private static Color TYPE_VACANT_COLOR = Color.WHITE;
 	public SegregationGrid(XMLArgs xmlArgs, AutomatonDisplay a) {
 		super(xmlArgs, a);
 		// TODO Auto-generated constructor stub
@@ -42,15 +45,15 @@ public class SegregationGrid extends CA {
 			double typeOne = (1.0 - vacantP) * typeOneP;
 			double rand = Math.random();
 			if (rand < vacantP) {
-				SegregationSlotCell cell = new SegregationSlotCell(Color.WHITE,
+				SegregationSlotCell cell = new SegregationSlotCell(TYPE_VACANT_COLOR,
 						tPercentage, 0,0);
 				s.addOccupant(cell);
 			} else if (rand > vacantP && rand < vacantP + typeOne) {
-				SegregationSlotCell cell = new SegregationSlotCell(Color.RED,
+				SegregationSlotCell cell = new SegregationSlotCell(TYPE_ONE_COLOR,
 						tPercentage, 1,2);
 				s.addOccupant(cell);
 			} else {
-				SegregationSlotCell cell = new SegregationSlotCell(Color.BLUE,
+				SegregationSlotCell cell = new SegregationSlotCell(TYPE_TWO_COLOR,
 						tPercentage, 2,1);
 				s.addOccupant(cell);
 			}
