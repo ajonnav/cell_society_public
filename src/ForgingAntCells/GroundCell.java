@@ -69,7 +69,7 @@ public class GroundCell extends Cell {
 
 	}
 	
-	static Comparator<GroundCell> homeCompard() {
+	static Comparator<GroundCell> homeComparator() {
 		return new Comparator<GroundCell>() {
 		@Override
 			public int compare(GroundCell c1, GroundCell c2) {
