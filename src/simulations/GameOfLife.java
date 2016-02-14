@@ -4,9 +4,6 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import cells.DeadGOLSquareCell;
-import cells.GOLSquareCell;
-import cells.LiveGOLSquareCell;
 import cells.SquareCell;
 import automaton.AutomatonDisplay;
 import automaton.XMLArgs;
