@@ -98,9 +98,9 @@ public class ForgingAnts extends CA {
 				if (ant_x.contains(col) && ant_y.contains(row)) {
 					ant =  new AntCell(life_span, tcol);
 				}
-				allSlots.get(getIndexFromRowCol(col, row)).addOccupants(cell);
+				allSlots.get(getIndexFromRowCol(col, row)).addOccupant(cell);
 				if (ant != null) {
-					allSlots.get(getIndexFromRowCol(col, row)).addOccupants(ant);
+					allSlots.get(getIndexFromRowCol(col, row)).addOccupant(ant);
 				}
 				numCell++;
 			}

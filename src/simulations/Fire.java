@@ -41,7 +41,7 @@ public class Fire extends CA {
 				} else {
 					cell = new TreeFireCell(probCatch);
 				}
-				list.get(getIndexFromRowCol(col, row)).addOccupants(cell);
+				list.get(getIndexFromRowCol(col, row)).addOccupant(cell);
 			}
 		}
 		initializeSimulationLoop();
