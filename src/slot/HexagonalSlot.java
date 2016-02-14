@@ -105,4 +105,10 @@ public class HexagonalSlot implements Slot {
 		occupants = new ArrayList<Cell>(cells);
 
 	}
+
+	
+	@Override
+	public void addOccupants(Cell cell) {
+		occupants.add(cell);
+	}
 }

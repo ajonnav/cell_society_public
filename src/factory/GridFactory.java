@@ -14,7 +14,7 @@ public class GridFactory {
 		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE);
 	}
 
-	public static AnyGrid create(String id, XMLArgs xmlArgs, AutomatonDisplay autoDisp) {
+	public static Grid create(String id, XMLArgs xmlArgs, AutomatonDisplay autoDisp) {
 		if(id.equals("Finite")) {
 			return new FiniteGrid();
 		}

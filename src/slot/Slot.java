@@ -1,7 +1,5 @@
 package slot;
-
-import java.util.Collection;
-
+import java.util.List;
 import cells.*;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -21,7 +19,7 @@ public interface Slot {
 	  * I could use some input from y'all about that.
 	  * @param neighbors
 	  */
-	public void setNeighbors(Collection<Slot> newNeighbors);
+	public void setNeighbors(List<Slot> newNeighbors);
 	
 	
 	/**
@@ -40,7 +38,7 @@ public interface Slot {
 	 * Returns the neighboring slots to this slot.
 	 * @return
 	 */
-	public Collection<Slot> getNeighbors();
+	public List<Slot> getNeighbors();
 	/**
 	 * Thinking about moving the draw to the slot itself. Useful for simulations that have multiple cells in one slot
 	 *   
@@ -51,10 +49,12 @@ public interface Slot {
 	 * Returns a collection of all the cells in this slot.
 	 * @return
 	 */
-	public Collection<Cell> getOccupants();
+	public List<Cell> getOccupants();
 	/**
 	 * Sets the occupants of this slot
 	 * @param cells
 	 */
-	public void setOccupants(Collection<Cell> cells);
+	public void setOccupants(List<Cell> cells);
+	
+	public void addOccupants(Cell cell);
 }

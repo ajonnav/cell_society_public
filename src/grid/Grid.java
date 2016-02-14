@@ -66,7 +66,6 @@ public abstract class Grid {
 		}
 	}
 
-	
 	public abstract void setNeighbors();
 	
 	public int getIndexFromRowCol(int row, int col) {
@@ -76,7 +75,6 @@ public abstract class Grid {
 	public Direction[] getDirections() {
 		return directions;
 	}
-
 	
 	public void setDirections(Direction[] directions) {
 		this.directions = directions;

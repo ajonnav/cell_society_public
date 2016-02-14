@@ -70,4 +70,9 @@ public class SquareSlot implements Slot {
 
 	}
 
+	@Override
+	public void addOccupants(Cell cell) {
+		occupants.add(cell);
+	}
+
 }
