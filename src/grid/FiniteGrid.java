@@ -16,7 +16,7 @@ public class FiniteGrid extends Grid implements AnyGrid {
 		super(xmlArgs.getAsInt("numRow"), xmlArgs.getAsInt("numCol"), xmlArgs
 				.getAsInt("simWidth") / xmlArgs.getAsInt("numCol"), xmlArgs
 				.getAsInt("simHeight") / xmlArgs.getAsInt("numRow"), xmlArgs
-				.getAsString("edgeType"), neighborsToCheck);
+				.getAsString("slotType"), neighborsToCheck);
 	}
 
 	/**

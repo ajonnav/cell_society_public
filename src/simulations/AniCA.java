@@ -9,7 +9,7 @@ public class AniCA {
 	private String edgeType;
 	
 	public AniCA (XMLArgs xmlArgs, AutomatonDisplay autoDisp) {
-		grid = (AniAnyGrid) GridFactory.create(edgeType, xmlArgs, autoDisp);
+		//grid = (AniAnyGrid) GridFactory.create(edgeType, xmlArgs, autoDisp);
 		grid.setUpSlots();
 		grid.calculateNeighbors();
 	}

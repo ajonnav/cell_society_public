@@ -22,7 +22,7 @@ public class SimulationFactory {
 			return new Fire(xmlArgs, autoDisp);
 		}
 		else if(id.equals("Segregation")) {
-			return new SchellingCA(xmlArgs, autoDisp);
+			return new SegregationGrid(xmlArgs, autoDisp);
 		}
 		else if(id.equals("Wator")) {
 			return new Wator(xmlArgs, autoDisp);

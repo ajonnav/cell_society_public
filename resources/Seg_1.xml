@@ -10,4 +10,8 @@
 <tPercentage>0.40</tPercentage>
 <typeOneP>0.50</typeOneP>
 <vacantP>0.30</vacantP>
+<slotType>Square</slotType>
+<edgeType>Finite</edgeType>
+<direction>All</direction>
+
 </content>

@@ -32,11 +32,17 @@ public class SegregationGrid extends CA {
 	public void initializeScreen() {
 		// TODO Auto-generated method stub
 		simGrid.initializeGrid();
+		setInitialStates();
+		initializeSimulationLoop();
+		drawCells();
+	}
+
+	private void setInitialStates() {
 		for (Slot s : simGrid.getSlots()) {
 			double typeOne = (1.0 - vacantP) * typeOneP;
 			double rand = Math.random();
 			if (rand < vacantP) {
-				SegregationSlotCell cell = new SegregationSlotCell(Color.GRAY,
+				SegregationSlotCell cell = new SegregationSlotCell(Color.WHITE,
 						tPercentage, 0,0);
 				s.addOccupant(cell);
 			} else if (rand > vacantP && rand < vacantP + typeOne) {
@@ -61,6 +67,7 @@ public class SegregationGrid extends CA {
 	@Override
 	public void updateCells() {
 		// TODO Auto-generated method stub
+		
 		for (Slot s : simGrid.getSlots()) {
 			ArrayList<Cell> occupant = new ArrayList<Cell>(s.getOccupants());
 			SegregationSlotCell resident = (SegregationSlotCell) occupant
@@ -78,11 +85,11 @@ public class SegregationGrid extends CA {
 	
 	private void moveUnsatisfiedCells(){
 		while(!slotsToChange.isEmpty()){
-			Slot s = slotsToChange.pop();
+			Slot s = slotsToChange.pop();			
 			ArrayList<Slot> slotRound  = (ArrayList<Slot>) simGrid.getSlots();
 			boolean go = true;
 			while(go){
-				int randIndex = (int)Math.random()*slotRound.size();
+				int randIndex = (int)(Math.random()*slotRound.size());
 				ArrayList<Cell> cells = new ArrayList<Cell>(slotRound.get(randIndex).getOccupants());
 				SegregationSlotCell seg = (SegregationSlotCell)cells.get(0);
 				if(seg.getState() == 0){

@@ -5,9 +5,12 @@
 <author>Thomas Schelling</author>
 <simWidth>500</simWidth>
 <simHeight>500</simHeight>
-<numRow>30</numRow>
-<numCol>30</numCol>
+<numRow>2</numRow>
+<numCol>2</numCol>
 <tPercentage>0.40</tPercentage>
-<typeOneP>0.50</typeOneP>
+<typeOneP>0.80</typeOneP>
 <vacantP>0.20</vacantP>
+<slotType>Hexagonal</slotType>
+<edgeType>Finite</edgeType>
+<direction>All</direction>
 </content>
