@@ -7,7 +7,6 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import automaton.*;
@@ -18,7 +17,6 @@ public class AniCA {
 	
 	private final int DEFAULT_FRAMES_PER_SECOND = 30;
 	private Grid grid;
-	private String edgeType;
 	private Timeline timeline;
 	private GraphicsContext graphicsContext;
 	private Stage window;
@@ -26,7 +24,7 @@ public class AniCA {
 	private double simHeight;
 	
 	public AniCA (XMLArgs xmlArgs, AutomatonDisplay autoDisp) {
-		grid = (Grid) GridFactory.create(edgeType, xmlArgs, autoDisp);
+		grid = (Grid) GridFactory.create(xmlArgs, autoDisp);
 		grid.initializeGrid();
 	}
 	

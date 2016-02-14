@@ -31,16 +31,16 @@ public class GridFactory {
 	}
 	
 	static class DirectionFactory{
-			private DirectionFactory(){
-				myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE);
-			}
-			
-			private static Direction[] create(String type){
-				if(type.equals("Cardinal")){
-					return Direction.CARDINAL_DIRECTIONS;
-				}else if(type.equals("All")){
-					return Direction.ALL_DIRECTIONS;
-				}else return Direction.ALL_DIRECTIONS;
-			}
+		private DirectionFactory(){
+			myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE);
+		}
+		
+		private static Direction[] create(String type){
+			if(type.equals("Cardinal")){
+				return Direction.CARDINAL_DIRECTIONS;
+			}else if(type.equals("All")){
+				return Direction.ALL_DIRECTIONS;
+			}else return Direction.ALL_DIRECTIONS;
+		}
 	}
 }
