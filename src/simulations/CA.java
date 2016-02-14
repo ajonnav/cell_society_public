@@ -1,5 +1,6 @@
 package simulations;
 import java.util.List;
+
 import slot.*;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -7,6 +8,7 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import automaton.*;
@@ -55,6 +57,11 @@ public class CA {
 	}
 	
 	public void drawCells() {
+		getGraphicsContext().clearRect(0,0,getSimWidth(), getSimHeight());
+		for(Slot slot: getAllSlots()) {
+			Color c = slot.getOccupants().get(0).getCellColor();
+			slot.draw(getGraphicsContext(), c);
+		}
 	}
 	
 	private int getFramesPerSecond() {
