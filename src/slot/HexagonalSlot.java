@@ -68,6 +68,9 @@ public class HexagonalSlot implements Slot {
 		//corners will be ordered in a clockwise fashion, starting at reference point xCoord, yCoord
 		double [] xPoints = getXPoints();
 		double [] yPoints = getYPoints();
+		for(int i = 0; i < 6; i++){
+			System.out.println("X: " + xPoints[i] + " Y: " + yPoints[i]);
+		}
 		gc.fillPolygon(xPoints, yPoints, 6);
 
 	}
@@ -106,7 +109,7 @@ public class HexagonalSlot implements Slot {
 	}
 	
 	@Override
-	public void addOccupants(Cell cell) {
+	public void addOccupant(Cell cell) {
 		occupants.add(cell);
 	}
 }

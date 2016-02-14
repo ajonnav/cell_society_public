@@ -58,11 +58,6 @@ public class SegregationGrid extends CA {
 		}
 	}
 
-	@Override
-	protected void calculateAdjacencyMatrixAndSetNeighbor() {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public void updateCells() {
