@@ -27,7 +27,7 @@ public class HexagonalSlot implements Slot {
 	}
 
 	@Override
-	public void setNeighbors(Collection<Slot> newNeighbors) {
+	public void setNeighbors(List<Slot> newNeighbors) {
 		neighbors = new ArrayList<Slot>(newNeighbors);
 	}
 	
@@ -59,7 +59,7 @@ public class HexagonalSlot implements Slot {
 	}
 
 	@Override
-	public Collection<Slot> getNeighbors() {
+	public List<Slot> getNeighbors() {
 		return neighbors;
 	}
 
@@ -96,16 +96,18 @@ public class HexagonalSlot implements Slot {
 	}
 
 	@Override
-	public Collection<Cell> getOccupants() {
+	public List<Cell> getOccupants() {
 		return occupants;
 	}
 
 	@Override
-	public void setOccupants(Collection<Cell> cells) {
+	public void setOccupants(List<Cell> cells) {
 		occupants = new ArrayList<Cell>(cells);
 
 	}
-	public void addOccupant(Cell cell){
+	
+	@Override
+	public void addOccupants(Cell cell) {
 		occupants.add(cell);
 	}
 }
