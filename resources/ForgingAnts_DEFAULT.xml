@@ -16,9 +16,9 @@
 <home_y>50 51 52 52</home_y>
 <food_x>20 20 21 21</food_x>
 <food_y>20 20 20 20</food_y>
-<ant_x>50 50 50</ant_x>
-<ant_y>50 50 50</ant_y>
+<ant_x>0 50 50 50</ant_x>
+<ant_y>0 50 50 50</ant_y>
+<direction>All</direction>
 <edgeType>Finite</edgeType>
 <gridShape>Square</gridShape>
-<direction>all</direction>
 </content>

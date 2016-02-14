@@ -12,11 +12,13 @@ public class AntCell extends ForgingAntCell {
 	private int lifeCycle;
 	private boolean hasFood;
 	private CardinalDirection direction;
+	private int tcol;
 	
-	public AntCell(int lifeSpan) {
+	public AntCell(int lifeSpan, int tcol) {
 		super(Color.RED);
 		// TODO Auto-generated constructor stub
 		this.lifeCycle = lifeSpan;
+		this.tcol = tcol;
 	}	
 
 	public void update() {
@@ -30,8 +32,8 @@ public class AntCell extends ForgingAntCell {
 	/*
 	 * Returns the best neighbor to move to 
 	 */
-	public Slot findBestNeighbor(Slot s) {
-		AntOrientationFactory myFactory = new AntOrientationFactory(direction, s);
+	public Slot findBestNeighbor(Slot s, int coltotal) {
+		AntOrientationFactory myFactory = new AntOrientationFactory(direction, s, coltotal);
 		//Collection<Slot> myF_Neighbors = myFactory.getForwardNeighbors();
 		List<GroundCell> possibleGround = getGroundCellsFromSlot(myFactory.getForwardNeighbors());
 		sortCollectionbyFoodStatus(possibleGround);

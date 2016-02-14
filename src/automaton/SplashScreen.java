@@ -42,8 +42,8 @@ public class SplashScreen {
 		ImageView background = new ImageView(image);
 		root.getChildren().add(background);
 		setupFileChoose();
-		SplashScreenButtons myChoices = new SplashScreenButtons(root, "English");
-		myChoices.setDisplayControllers();
+		//SplashScreenButtons myChoices = new SplashScreenButtons(root, "English");
+		//myChoices.setDisplayControllers();
 		return s;
 	}
 	

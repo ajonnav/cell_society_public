@@ -16,10 +16,11 @@ public class AntOrientationFactory {
 	public AntOrientationFactory() {	
 	}
 	
-	public AntOrientationFactory(CardinalDirection d, Slot s) {
+	public AntOrientationFactory(CardinalDirection d, Slot s, int tcol) {
 		Neighbors = s.getNeighbors();
 		forwardNeighbors = new ArrayList<Slot>();
 		backwardNeighbors = new ArrayList<Slot>();
+		this.tcol = tcol;
 		findNeighborDirection(d, s);
 	}
 	
@@ -51,43 +52,48 @@ public class AntOrientationFactory {
 	private void findNeighborDirection(CardinalDirection d, Slot s) {
 		int[] dx = null; 
 		int[] dy = null;
-		switch (d) {
-			case N:
-				dx = new int[]{-1, -1, -1};
-				dy = new int[]{-1, 0, 1};
-				break;
-			case NE: 
-				dx = new int[]{-1, -1, 0};
-				dy = new int[]{0, 1, 1};
-				break;
-			case E:
-				dx = new int[]{-1, 0, 1};
-				dy = new int[]{-1, 1, 1};
-				break;
-			case SE: 
-				dx = new int[]{0, 1, 1};
-				dy = new int[]{1, 1, 0};
-				break;
-			case S:
-				dx = new int[]{1, 1, 1};
-				dy = new int[]{1, 0, 1};
-				break;
-			case SW:
-				dx = new int[]{1, 1, 0};
-				dy = new int[]{0, -1, -1};
-				break;
-			case W:
-				dx = new int[]{1, 0, -1};
-				dy = new int[]{-1, -1, -1};
-				break;
-			case NW:
-				dx = new int[]{0, -1, -1};
-				dy = new int[]{-1, -1, 0};
-				break;
-			default:
-				dx = new int[]{-1, -1, -1, 0, 1, 1, 1, 0};
-				dy = new int[]{-1, 0, 1, 1, 1, 0, -1, -1};
-				break;
+		if (d == null) {
+			dx = new int[]{-1, -1, -1, 0, 1, 1, 1, 0};
+			dy = new int[]{-1, 0, 1, 1, 1, 0, -1, -1};
+		} else {
+			switch (d) {
+				case N:
+					dx = new int[]{-1, -1, -1};
+					dy = new int[]{-1, 0, 1};
+					break;
+				case NE: 
+					dx = new int[]{-1, -1, 0};
+					dy = new int[]{0, 1, 1};
+					break;
+				case E:
+					dx = new int[]{-1, 0, 1};
+					dy = new int[]{-1, 1, 1};
+					break;
+				case SE: 
+					dx = new int[]{0, 1, 1};
+					dy = new int[]{1, 1, 0};
+					break;
+				case S:
+					dx = new int[]{1, 1, 1};
+					dy = new int[]{1, 0, 1};
+					break;
+				case SW:
+					dx = new int[]{1, 1, 0};
+					dy = new int[]{0, -1, -1};
+					break;
+				case W:
+					dx = new int[]{1, 0, -1};
+					dy = new int[]{-1, -1, -1};
+					break;
+				case NW:
+					dx = new int[]{0, -1, -1};
+					dy = new int[]{-1, -1, 0};
+					break;
+				default:
+					dx = new int[]{-1, -1, -1, 0, 1, 1, 1, 0};
+					dy = new int[]{-1, 0, 1, 1, 1, 0, -1, -1};
+					break;
+			}
 		}
 		getSlotsfromArray(s, dx, dy);
 	}

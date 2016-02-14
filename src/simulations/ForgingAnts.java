@@ -11,17 +11,18 @@ import ForgingAntCells.GroundCell;
 import automaton.AutomatonDisplay;
 import automaton.XMLArgs;
 import cells.Cell;
+import javafx.scene.paint.Color;
 import slot.Slot;
 
 public class ForgingAnts extends CA {
 	private List<Slot> allSlots;
 	private List<Integer> homeSpot;
 	private List<Integer> foodSpot;
-	private int tcol;
 	private double addPheromone;
 	private double diffRate;
 	private double evapRate;
 	private int life_span;
+	private int tcol;
 	private double pheromonelimit;
 	private List<List<Cell>> copiesOfCells;
 	private List<Integer> home_x;
@@ -66,6 +67,7 @@ public class ForgingAnts extends CA {
 		ant_y = xmlArgs.getAsListOfInteger("ant_y");
 		homeSpot = new ArrayList<Integer>();
 		foodSpot = new ArrayList<Integer>();
+		tcol = xmlArgs.getAsInt("numCol");
 	}
 
 	@Override
@@ -91,10 +93,10 @@ public class ForgingAnts extends CA {
 					isFood = true;
 					foodSpot.add(numCell);
 				}
-				cell = new GroundCell(pheromonelimit, diffRate, evapRate, isHome, isFood);
+				cell = new GroundCell(pheromonelimit, diffRate, evapRate, isHome, isFood, allSlots.get(getIndexFromRowCol(col, row)));
 				Cell ant = null;
 				if (ant_x.contains(col) && ant_y.contains(row)) {
-					ant =  new AntCell(life_span);
+					ant =  new AntCell(life_span, tcol);
 				}
 				allSlots.get(getIndexFromRowCol(col, row)).addOccupants(cell);
 				if (ant != null) {
@@ -181,7 +183,7 @@ public class ForgingAnts extends CA {
 		} else {
 			antDropFoodPheromone[s.index()] += addPheromone;
 		}
-		Slot nextSlot = ((AntCell) c).findBestNeighbor(allSlots.get(s.index()));
+		Slot nextSlot = ((AntCell) c).findBestNeighbor(allSlots.get(s.index()), tcol);
 		if (nextSlot == null) {
 			nextSlot = s;
 		}
@@ -194,8 +196,16 @@ public class ForgingAnts extends CA {
 
 	@Override
 	public void drawCells() {
-		// TODO Auto-generated method stub
-
+		getGraphicsContext().clearRect(0,0,getSimWidth(), getSimHeight());
+		
+		for(Slot slot: getAllSlots()) {
+			for(int k = 0; k < slot.getOccupants().size(); k++) {
+				Color c = slot.getOccupants().get(k).getCellColor();
+				slot.draw(getGraphicsContext(), c);
+			}
+		}
+		int x=0;
+		int y=x+1;
 	}
 	
 	private CardinalDirection getDirectionbetweenSlots(Slot origin, Slot next) {

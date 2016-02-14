@@ -18,8 +18,8 @@ public class GroundCell extends ForgingAntCell {
 	private boolean home;
 	private boolean food;
 	
-	public GroundCell(double pheromoneLimit, double diffusionRate, double evapRate, boolean home, boolean food) {
-		super(Color.GREEN);
+	public GroundCell(double pheromoneLimit, double diffusionRate, double evapRate, boolean home, boolean food, Slot s) {
+		super(Color.TRANSPARENT);
 		homePheromone = 0;
 		foodPheromone = 0;
 		this.pheromoneLimit = pheromoneLimit;
@@ -27,7 +27,7 @@ public class GroundCell extends ForgingAntCell {
 		this.evapRate = evapRate;
 		this.home = home;
 		this.food = food;
-		
+		this.mySlot = s;
 	}
 	
 	public void sethomeHormone(double addHormone) {
