@@ -3,12 +3,9 @@
 <name>GOL</name>
 <title>Conway's Game of Life</title>
 <author>John Horton Conway</author>
-<simWidth>700</simWidth>
-<simHeight>700</simHeight>
+<simWidth>500</simWidth>
+<simHeight>500</simHeight>
 <numRow>100</numRow>
 <numCol>100</numCol>
 <perAlive>0.30</perAlive>
-<direction>All</direction>
-<edgeType>Toroid</edgeType>
-<gridShape>Square</gridShape>
 </content>

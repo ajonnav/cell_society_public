@@ -105,6 +105,7 @@ public class HexagonalSlot implements Slot {
 	}
 	
 	@Override
+
 	public void addOccupant(Cell cell) {
 		occupants.add(cell);
 	}

@@ -8,11 +8,8 @@
 <numRow>100</numRow>
 <numCol>100</numCol>
 <probCatch>0.70</probCatch>
-<burning_x>0 50</burning_x>
-<burning_y>3 50</burning_y>
-<empty_x>0</empty_x>
-<empty_y>0</empty_y>
-<direction>Cardinal</direction>
-<edgeType>Toroid</edgeType>
-<gridShape>Square</gridShape>
+<BurningCells_x>50 51 53</BurningCells_x>
+<BurningCells_y>50 52 50</BurningCells_y>
+<Empty_x>0</Empty_x>
+<Empty_y>0</Empty_y>
 </content>

@@ -1,5 +1,9 @@
 package simulations;
 import java.util.List;
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 import slot.*;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -49,6 +53,7 @@ public class CA {
 	protected void runSimulation() {
 		updateCells();
 		drawCells();
+<<<<<<< HEAD
 	}
 	
 	public void updateCells() {
@@ -102,6 +107,66 @@ public class CA {
 	}
 
 	
+=======
+	}
+	
+	public void updateCells() {
+	}
+	
+	public void drawCells() {
+		getGraphicsContext().clearRect(0,0,getSimWidth(), getSimHeight());
+		for(Slot slot: getAllSlots()) {
+			Color c = slot.getOccupants().get(0).getCellColor();
+			slot.draw(getGraphicsContext(), c);
+		}
+	}
+	
+	private int getFramesPerSecond() {
+		return DEFAULT_FRAMES_PER_SECOND;
+	}
+	
+	public int getNumCol() {
+		return grid.getNumCol();
+	}
+	
+	public int getNumRow() {
+		return grid.getNumRow();
+	}
+	
+	public int getIndexFromRowCol(int row, int col) {
+		return grid.getIndexFromRowCol( row, col);
+	}
+	
+	public List<Slot> getAllSlots() {
+		return grid.getSlots();
+	}
+
+	public GraphicsContext getGraphicsContext() {
+		return graphicsContext;
+	}
+
+	public void setGraphicsContext(GraphicsContext graphicsContext) {
+		this.graphicsContext = graphicsContext;
+	}
+
+	public double getSimWidth() {
+		return simWidth;
+	}
+
+	public void setSimWidth(double simWidth) {
+		this.simWidth = simWidth;
+	}
+
+	public double getSimHeight() {
+		return simHeight;
+	}
+
+	public void setSimHeight(double simHeight) {
+		this.simHeight = simHeight;
+	}
+
+	
+>>>>>>> master
 	public void initializeScreen() {		
 	}
 

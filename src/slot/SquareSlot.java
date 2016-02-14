@@ -74,4 +74,6 @@ public class SquareSlot implements Slot {
 		occupants.add(cell);
 	}
 
+
+
 }

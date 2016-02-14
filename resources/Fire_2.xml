@@ -7,9 +7,12 @@
 <simHeight>500</simHeight>
 <numRow>3</numRow>
 <numCol>3</numCol>
-<probCatch>0.1</probCatch>
-<BurningCells_x>0</BurningCells_x>
-<BurningCells_y>0</BurningCells_y>
-<Empty_x>1</Empty_x>
-<Empty_y>1</Empty_y>
+<probCatch>1</probCatch>
+<burning_x>0</burning_x>
+<burning_y>0</burning_y>
+<empty_x>1</empty_x>
+<empty_y>1</empty_y>
+<direction>Cardinal</direction>
+<edgeType>Finite</edgeType>
+<gridShape>Square</gridShape>
 </content>

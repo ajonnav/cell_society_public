@@ -1,85 +1,101 @@
 package ForgingAntCells;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
-import cells.Cell;
-import javafx.scene.canvas.GraphicsContext;
+import ForgingAntCells.ForgingAntCell;
 import javafx.scene.paint.Color;
+import slot.Slot;
 
-public abstract class AntCell extends Cell {
+public class AntCell extends ForgingAntCell {
 	private int lifeCycle;
 	private boolean hasFood;
-	private double addHormone;
-	private GroundCell currentground;
+	private CardinalDirection direction;
+	private int tcol;
 	
-	public AntCell(double x, double y, Color color, double w, double h) {
-		super(x, y, color, w, h);
+	public AntCell(int lifeSpan, int tcol) {
+		super(Color.RED);
 		// TODO Auto-generated constructor stub
-	}
+		this.lifeCycle = lifeSpan;
+		this.tcol = tcol;
+	}	
 
-	@Override
-	public void draw(GraphicsContext gc) {
-		// TODO Auto-generated method stub
-
+	public void update() {
+		lifeCycle--;
+	}
+	
+	public int getLifeLeft() {
+		return lifeCycle;
 	}
 	
 	/*
-	 * Will find the next location for the cell and drop hormones 
+	 * Returns the best neighbor to move to 
 	 */
-	public void update(AntCell[] ants, GroundCell[] groundcells) {
-		AntCell moveAnt = nextOrientationAnt(groundcells);
-		dropHormone(currentground);
-		//remove from neighbors list, get another neighbor list...etc
-	}
-
-	/*
-	 * Finds the next location for the ant and creates an ant in that location
-	 */
-	private AntCell nextOrientationAnt(GroundCell[] cells) {
-		return moveToNextLocation(findBestNeighbor(getForwardNeighbors()));
-	}
-	
-	/*
-	 * Gets the forward neighbors for the ant based on its orientation
-	 */
-	public abstract Collection<GroundCell> getForwardNeighbors();
-	
-	/*
-	 * Gets all the neighbors (ground) for the ant except its forward neighbors
-	 */
-	public abstract Collection<GroundCell> getNonForwardNeighbors(); 
-	
-	/*
-	 * Gets passed the forward neighbors for the ant and finds which to move to
-	 * If not forward neighbors are available, gets rest of neighbors and finds the best to move to
-	 */
-	public GroundCell findBestNeighbor(Collection<GroundCell> cells) {
-		if (getFoodStatus()) {
-			//sorts list based on home hormones
-		} else {
-			//sorts list based on food hormones
+	public Slot findBestNeighbor(Slot s, int coltotal) {
+		AntOrientationFactory myFactory = new AntOrientationFactory(direction, s, coltotal);
+		//Collection<Slot> myF_Neighbors = myFactory.getForwardNeighbors();
+		List<GroundCell> possibleGround = getGroundCellsFromSlot(myFactory.getForwardNeighbors());
+		sortCollectionbyFoodStatus(possibleGround);
+		Slot newSlot = checkMaxOccupantsandReturnSlot(possibleGround);
+		if (newSlot == null) {
+			Collection<GroundCell> otherPossible = getGroundCellsFromSlot(myFactory.getBackwardNeighbors());
+			return checkMaxOccupantsandReturnSlot(otherPossible);
 		}
-		return currentground;
+		return newSlot;
 		
 	}
+
+	/*
+	 * Returns a slot if the slot does not have the maximum number of occupants possible
+	 */
+	private Slot checkMaxOccupantsandReturnSlot(Collection<GroundCell> possibleGround) {
+		for (GroundCell g : possibleGround) {
+			if (!(g.getSlot().getOccupants().size() > 10)) {
+				return g.getSlot();
+			}
+		}
+		return null;
+	}
 	
 	/*
-	 * Creates a new ant cell with the new orientation of the ant and copies over the life cycle
-	 * and modifies the food status of the ant if appropriate
+	 * Sorts the ants based on food pheromones and home pheromones 
 	 */
-	public abstract AntCell moveToNextLocation(GroundCell cell);
-	
-	private void dropHormone(GroundCell currentground) {
+	private void sortCollectionbyFoodStatus(List<GroundCell> possibleGround) {
 		if (hasFood) {
-			currentground.sethomeHormone(addHormone);
+			Collections.sort(possibleGround, GroundCell.homeComparator());
 		} else {
-			currentground.setfoodHormone(addHormone);
+			Collections.sort(possibleGround, GroundCell.foodComparator());
 		}
 	}
 	
 	/*
 	 * Returns true if the ant has food, returns false otherwise
 	 */
-	public abstract boolean getFoodStatus();
+	public boolean getFoodStatus() {
+		return hasFood;
+	}
+	
+	/*
+	 * Sets the food status of the ant
+	 */
+	public void setFoodStatus(boolean hasFood) {
+		this.hasFood = hasFood;
+	}
+	
+	
+	/*
+	 * Returns the cardinal direction of the ant cell
+	 */
+	public CardinalDirection getCurrentDirection() {
+		return direction;
+	}
+	
+	/*
+	 * Sets the direction of the ant
+	 */
+	public void setDirection(CardinalDirection d) {
+		this.direction = d;
+	}
 	
 }

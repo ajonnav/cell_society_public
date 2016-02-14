@@ -1,12 +1,19 @@
 package simulations;
 import java.util.ArrayList;
 import java.util.List;
+<<<<<<< HEAD
 
 import javafx.scene.paint.Color;
 import slot.*;
 import cells.*;
 import automaton.*;
 
+=======
+import slot.*;
+import cells.*;
+import automaton.*;
+
+>>>>>>> master
 public class GameOfLife extends CA{
 	private double perAlive; 
 	
@@ -16,8 +23,12 @@ public class GameOfLife extends CA{
 	}
 	
 	@Override
+<<<<<<< HEAD
 	public void initializeScreen() {		
 		int numCell = 0;
+=======
+	public void initializeScreen() {
+>>>>>>> master
 		List<Slot> list = getAllSlots();
 		for(Slot slot:list) {
 			slot.getOccupants().clear();
@@ -32,7 +43,10 @@ public class GameOfLife extends CA{
 					cell = new DeadGOLCell();
 				}
 				list.get(getIndexFromRowCol(col, row)).addOccupants(cell);
+<<<<<<< HEAD
 				numCell++;
+=======
+>>>>>>> master
 			}
 		}
 		initializeSimulationLoop();
@@ -46,6 +60,7 @@ public class GameOfLife extends CA{
 		for(Slot slot : slotList) {
 			Cell newCell=slot.getOccupants().get(0).update(slot.getNeighbors());
 			newCellList.add(newCell);
+<<<<<<< HEAD
 		}
 		
 		for(int i=0; i < slotList.size(); i++) {
@@ -62,6 +77,13 @@ public class GameOfLife extends CA{
 		for(Slot slot: getAllSlots()) {
 			Color c = slot.getOccupants().get(0).getCellColor();
 			slot.draw(getGraphicsContext(), c);
+=======
+		}
+		for(int i=0; i < slotList.size(); i++) {
+			List<Cell> list = new ArrayList<Cell>();
+			list.add(newCellList.get(i));
+			slotList.get(i).setOccupants(list);
+>>>>>>> master
 		}
 		int x=0;
 		int y=x+1;

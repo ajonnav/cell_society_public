@@ -27,6 +27,9 @@ public class SimulationFactory {
 		else if(id.equals("Wator")) {
 			return new Wator(xmlArgs, autoDisp);
 		}
+		else if(id.equals("Forging Ants")) {
+			return new ForgingAnts(xmlArgs, autoDisp);
+		}
 		else {
 			throw new ConfigFileException(myResources.getString("NotValid"), "name");
 		}

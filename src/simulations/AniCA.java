@@ -25,10 +25,13 @@ public class AniCA {
 	
 	public AniCA (XMLArgs xmlArgs, AutomatonDisplay autoDisp) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		//grid = (AniAnyGrid) GridFactory.create(edgeType, xmlArgs, autoDisp);
 		grid.setUpSlots();
 		grid.calculateNeighbors();
 =======
+=======
+>>>>>>> master
 		grid = (Grid) GridFactory.create(xmlArgs, autoDisp);
 		grid.initializeGrid();
 		timeline= new Timeline();
@@ -80,6 +83,9 @@ public class AniCA {
 	
 	public List<Slot> getAllSlots() {
 		return grid.getSlots();
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
 	}
 
