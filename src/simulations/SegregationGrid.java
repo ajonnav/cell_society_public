@@ -11,7 +11,11 @@ import automaton.AutomatonDisplay;
 import automaton.XMLArgs;
 import factory.GridFactory;
 import grid.*;
-
+/**
+ * This is the Implementation of the Segregation simulation using our new framework
+ * @author colinduffy
+ *
+ */
 public class SegregationGrid extends CA {
 	private double tPercentage;
 	private double typeOneP;
@@ -32,6 +36,9 @@ public class SegregationGrid extends CA {
 	}
 
 	@Override
+	/**
+	 * Initializes Grid, sets initial states, begins loop and draws the cells.
+	 */
 	public void initializeScreen() {
 		// TODO Auto-generated method stub
 		simGrid.initializeGrid();
@@ -45,14 +52,17 @@ public class SegregationGrid extends CA {
 			double typeOne = (1.0 - vacantP) * typeOneP;
 			double rand = Math.random();
 			if (rand < vacantP) {
+				//vacant cell
 				SegregationSlotCell cell = new SegregationSlotCell(TYPE_VACANT_COLOR,
 						tPercentage, 0,0);
 				s.addOccupant(cell);
 			} else if (rand > vacantP && rand < vacantP + typeOne) {
+				//type one cell
 				SegregationSlotCell cell = new SegregationSlotCell(TYPE_ONE_COLOR,
 						tPercentage, 1,2);
 				s.addOccupant(cell);
 			} else {
+				//type two cell
 				SegregationSlotCell cell = new SegregationSlotCell(TYPE_TWO_COLOR,
 						tPercentage, 2,1);
 				s.addOccupant(cell);
@@ -61,10 +71,12 @@ public class SegregationGrid extends CA {
 		}
 	}
 
-
+	
 	@Override
+	/**
+	 * Checks cell in each slot for its satisfaction.  If not satisfied, slot is pushed onto the Slots to Change stack
+	 */
 	public void updateCells() {
-
 		for (Slot s : simGrid.getSlots()) {
 			ArrayList<Cell> occupant = new ArrayList<Cell>(s.getOccupants());
 			SegregationSlotCell resident = (SegregationSlotCell) occupant
@@ -109,7 +121,11 @@ public class SegregationGrid extends CA {
 		return states;
 	}
 
+	
 	@Override
+	/**
+	 * Retrieves the Color of the cell and displays it for the slot. 
+	 */
 	public void drawCells() {
 		// TODO Auto-generated method stub
 		getGraphicsContext().clearRect(0, 0, getSimWidth(), getSimHeight());
