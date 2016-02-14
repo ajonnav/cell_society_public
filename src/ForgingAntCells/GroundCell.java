@@ -1,17 +1,21 @@
 package ForgingAntCells;
 
 import java.util.Comparator;
+import java.util.List;
 
 import cells.Cell;
+import grid.ForgingAntCell;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import slot.Slot;
 
-public class GroundCell extends Cell {
+public class GroundCell extends ForgingAntCell {
 	private Slot mySlot;
-	private double homeHormone;
-	private double foodHormone;
-	private double hormoneLimit;
+	private double homePheromone;
+	private double foodPheromone;
+	private double pheromoneLimit;
+	private double diffusionRate;
+	private double evapRate;
 	private boolean home;
 	private boolean food;
 	
@@ -27,23 +31,23 @@ public class GroundCell extends Cell {
 	}
 	
 	public void sethomeHormone(double addHormone) {
-		if (homeHormone < hormoneLimit) {
-			homeHormone += addHormone;
+		if (homePheromone < pheromoneLimit) {
+			homePheromone += addHormone;
 		}
 	}
 	
 	public void setfoodHormone(double addHormone) {
-		if (foodHormone < hormoneLimit) {
-			foodHormone += addHormone;
+		if (foodPheromone < pheromoneLimit) {
+			foodPheromone += addHormone;
 		}
 	}
 
 	public double gethomeHormone() {
-		return homeHormone;
+		return homePheromone;
 	}
 	
 	public double getfoodHormone() {
-		return foodHormone;
+		return foodPheromone;
 	}
 	
 	public Slot getSlot() {
@@ -51,8 +55,26 @@ public class GroundCell extends Cell {
 	}
 	
 	public void update(GroundCell[] cells) {
-		//evaporation, decrease hormone levels by certain amount
-		//check for diffusion? based on neighbors, increase by certain amount?
+	}
+	
+	public void update() {
+		foodPheromone -= evapRate;
+		homePheromone -= evapRate;
+		if (foodPheromone < 0) {
+			foodPheromone = 0;
+		} else if (homePheromone < 0) {
+			homePheromone = 0;
+		}
+	}
+	
+	public double[] getDiffusionAmount() {
+		List<GroundCell> neighbors = getGroundCellsFromSlot(mySlot.getNeighbors());
+		double[] pheromoneIncrease = new double[]{0,0}; //0 is food, 1 is home 
+		for (GroundCell g : neighbors) {
+			pheromoneIncrease[0] += g.gethomeHormone()*diffusionRate;
+			pheromoneIncrease[1] += g.getfoodHormone()*diffusionRate;
+		}
+		return pheromoneIncrease;
 	}
 	
 	//use comparable or comparator to sort by either food hormones or home hormones?

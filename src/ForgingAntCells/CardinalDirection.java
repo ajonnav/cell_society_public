@@ -3,7 +3,7 @@ package ForgingAntCells;
 public enum CardinalDirection {
 	N, NE, E, SE, S, SW, W, NW;
 
-	public CardinalDirection valueOf(int dx, int dy) {
+	public static CardinalDirection valueOf(int dx, int dy) {
 		if (dx == 0) {
 			if (dy == -1) {
 				return W;

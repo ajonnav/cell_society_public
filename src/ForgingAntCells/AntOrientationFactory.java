@@ -17,7 +17,7 @@ public class AntOrientationFactory {
 	}
 	
 	public AntOrientationFactory(CardinalDirection d, Slot s) {
-		Collection<Slot> Neighbors = s.getNeighbors();
+		Neighbors = s.getNeighbors();
 		forwardNeighbors = new ArrayList<Slot>();
 		backwardNeighbors = new ArrayList<Slot>();
 		findNeighborDirection(d, s);
@@ -85,6 +85,8 @@ public class AntOrientationFactory {
 				dy = new int[]{-1, -1, 0};
 				break;
 			default:
+				dx = new int[]{-1, -1, -1, 0, 1, 1, 1, 0};
+				dy = new int[]{-1, 0, 1, 1, 1, 0, -1, -1};
 				break;
 		}
 		getSlotsfromArray(s, dx, dy);
