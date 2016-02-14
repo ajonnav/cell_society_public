@@ -9,6 +9,7 @@ import cells.*;
 import slot.Slot;
 import automaton.AutomatonDisplay;
 import automaton.XMLArgs;
+import factory.GridFactory;
 import grid.*;
 
 public class SegregationGrid extends CA {
@@ -23,8 +24,7 @@ public class SegregationGrid extends CA {
 		tPercentage = xmlArgs.getAsDouble("tPercentage");
 		typeOneP = xmlArgs.getAsDouble("typeOneP");
 		vacantP = xmlArgs.getAsDouble("vacantP");
-		simGrid = new FiniteGrid(getNumRow(), getNumCol(), (int)getCellWidth(),
-				(int) getCellHeight(), "Hexagonal", Direction.ALL_DIRECTIONS);
+		simGrid = GridFactory.create(xmlArgs, a);
 		slotsToChange = new Stack<Slot>();
 	}
 
