@@ -57,4 +57,6 @@ public interface Slot {
 	 * @param cells
 	 */
 	public void setOccupants(Collection<Cell> cells);
+	
+	public void addOccupant(Cell cell);
 }

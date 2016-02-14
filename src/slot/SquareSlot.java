@@ -69,5 +69,8 @@ public class SquareSlot implements Slot {
 		occupants = new ArrayList<Cell>(cells);
 
 	}
+	public void addOccupant(Cell cell){
+		occupants.add(cell);
+	}
 
 }

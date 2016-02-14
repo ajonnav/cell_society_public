@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 
 public abstract class SegregationTypeSquareCell extends SegregationSquareCell {
 	protected double tPercentage;
-	private int OTHER_STATE;
+	protected int OTHER_STATE;
 	
 	public SegregationTypeSquareCell(double x, double y, Color c, double w,
 			double h, double t) {
