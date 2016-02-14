@@ -12,4 +12,7 @@
 <burning_y>3 50</burning_y>
 <empty_x>0</empty_x>
 <empty_y>0</empty_y>
+<direction>Cardinal</direction>
+<edgeType>Toroid</edgeType>
+<gridShape>Square</gridShape>
 </content>
