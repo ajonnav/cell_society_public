@@ -11,16 +11,35 @@ import slot.Slot;
 /*
  * Author: Christine Zhou
  */
+
+//This entire file is part of my masterpiece.
+//Christine Zhou
+/*
+ * My ant cell class is created by the CA which passes its life span. It has methods for calculating its best neighbors
+ * and setting its current direction and next direction. It will return to the CA through neighbors method the slot it wants
+ * to move to or null if there is no spot that it can move to.
+ * I chose my AntCell class as part of my masterpiece because I think it a good example of giving more functions to a cell class
+ * instead of letting the simulation controller for ant simulation (ForgingAnts) do all the work. I moved some of the 
+ * integral parts for updating an ant cell, such as finding its next slot to move to, into the ant cell class itself so
+ * that the ant doesn't need to pass a bunch of parameters to the simulation and then get a bunch of parameters back 
+ * from the simulation. If the ant cell can calculate its own neighbors, find the next slot to move to, and find its next
+ * orientation (which all is specific to the ant cell), then all the simulation has to do is pass the slot that the ant cell is 
+ * in and retrieve the best neighbor to move the cell, call update, and check that the ant is still alive. Moving many
+ * of the functions to the cell class itself helps with encapsulation and restricted the getters and setters to only a setter
+ * for setting the food status of the ant which the simulation checks by seeing if the ant is in the same slot as a food
+ * spot and a getter for food status which the simulation uses to deposit pheromones in the ground cells.
+ */
+
 public class AntCell extends ForgingAntCell {
 	private int lifeCycle;
 	private boolean hasFood;
 	private CardinalDirection direction;
-	private int tcol;
+	private CardinalDirection nextDirection;
+	private int maxOccupants;
 	
-	public AntCell(int lifeSpan, int tcol) {
+	public AntCell(int lifeSpan) {
 		super(Color.RED);
 		this.lifeCycle = lifeSpan;
-		this.tcol = tcol;
 	}	
 	
 	/*
@@ -28,6 +47,8 @@ public class AntCell extends ForgingAntCell {
 	*/
 	public void update() {
 		lifeCycle--;
+		direction = nextDirection;
+		nextDirection = null;
 	}
 	
 	/*
@@ -40,9 +61,9 @@ public class AntCell extends ForgingAntCell {
 	/*
 	 * Returns the best neighbor to move to 
 	 */
-	public Slot findBestNeighbor(Slot s, int coltotal) {
-		AntOrientationFactory myFactory = new AntOrientationFactory(direction, s, coltotal);
-		//Collection<Slot> myF_Neighbors = myFactory.getForwardNeighbors();
+	public Slot findBestNeighbor(Slot currentSlot) {
+		AntOrientationFactory myFactory = new AntOrientationFactory();
+		myFactory.findNeighbors(direction, currentSlot);
 		List<GroundCell> possibleGround = getGroundCellsFromSlot(myFactory.getForwardNeighbors());
 		sortCollectionbyFoodStatus(possibleGround);
 		Slot newSlot = checkMaxOccupantsandReturnSlot(possibleGround);
@@ -50,6 +71,7 @@ public class AntCell extends ForgingAntCell {
 			Collection<GroundCell> otherPossible = getGroundCellsFromSlot(myFactory.getBackwardNeighbors());
 			return checkMaxOccupantsandReturnSlot(otherPossible);
 		}
+		setDirectionBetweenSlots(currentSlot, newSlot);
 		return newSlot;
 		
 	}
@@ -59,7 +81,7 @@ public class AntCell extends ForgingAntCell {
 	 */
 	private Slot checkMaxOccupantsandReturnSlot(Collection<GroundCell> possibleGround) {
 		for (GroundCell g : possibleGround) {
-			if (!(g.getSlot().getOccupants().size() > 10)) {
+			if (!(g.getSlot().getOccupants().size() > maxOccupants)) {
 				return g.getSlot();
 			}
 		}
@@ -78,10 +100,10 @@ public class AntCell extends ForgingAntCell {
 	}
 	
 	/*
-	 * Returns true if the ant has food, returns false otherwise
+	 * Sets the value for next direction of the ant 
 	 */
-	public boolean getFoodStatus() {
-		return hasFood;
+	private void setDirectionBetweenSlots(Slot currentSlot, Slot newSlot) {
+		nextDirection = (newSlot != null) ? currentSlot.getDirectionOf(newSlot) : null;
 	}
 	
 	/*
@@ -91,19 +113,11 @@ public class AntCell extends ForgingAntCell {
 		this.hasFood = hasFood;
 	}
 	
-	
 	/*
-	 * Returns the cardinal direction of the ant cell
+	 * Returns the food status of the ant
 	 */
-	public CardinalDirection getCurrentDirection() {
-		return direction;
-	}
-	
-	/*
-	 * Sets the direction of the ant
-	 */
-	public void setDirection(CardinalDirection d) {
-		this.direction = d;
+	public boolean getFoodStatus() {
+		return hasFood;
 	}
 	
 }
