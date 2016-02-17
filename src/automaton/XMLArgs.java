@@ -1,3 +1,9 @@
+// This entire file is part of my masterpiece.
+// Anirudh Jonnavithula
+// I think this code is well designed because it hides the data structure that stores the parsed arguments but allows
+// other parts of the program to access them without harmfully changing them. It is also easy to extend; subclasses
+// could have other methods defined that read in the string as different data types. The could also have other methods
+// that read in files that are not XML files (for example csv files with column headers).
 package automaton;
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,7 +33,7 @@ import simexception.ConfigFileException;
 public class XMLArgs {
 	
 	private static final String DEFAULT_RESOURCE_PACKAGE = "ResourceBundle/Errors";
-	private HashMap<String, String> map;
+	private Map<String, String> map;
 	private ResourceBundle myResources;
 
 	/**
@@ -60,6 +66,11 @@ public class XMLArgs {
 	
 	}
 	
+	/**
+	 * Returns the key value as a string
+	 * @param key
+	 * @return map value as string
+	 */
 	public String getAsString(String key) {
 		validateKey(key);
 		return map.get(key);
@@ -68,7 +79,7 @@ public class XMLArgs {
 	/**
 	 * Get key value as int
 	 * @param key 
-	 * @return
+	 * @return map value as int
 	 */
 	public int getAsInt(String key) {
 		validateKey(key);
@@ -80,6 +91,11 @@ public class XMLArgs {
 		}
 	}
 	
+	/**
+	 * Returns the key value as a list of doubles
+	 * @param key
+	 * @return map value as double
+	 */
 	public double getAsDouble(String key) {
 		validateKey(key);
 		if(isDouble(map.get(key))) {
@@ -90,11 +106,21 @@ public class XMLArgs {
 		}
 	}
 
+	/**
+	 * Returns the key value as a list of strings
+	 * @param key
+	 * @return map value as list of strings
+	 */
 	public List<String> getAsListOfString(String key) {
 		validateKey(key);
 		return Arrays.asList(map.get(key).split(" "));
 	}
 
+	/**
+	 * Returns the key value as a list of ints
+	 * @param key
+	 * @return map value as list of ints
+	 */
 	public List<Integer> getAsListOfInteger(String key) {
 		validateKey(key);
 		List<String> sList= getAsListOfString(key);
@@ -110,15 +136,24 @@ public class XMLArgs {
 		return iList;
 	}
 	
-	private void validateKey(String key) {
+	/**
+	 * Checks if key exists in map
+	 * @param key String to check if it is a key in map
+	 */
+	protected void validateKey(String key) {
 		if(!map.containsKey(key)) {
 			throw new ConfigFileException(myResources.getString("NotFound"), key);
 		}
 	}
 	
-	private boolean isDouble(String s) {
+	/**
+	 * Checks if string can be converted to a double
+	 * @param s String to check
+	 * @return true if string can be converted
+	 */
+	public boolean isDouble(String s) {
 		try {
-			double num = Double.parseDouble(s);
+			Double.parseDouble(s);
 		}
 		catch(NumberFormatException e) { 
 	        return false; 
@@ -126,9 +161,14 @@ public class XMLArgs {
 		return true;
 	}
 	
-	private boolean isInteger(String s) {
+	/**
+	 * Checks if string can be converted to an int
+	 * @param s String to check
+	 * @return true if string can be converted
+	 */
+	public boolean isInteger(String s) {
 		try {
-			double num = Integer.parseInt(s);
+			Integer.parseInt(s);
 		}
 		catch(NumberFormatException e) { 
 	        return false; 
@@ -136,9 +176,14 @@ public class XMLArgs {
 		return true;
 	}
 	
+	/**
+	 * 
+	 * @return Map that is constructed when the XML file is read
+	 */
 	protected Map<String, String> getMap() {
 		return map;
 	}
+	
 	/**
 	 * Clears the map
 	 */
