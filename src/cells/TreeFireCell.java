@@ -1,21 +1,25 @@
-package FireCells;
+package cells;
 
+import java.util.List;
+
+import slot.Slot;
 import javafx.scene.paint.Color;
 
-public class FireTREE extends FireCell {
+/*
+* Author: Christine Zhou, updated by Ani
+*/
+public class TreeFireCell extends FireCell {
 
 	private static final boolean isBurning = false;
 	private static final boolean isEmpty = false;
-	private static double probCatch;
+	private double probCatch;
 	
 	/*
 	 * Sets the that a FireTREE cell is empty and is burning
 	 */
-	public FireTREE(double x, double y, double w, double h, double probCatch) {
-		super(x, y, Color.GREEN, w, h, probCatch);
+	public TreeFireCell(double probCatch) {
+		super(Color.GREEN, isEmpty, isBurning);
 		// TODO Auto-generated constructor stub
-		setEmpty(isEmpty);
-		setBurning(isBurning);
 		this.probCatch = probCatch;
 	}
 	
@@ -25,20 +29,19 @@ public class FireTREE extends FireCell {
 	 * then it sets the cell to a new burning cell, otherwise it just returns itself.
 	 */
 	@Override
-	public FireCell update(FireCell[] cells) {
+	public FireCell update(List<Slot> neighbors) {
 		// TODO Auto-generated method stub
-		FireBURNING newFireCell = new FireBURNING(getX(), getY(), getWidth(), getHeight());
-		newFireCell.setNeighbor(getNeighbor());
-		return hasBurningNeighbor(cells) && (probCatch >= Math.random()) 
+		BurningFireCell newFireCell = new BurningFireCell();
+		return hasBurningNeighbor(neighbors) && (probCatch >= Math.random()) 
 				? newFireCell : this;
 	}
 	
 	/*
 	 * Checks for if any of a cell's neighbors are burning.
 	 */
-	private boolean hasBurningNeighbor(FireCell[] cells) {
-		for (int i : getNeighbor()) {
-			if (cells[i].isBurning()) {
+	private boolean hasBurningNeighbor(List<Slot> neighbors) {
+		for (Slot slot : neighbors) {
+			if (((FireCell)slot.getOccupants().get(0)).isBurning()) {
 				return true;
 			}
 		}

@@ -1,5 +1,9 @@
 package simexception;
-
+/**
+ * Class for exception in the configuration file
+ * @author aj168
+ *
+ */
 public class ConfigFileException extends RuntimeException{
 
 	    // for serialization

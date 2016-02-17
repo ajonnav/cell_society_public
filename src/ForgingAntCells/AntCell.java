@@ -39,16 +39,21 @@ public class AntCell extends ForgingAntCell {
 	
 	public AntCell(int lifeSpan) {
 		super(Color.RED);
-		// TODO Auto-generated constructor stub
 		this.lifeCycle = lifeSpan;
 	}	
-
+	
+	/*
+	* Updates and subtracts from life cycle
+	*/
 	public void update() {
 		lifeCycle--;
 		direction = nextDirection;
 		nextDirection = null;
 	}
 	
+	/*
+	* Returns the life cycle
+	*/
 	public int getLifeLeft() {
 		return lifeCycle;
 	}

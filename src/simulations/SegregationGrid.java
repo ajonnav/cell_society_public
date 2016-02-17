@@ -11,13 +11,20 @@ import automaton.AutomatonDisplay;
 import automaton.XMLArgs;
 import factory.GridFactory;
 import grid.*;
-
+/**
+ * This is the Implementation of the Segregation simulation using our new framework
+ * @author colinduffy
+ *
+ */
 public class SegregationGrid extends CA {
 	private double tPercentage;
 	private double typeOneP;
 	private double vacantP;
 	private AnyGrid simGrid;
 	private Stack<Slot> slotsToChange;
+	private final static Color TYPE_ONE_COLOR = Color.RED;
+	private static Color TYPE_TWO_COLOR = Color.BLUE;
+	private static Color TYPE_VACANT_COLOR = Color.WHITE;
 	public SegregationGrid(XMLArgs xmlArgs, AutomatonDisplay a) {
 		super(xmlArgs, a);
 		// TODO Auto-generated constructor stub
@@ -29,22 +36,34 @@ public class SegregationGrid extends CA {
 	}
 
 	@Override
+	/**
+	 * Initializes Grid, sets initial states, begins loop and draws the cells.
+	 */
 	public void initializeScreen() {
 		// TODO Auto-generated method stub
 		simGrid.initializeGrid();
+		setInitialStates();
+		initializeSimulationLoop();
+		drawCells();
+	}
+
+	private void setInitialStates() {
 		for (Slot s : simGrid.getSlots()) {
 			double typeOne = (1.0 - vacantP) * typeOneP;
 			double rand = Math.random();
 			if (rand < vacantP) {
-				SegregationSlotCell cell = new SegregationSlotCell(Color.GRAY,
+				//vacant cell
+				SegregationSlotCell cell = new SegregationSlotCell(TYPE_VACANT_COLOR,
 						tPercentage, 0,0);
 				s.addOccupant(cell);
 			} else if (rand > vacantP && rand < vacantP + typeOne) {
-				SegregationSlotCell cell = new SegregationSlotCell(Color.RED,
+				//type one cell
+				SegregationSlotCell cell = new SegregationSlotCell(TYPE_ONE_COLOR,
 						tPercentage, 1,2);
 				s.addOccupant(cell);
 			} else {
-				SegregationSlotCell cell = new SegregationSlotCell(Color.BLUE,
+				//type two cell
+				SegregationSlotCell cell = new SegregationSlotCell(TYPE_TWO_COLOR,
 						tPercentage, 2,1);
 				s.addOccupant(cell);
 			}
@@ -52,15 +71,12 @@ public class SegregationGrid extends CA {
 		}
 	}
 
+	
 	@Override
-	protected void calculateAdjacencyMatrixAndSetNeighbor() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
+	/**
+	 * Checks cell in each slot for its satisfaction.  If not satisfied, slot is pushed onto the Slots to Change stack
+	 */
 	public void updateCells() {
-		// TODO Auto-generated method stub
 		for (Slot s : simGrid.getSlots()) {
 			ArrayList<Cell> occupant = new ArrayList<Cell>(s.getOccupants());
 			SegregationSlotCell resident = (SegregationSlotCell) occupant
@@ -78,11 +94,11 @@ public class SegregationGrid extends CA {
 	
 	private void moveUnsatisfiedCells(){
 		while(!slotsToChange.isEmpty()){
-			Slot s = slotsToChange.pop();
+			Slot s = slotsToChange.pop();			
 			ArrayList<Slot> slotRound  = (ArrayList<Slot>) simGrid.getSlots();
 			boolean go = true;
 			while(go){
-				int randIndex = (int)Math.random()*slotRound.size();
+				int randIndex = (int)(Math.random()*slotRound.size());
 				ArrayList<Cell> cells = new ArrayList<Cell>(slotRound.get(randIndex).getOccupants());
 				SegregationSlotCell seg = (SegregationSlotCell)cells.get(0);
 				if(seg.getState() == 0){
@@ -105,7 +121,11 @@ public class SegregationGrid extends CA {
 		return states;
 	}
 
+	
 	@Override
+	/**
+	 * Retrieves the Color of the cell and displays it for the slot. 
+	 */
 	public void drawCells() {
 		// TODO Auto-generated method stub
 		getGraphicsContext().clearRect(0, 0, getSimWidth(), getSimHeight());

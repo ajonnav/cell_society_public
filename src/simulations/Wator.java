@@ -16,6 +16,8 @@ import automaton.XMLArgs;
 
 /**
  * This class is the Wator simulation class
+ * This class follows our old design.
+ * It does not work with the current design
  * @author aj168 - Anirudh Jonnavithula
  *
  */

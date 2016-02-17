@@ -8,6 +8,8 @@ import javafx.scene.paint.Color;
 
 /**
  * Class for shark cells in Wator
+ * This class follows our old design.
+ * It does not work with the final design
  * @author aj168 - Anirudh Jonnavithula
  *
  */

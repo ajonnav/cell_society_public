@@ -43,7 +43,7 @@ public class AntOrientationFactory {
 		findNeighborDirection(d, s);
 	}
 	
-	
+
 	private void getSlotsfromArray(Slot s, int[] dx, int[] dy) {
 		//assumes that slot has can give back a list of neighbors with those direction vectors
 		//this is definitely possible since our slot neighbors were originally calculated by passing in a direction vector

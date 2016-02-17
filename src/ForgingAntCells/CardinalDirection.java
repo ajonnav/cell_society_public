@@ -6,6 +6,9 @@ package ForgingAntCells;
 public enum CardinalDirection {
 	N, NE, E, SE, S, SW, W, NW;
 
+	/*
+	* Returns the cardinal direction based on the change in x and change in y
+	*/
 	public static CardinalDirection valueOf(int dx, int dy) {
 		if (dx == 0) {
 			if (dy == -1) {

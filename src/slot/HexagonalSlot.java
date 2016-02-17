@@ -6,10 +6,14 @@ import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import cells.Cell;
-
+/**
+ * Hexagon implementation of the Slot.  Trigonometry is off in scaling the vertices, but the angles are correct.
+ * @author colinduffy
+ *
+ */
 public class HexagonalSlot implements Slot {
 	private int index;
-	private double x, y, width, height, side;
+	private double x, y, height, side;
 	private List<Cell> occupants;
 	private List<Slot> neighbors;
 	
@@ -17,7 +21,6 @@ public class HexagonalSlot implements Slot {
 		// TODO Auto-generated constructor stub
 		this.x = x;
 		this.y = y;
-		width = w;
 		height = h;
 		side = height/2;
 		index = i;
@@ -63,6 +66,9 @@ public class HexagonalSlot implements Slot {
 	}
 
 	@Override
+	/**
+	 * Draws Polygon representation of slot using the GraphicsContext
+	 */
 	public void draw(GraphicsContext gc, Color c) {
 		gc.setFill(c);
 		//corners will be ordered in a clockwise fashion, starting at reference point xCoord, yCoord
@@ -72,7 +78,7 @@ public class HexagonalSlot implements Slot {
 
 	}
 	
-	double [] getXPoints(){
+	private double [] getXPoints(){
 		double [] xPoints = new double[6];
 		xPoints[0] = x;
 		xPoints[1] = x + trig(30, 2);
@@ -83,7 +89,7 @@ public class HexagonalSlot implements Slot {
 		return xPoints;
 	}
 	
-	double [] getYPoints(){
+	private double [] getYPoints(){
 		double [] yPoints = new double[6];
 		yPoints[0] = y;
 		yPoints[1] = y - trig(30, 1);
@@ -106,7 +112,8 @@ public class HexagonalSlot implements Slot {
 	}
 	
 	@Override
-	public void addOccupants(Cell cell) {
+
+	public void addOccupant(Cell cell) {
 		occupants.add(cell);
 	}
 }

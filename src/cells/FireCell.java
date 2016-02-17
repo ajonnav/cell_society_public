@@ -1,17 +1,23 @@
-package FireCells;
+package cells;
+import java.util.List;
 
-import cells.SquareCell;
+import slot.Slot;
 import javafx.scene.paint.Color;
 
-public abstract class FireCell extends SquareCell {
+/*
+* Author: Christine Zhou, updated by Ani
+*/
+public abstract class FireCell extends Cell {
 	private boolean isEmpty;
 	private boolean isBurning;
 	
 	/*
 	 * Constructor for a FireCell
 	 */
-	public FireCell(double x, double y, Color color, double w, double h, double probCatch) {
-		super(x, y, color, w, h);
+	public FireCell(Color color, boolean empty, boolean burning) {
+		super(color);
+		isEmpty = empty;
+		isBurning = burning;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -46,5 +52,5 @@ public abstract class FireCell extends SquareCell {
 	/*
 	 * Updates a cell based on rules applied to each cell
 	 */
-	public abstract FireCell update(FireCell[] cells);
+	public abstract FireCell update(List<Slot> neighbors);
 }

@@ -8,6 +8,8 @@ import javafx.scene.paint.Color;
 
 /**
  * Class for Fish cells in Wator
+ * This is a file that followed our old design.
+ * It does not work with our final design
  * @author aj168 - Anirudh Jonnavithula
  *
  */

@@ -3,7 +3,11 @@ import java.util.List;
 import cells.*;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-
+/**
+ * Interface for which Slots will be built to
+ * @author colinduffy
+ *
+ */
 public interface Slot {
 	/**
 	 * The Slot Interface will serve as the basis for which the "slots" rather than cells implement.
@@ -56,6 +60,6 @@ public interface Slot {
 	 */
 	public void setOccupants(List<Cell> cells);
 	
-	public void addOccupants(Cell cell);
+	public void addOccupant(Cell cell);
 	
 }

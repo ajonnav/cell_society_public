@@ -22,6 +22,9 @@ public class GroundCell extends ForgingAntCell {
 	private boolean home;
 	private boolean food;
 	
+	/*
+	* Defines a ground cell in Forging Ants
+	*/
 	public GroundCell(double pheromoneLimit, double diffusionRate, double evapRate, boolean home, boolean food, Slot s) {
 		super(Color.TRANSPARENT);
 		homePheromone = 0;
@@ -34,22 +37,34 @@ public class GroundCell extends ForgingAntCell {
 		this.mySlot = s;
 	}
 	
+	/*
+	* Sets the home pheromone level
+	*/
 	public void sethomeHormone(double addHormone) {
 		if (homePheromone < pheromoneLimit) {
 			homePheromone += addHormone;
 		}
 	}
 	
+	/*
+	* Sets the food pheromone level
+	*/
 	public void setfoodHormone(double addHormone) {
 		if (foodPheromone < pheromoneLimit) {
 			foodPheromone += addHormone;
 		}
 	}
 
+	/*
+	* Returns the home pheromone level
+	*/
 	public double gethomeHormone() {
 		return homePheromone;
 	}
 	
+	/*
+	* Returns the food pheromone level
+	*/
 	public double getfoodHormone() {
 		return foodPheromone;
 	}
@@ -61,6 +76,9 @@ public class GroundCell extends ForgingAntCell {
 	public void update(GroundCell[] cells) {
 	}
 	
+	/*
+	* Updates the evaporation of each cell
+	*/
 	public void update() {
 		foodPheromone -= evapRate;
 		homePheromone -= evapRate;
@@ -71,6 +89,9 @@ public class GroundCell extends ForgingAntCell {
 		}
 	}
 	
+	/*
+	* Gets the diffusion amount calculated from the neighbors
+	*/
 	public double[] getDiffusionAmount() {
 		List<GroundCell> neighbors = getGroundCellsFromSlot(mySlot.getNeighbors());
 		double[] pheromoneIncrease = new double[]{0,0}; //0 is food, 1 is home 
@@ -81,7 +102,9 @@ public class GroundCell extends ForgingAntCell {
 		return pheromoneIncrease;
 	}
 	
-	//use comparable or comparator to sort by either food hormones or home hormones?
+	/*
+	* Two different comparators for comparing the Ground cell based on its pheromone levels
+	*/
 	static Comparator<GroundCell> foodComparator() {
 		return new Comparator<GroundCell>() {
 		@Override
